@@ -3,7 +3,7 @@
 const defaultConfig = {
   // font scaling override - RN default is on
   allowTextFontScaling: true,
-  baseURL: 'http://google.com/' //belum ada
+  baseURL: 'http://google.com/' // belum ada
 }
 
 const debugConfig = {

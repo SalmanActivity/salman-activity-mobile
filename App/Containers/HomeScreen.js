@@ -3,9 +3,9 @@ import { ScrollView, Text, Image, View } from 'react-native'
 import { Images } from '../Themes'
 
 // Styles
-import styles from './Styles/HomeStyles'
+import styles from './Styles/HomeScreenStyles'
 
-export default class Home extends Component {
+export default class HomeScreen extends Component {
   render () {
     return (
       <View style={styles.mainContainer}>
@@ -13,7 +13,7 @@ export default class Home extends Component {
         <ScrollView style={styles.container}>
           <View style={styles.section} >
             <Text style={styles.sectionText}>
-              Udah siap nih cuy!
+              {__DEV__ ? 'ini dev' : 'ini bukan dev'}
             </Text>
           </View>
 
