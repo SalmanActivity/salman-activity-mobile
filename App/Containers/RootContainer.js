@@ -6,6 +6,7 @@ import StartupActions from '../Redux/StartupRedux'
 import ReduxPersist from '../Config/ReduxPersist'
 
 // Styles
+import {Colors} from '../Themes'
 import styles from './Styles/RootContainerStyles'
 
 class RootContainer extends Component {
@@ -19,7 +20,7 @@ class RootContainer extends Component {
   render () {
     return (
       <View style={styles.applicationView}>
-        <StatusBar barStyle='light-content' />
+        <StatusBar barStyle='light-content' backgroundColor={Colors.fire} />
         <ReduxNavigation />
       </View>
     )
