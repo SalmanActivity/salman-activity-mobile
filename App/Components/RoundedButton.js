@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { TouchableOpacity, Text } from 'react-native'
-import styles from './Styles/FullButtonStyles'
+import styles from './Styles/RoundedButtonStyles'
 
 export default class RoundedButton extends Component {
   static propTypes = {
