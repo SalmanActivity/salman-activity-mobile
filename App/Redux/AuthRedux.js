@@ -33,18 +33,18 @@ export const AuthSelectors = {
 
 // login
 export const login = (state) =>
-  state.merge({ loggingIn: true })
+  state.merge({ loggingIn: true, error: null })
 
 // successful login
 export const loginSuccess = (state, action) => {
   const { token } = action
-  return state.merge({ loggingIn: false, token })
+  return state.merge({ loggingIn: false, token, error: null })
 }
 
 // failed to login
 export const loginFailure = (state, action) => {
   const { error } = action
-  state.merge({ loggingIn: false, error })
+  return state.merge({ loggingIn: false, error })
 }
 
 // logout
