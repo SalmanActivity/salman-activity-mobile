@@ -16,7 +16,7 @@ const PrimaryNav = DrawerNavigator({
 }, {
   // Default config for all screens
   headerMode: 'screen',
-  initialRouteName: 'LoginScreen',
+  initialRouteName: 'HomeScreen',
   navigationOptions: {
     headerStyle: styles.header
   }
