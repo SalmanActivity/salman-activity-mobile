@@ -3,7 +3,7 @@ import AppNavigation from '../Navigation/AppNavigation'
 import {AuthTypes} from './AuthRedux'
 import {AppStateTypes} from './AppStateRedux'
 
-const { navigate, reset } = NavigationActions
+const { navigate } = NavigationActions
 const { getStateForAction } = AppNavigation.router
 
 const INITIAL_STATE = getStateForAction(
@@ -13,7 +13,6 @@ const NOT_LOGGED_IN_STATE = getStateForAction(navigate({ routeName: 'LoggedOutNa
 const LOGGED_IN_STATE = getStateForAction(navigate({ routeName: 'LoggedInNavigation' }))
 
 export function reducer (state = INITIAL_STATE, action) {
-  console.tron.log(LOGGED_IN_STATE)
   let nextState
   switch (action.type) {
     case AppStateTypes.SET_REHYDRATION_COMPLETE:
