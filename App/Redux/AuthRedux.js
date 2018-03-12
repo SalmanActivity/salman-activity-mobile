@@ -8,7 +8,8 @@ const { Types, Creators } = createActions({
   loginSuccess: ['token'],
   loginFailure: ['error'],
 
-  logout: null
+  logout: null,
+  autoLogin: null
 })
 
 export const AuthTypes = Types
@@ -51,6 +52,9 @@ export const loginFailure = (state, action) => {
 export const logout = (state) =>
   state.merge({ token: null })
 
+// auto login
+export const autoLogin = state => state
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -58,5 +62,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.LOGIN_SUCCESS]: loginSuccess,
   [Types.LOGIN_FAILURE]: loginFailure,
 
-  [Types.LOGOUT]: logout
+  [Types.LOGOUT]: logout,
+  [Types.AUTO_LOGIN]: autoLogin
 })
