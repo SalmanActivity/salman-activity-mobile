@@ -1,22 +1,20 @@
-import { StackNavigator, DrawerNavigator } from 'react-navigation'
-import HomeScreen from '../Containers/HomeScreen'
-import LoginScreen from '../Containers/LoginScreen'
+import { StackNavigator } from 'react-navigation'
+
+import LoadingScreen from '../Containers/LoadingScreen'
+import LoggedInNavigation from './LoggedInNavigation'
+import LoggedOutNavigation from './LoggedOutNavigation'
 
 import styles from './Styles/NavigationStyles'
 
 // Manifest of possible screens
-const PrimaryNav = DrawerNavigator({
-  HomeScreen: { screen: HomeScreen, navigationOptions: {drawerLabel: 'Home'} },
-  LoginScreen: {
-    screen: LoginScreen,
-    navigationOptions: {
-      drawerLabel: 'Login'
-    }
-  }
+const PrimaryNav = StackNavigator({
+  LoadingScreen: { screen: LoadingScreen },
+  LoggedInNavigation: { screen: LoggedInNavigation },
+  LoggedOutNavigation: { screen: LoggedOutNavigation }
 }, {
   // Default config for all screens
-  headerMode: 'screen',
-  initialRouteName: 'HomeScreen',
+  headerMode: 'none',
+  initialRouteName: 'LoadingScreen',
   navigationOptions: {
     headerStyle: styles.header
   }
