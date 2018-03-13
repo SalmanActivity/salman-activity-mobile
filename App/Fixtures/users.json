@@ -1,0 +1,18 @@
+[
+  {
+    "id": "abcdaaabaada",
+    "name": "User A",
+    "username": "usera",
+    "division": "divisionsatu",
+    "admin": false,
+    "enabled": true
+  },
+  {
+    "id": "adgagadaga",
+    "name": "User B",
+    "username": "userb",
+    "division": "divisionsatu",
+    "admin": false,
+    "enabled": true
+  }
+]
