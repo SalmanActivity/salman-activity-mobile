@@ -24,9 +24,9 @@ const create = (baseURL = config.baseURL) => {
   const getUsers = (userToken) =>
     api.get('users', {}, addAuthorizationHeader(userToken))
 
-  const postUser = (userToken, name, username, password, divisions, roles) =>
+  const postUser = (userToken, name, username, password, division, admin) =>
     api.post('users',
-             {name, username, password, divisions, roles},
+             {name, username, password, division, admin},
              addAuthorizationHeader(userToken))
 
   const updateUser = (userToken, id, userData) =>
