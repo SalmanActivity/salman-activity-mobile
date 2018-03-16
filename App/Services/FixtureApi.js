@@ -1,4 +1,5 @@
 const users = require('../Fixtures/users.json')
+const locations = require('../Fixtures/locations.json')
 
 export default {
   login: (username, password) => {
@@ -121,8 +122,8 @@ export default {
     }
   },
 
-  getLocations: (locationToken) => {
-    if (locationToken === 'abcd') {
+  getLocations: (userToken) => {
+    if (userToken === 'abcd') {
       return {
         ok: true,
         data: locations
@@ -138,9 +139,9 @@ export default {
     }
   },
 
-  postLocation: (locationToken, name) => {
-    if (locationToken === 'abcd') {
-      locations.forEach(user => {
+  postLocation: (userToken, name) => {
+    if (userToken === 'abcd') {
+      locations.forEach(location => {
         if (location.name === name) {
           return {
             ok: false,
@@ -167,8 +168,8 @@ export default {
     }
   },
 
-  updateLocation: (locationToken, id, locationData) => {
-    if (locationToken === 'abcd') {
+  updateLocation: (userToken, id, locationData) => {
+    if (userToken === 'abcd') {
       locations.forEach(location => {
         if (location.id === id) {
           return {
