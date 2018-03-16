@@ -1,18 +1,6 @@
 import { call, put } from 'redux-saga/effects'
 import LocationActions from '../Redux/LocationRedux'
 
-export function * getMe (api, action) {
-  const {locatinoToken} = action
-  const response = yield call(api.getMe, locationToken)
-
-  if (response.ok) {
-    yield put(LocationActions.getMeSuccess(response.data))
-  } else {
-    const {cause} = response.data
-    yield put(LocationActions.getMeFailure(cause))
-  }
-}
-
 export function * getLocations (api, action) {
   const {locationToken} = action
   const response = yield call(api.getLocations, locationToken)
