@@ -16,7 +16,7 @@ export default {
         ok: false,
         data: {
           msg: 'cannot perform action',
-          cause: 'unauthorized access'
+          cause: 'Wrong username/password'
         }
       }
     }

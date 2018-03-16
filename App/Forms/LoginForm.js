@@ -1,9 +1,11 @@
 import React from 'react'
 import {ScrollView} from 'react-native'
 import {reduxForm, Field} from 'redux-form'
+import {Button} from 'react-native-elements'
 
-import RoundedButton from '../Components/RoundedButton'
 import TextInput from './TextInputWrapper'
+
+import styles from './Styles/LoginFormStyles'
 
 const LoginForm = (props) => (
   <ScrollView keyboardShouldPersistTaps='always'>
@@ -20,7 +22,11 @@ const LoginForm = (props) => (
       secureTextEntry
     />
 
-    <RoundedButton onPress={props.handleSubmit} text='Login' />
+    <Button
+      title='Login'
+      buttonStyle={styles.button}
+      onPress={props.handleSubmit}
+    />
   </ScrollView>
 )
 

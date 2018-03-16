@@ -1,12 +1,8 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, Image, View } from 'react-native'
+import { ScrollView, Text, View } from 'react-native'
 import {connect} from 'react-redux'
-
-import RoundedButton from '../Components/RoundedButton'
-
+import {Button} from 'react-native-elements'
 import AuthActions, {AuthSelectors} from '../Redux/AuthRedux'
-
-import { Images } from '../Themes'
 
 // Styles
 import styles from './Styles/HomeScreenStyles'
@@ -17,7 +13,6 @@ class HomeScreen extends Component {
 
     return (
       <View style={styles.mainContainer}>
-        <Image source={Images.background} style={styles.backgroundImage} resizeMode='stretch' />
         <ScrollView style={styles.container}>
           <View style={styles.section} >
             <Text style={styles.sectionText}>
@@ -25,7 +20,7 @@ class HomeScreen extends Component {
             </Text>
 
             {isLoggedIn && (
-              <RoundedButton text='Logout' onPress={logout} />
+              <Button title='Logout' onPress={logout} />
             )}
           </View>
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, Image, View, Text } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 
@@ -7,14 +7,13 @@ import Login from '../Components/Login'
 
 import AuthActions from '../Redux/AuthRedux'
 
-import { Images } from '../Themes'
-
 // Styles
 import styles from './Styles/LoginScreenStyles'
 
 class LoginScreen extends Component {
   static PropTypes = {
-    login: PropTypes.func.isRequired
+    login: PropTypes.func.isRequired,
+    error: PropTypes.string
   }
 
   loginHandler (username, password) {
@@ -23,14 +22,15 @@ class LoginScreen extends Component {
   }
 
   render () {
+    const {error} = this.props
+
     return (
       <View style={styles.mainContainer} keyboardShouldPersistTaps='handled'>
-        <Image source={Images.background} style={styles.backgroundImage} resizeMode='stretch' />
         <ScrollView style={styles.container} keyboardShouldPersistTaps='handled'>
           <ScrollView style={styles.section} keyboardShouldPersistTaps='handled' >
-            <Text style={styles.titleText}>Login</Text>
             <Login
               loginHandler={this.loginHandler.bind(this)}
+              error={error}
             />
           </ScrollView>
         </ScrollView>
@@ -43,4 +43,8 @@ const mapDispatchToProps = {
   login: AuthActions.login
 }
 
-export default connect(null, mapDispatchToProps)(LoginScreen)
+const mapStateToProps = (state) => ({
+  error: state.auth.error
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
