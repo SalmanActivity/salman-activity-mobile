@@ -119,5 +119,80 @@ export default {
         }
       }
     }
+  },
+
+  getDivision: (divisionToken) => {
+    if (divisionToken === 'abcd') {
+      return {
+        ok: true,
+        data: divisions
+      }
+    } else {
+      return {
+        ok: false,
+        data: {
+          msg: 'cannot perform action',
+          cause: 'unauthorized access'
+        }
+      }
+    }
+  },
+
+  postDivision: (divisionToken, name) => {
+    if (divisionToken === 'abcd') {
+      divisions.forEach(user => {
+        if (division.name === name) {
+          return {
+            ok: false,
+            data: {
+              msg: 'cannot perform action',
+              cause: 'location exists'
+            }
+          }
+        }
+      })
+
+      return {
+        ok: true,
+        data: {}
+      }
+    } else {
+      return {
+        ok: false,
+        data: {
+          msg: 'cannot perform action',
+          cause: 'unauthorized access'
+        }
+      }
+    }
+  },
+
+  updateDivision: (divisionToken, id, divisionData) => {
+    if (divisionToken === 'abcd') {
+      divisions.forEach(division => {
+        if (division.id === id) {
+          return {
+            ok: true,
+            data: {}
+          }
+        }
+      })
+
+      return {
+        ok: false,
+        data: {
+          msg: 'cannot perform action',
+          cause: 'location not found'
+        }
+      }
+    } else {
+      return {
+        ok: false,
+        data: {
+          msg: 'cannot perform action',
+          cause: 'unauthorized access'
+        }
+      }
+    }
   }
 }
