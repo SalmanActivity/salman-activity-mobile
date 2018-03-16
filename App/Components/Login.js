@@ -1,12 +1,16 @@
 import React, {Component} from 'react'
-import {ScrollView} from 'react-native'
+import {View} from 'react-native'
+import {Card, Text} from 'react-native-elements'
 import PropTypes from 'prop-types'
 
 import LoginForm from '../Forms/LoginForm'
 
+import styles from './Styles/LoginStyles'
+
 export default class Login extends Component {
   static propTypes = {
-    loginHandler: PropTypes.func.isRequired
+    loginHandler: PropTypes.func.isRequired,
+    error: PropTypes.string
   }
 
   onSubmit (form) {
@@ -17,10 +21,13 @@ export default class Login extends Component {
   }
 
   render () {
+    const {error} = this.props
+
     return (
-      <ScrollView keyboardShouldPersistTaps='always'>
+      <Card title='Login'>
         <LoginForm onSubmit={this.onSubmit.bind(this)} />
-      </ScrollView>
+        {error ? <Text style={styles.errorText}>{error}</Text> : <View />}
+      </Card>
     )
   }
 }
