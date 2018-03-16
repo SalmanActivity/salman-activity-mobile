@@ -32,12 +32,26 @@ const create = (baseURL = config.baseURL) => {
   const updateUser = (userToken, id, userData) =>
     api.put('users', {...userData, id}, addAuthorizationHeader(userToken))
 
+  const getDivisions = (divisionToken) =>
+    api.get('Divisions', {}, addAuthorizationHeader(divisionToken))
+
+  const postDivision = (DivisionToken, name) =>
+    api.post('Divisions',
+             {name},
+             addAuthorizationHeader(DivisionToken))
+
+  const updateDivision = (DivisionToken, id, DivisionData) =>
+    api.put('Divisionss', {...DivisionData, id}, addAuthorizationHeader(DivisionToken))
+    
   return {
     login,
     getMe,
     getUsers,
     postUser,
-    updateUser
+    updateUser,
+    getDivisions,
+    postDivision,
+    updateDivision
   }
 }
 
