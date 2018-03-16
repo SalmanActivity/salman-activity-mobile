@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, View, ActivityIndicator } from 'react-native'
+import { ScrollView, View, ActivityIndicator, Text } from 'react-native'
 import {connect} from 'react-redux'
 import UserActions from '../Redux/UserRedux'
 import {AuthSelectors} from '../Redux/AuthRedux'
@@ -16,11 +16,11 @@ class UserListScreen extends Component {
 
   render () {
     const {user} = this.props
-    const {users, fetchingUsers} = user
+    const {users, fetchingUsers, fetchingUsersError} = user
 
     const transformedUsers = users.map(user => ({
       id: user.id,
-      title: user.name,
+      title: `${user.name} (${user.enabled ? '' : 'Tidak '}Aktif)`,
       subtitle: user.division.name
     }))
 
@@ -30,10 +30,11 @@ class UserListScreen extends Component {
           {fetchingUsers
             ? <ActivityIndicator />
             : (
-              <DataList
-                data={transformedUsers} />
+              fetchingUsersError
+              ? <Text style={styles.error}>{fetchingUsersError}</Text>
+              : <DataList data={transformedUsers} />
             )
-            }
+          }
         </ScrollView>
       </View>
     )

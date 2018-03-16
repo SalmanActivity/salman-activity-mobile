@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
-import {FlatList} from 'react-native'
-import {List, ListItem} from 'react-native-elements'
+import {FlatList, View} from 'react-native'
+import {List, ListItem, Text} from 'react-native-elements'
 import PropTypes from 'prop-types'
+
+import styles from './Styles/DataListStyles'
 
 export default class DataList extends Component {
   static propTypes = {
@@ -18,6 +20,14 @@ export default class DataList extends Component {
 
   render () {
     const {data} = this.props
+
+    if (data.length === 0) {
+      return (
+        <View style={styles.noDataView}>
+          <Text>Tidak ada data</Text>
+        </View>
+      )
+    }
 
     return (
       <List>

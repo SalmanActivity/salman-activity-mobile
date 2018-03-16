@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, View, ActivityIndicator } from 'react-native'
+import { ScrollView, View, ActivityIndicator, Text } from 'react-native'
 import {connect} from 'react-redux'
 import LocationActions from '../Redux/LocationRedux'
 import {AuthSelectors} from '../Redux/AuthRedux'
@@ -16,11 +16,11 @@ class LocationListScreen extends Component {
 
   render () {
     const {location} = this.props
-    const {locations, fetchingLocations} = location
+    const {locations, fetchingLocations, fetchingLocationsError} = location
 
     const transformedLocations = locations.map(location => ({
       id: location.id,
-      title: location.name
+      title: `${location.name} (${location.enabled ? '' : 'Tidak '}Aktif)`
     }))
 
     return (
@@ -29,10 +29,11 @@ class LocationListScreen extends Component {
           {fetchingLocations
             ? <ActivityIndicator />
             : (
-              <DataList
-                data={transformedLocations} />
+              fetchingLocationsError
+              ? <Text style={styles.error}>{fetchingLocationsError}</Text>
+              : <DataList data={transformedLocations} />
             )
-            }
+          }
         </ScrollView>
       </View>
     )
