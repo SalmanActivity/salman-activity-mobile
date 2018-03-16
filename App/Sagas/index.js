@@ -8,12 +8,14 @@ import DebugConfig from '../Config/DebugConfig'
 import { StartupTypes } from '../Redux/StartupRedux'
 import { AuthTypes } from '../Redux/AuthRedux'
 import { UserTypes } from '../Redux/UserRedux'
+import { LocationTypes } from '../Redux/LocationRedux'
 
 /* ------------- Sagas ------------- */
 
 import { startup } from './StartupSagas'
 import { login } from './AuthSagas'
 import { getMe, getUsers, newUser, updateUser } from './UserSagas'
+import { getLocations, newLocation, updateLocation } from './LocationSagas'
 
 /* ------------- API ------------- */
 
@@ -30,6 +32,10 @@ export default function * root () {
     takeLatest(UserTypes.GET_ME, getMe, api),
     takeLatest(UserTypes.GET_USERS, getUsers, api),
     takeEvery(UserTypes.NEW_USER, newUser, api),
-    takeEvery(UserTypes.UPDATE_USER, updateUser, api)
+    takeEvery(UserTypes.UPDATE_USER, updateUser, api),
+
+    takeLatest(LocationTypes.GET_LOCATIONS, getLocations, api),
+    takeEvery(LocationTypes.NEW_LOCATION, newLocation, api),
+    takeEvery(LocationTypes.UPDATE_LOCATION, updateLocation, api)
   ])
 }

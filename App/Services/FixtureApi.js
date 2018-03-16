@@ -1,4 +1,5 @@
 const users = require('../Fixtures/users.json')
+const locations = require('../Fixtures/locations.json')
 
 export default {
   login: (username, password) => {
@@ -108,6 +109,81 @@ export default {
         data: {
           msg: 'cannot perform action',
           cause: 'user not found'
+        }
+      }
+    } else {
+      return {
+        ok: false,
+        data: {
+          msg: 'cannot perform action',
+          cause: 'unauthorized access'
+        }
+      }
+    }
+  },
+
+  getLocations: (userToken) => {
+    if (userToken === 'abcd') {
+      return {
+        ok: true,
+        data: locations
+      }
+    } else {
+      return {
+        ok: false,
+        data: {
+          msg: 'cannot perform action',
+          cause: 'unauthorized access'
+        }
+      }
+    }
+  },
+
+  postLocation: (userToken, name) => {
+    if (userToken === 'abcd') {
+      locations.forEach(location => {
+        if (location.name === name) {
+          return {
+            ok: false,
+            data: {
+              msg: 'cannot perform action',
+              cause: 'location exists'
+            }
+          }
+        }
+      })
+
+      return {
+        ok: true,
+        data: {}
+      }
+    } else {
+      return {
+        ok: false,
+        data: {
+          msg: 'cannot perform action',
+          cause: 'unauthorized access'
+        }
+      }
+    }
+  },
+
+  updateLocation: (userToken, id, locationData) => {
+    if (userToken === 'abcd') {
+      locations.forEach(location => {
+        if (location.id === id) {
+          return {
+            ok: true,
+            data: {}
+          }
+        }
+      })
+
+      return {
+        ok: false,
+        data: {
+          msg: 'cannot perform action',
+          cause: 'location not found'
         }
       }
     } else {
