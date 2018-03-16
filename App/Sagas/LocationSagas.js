@@ -2,8 +2,8 @@ import { call, put } from 'redux-saga/effects'
 import LocationActions from '../Redux/LocationRedux'
 
 export function * getLocations (api, action) {
-  const {locationToken} = action
-  const response = yield call(api.getLocations, locationToken)
+  const {userToken} = action
+  const response = yield call(api.getLocations, userToken)
 
   if (response.ok) {
     yield put(LocationActions.getLocationsSuccess(response.data))
@@ -14,9 +14,9 @@ export function * getLocations (api, action) {
 }
 
 export function * newLocation (api, action) {
-  const {locationToken, name} = action
+  const {userToken, name} = action
   const response = yield call(api.postLocation,
-                              locationToken,
+                              userToken,
                               name)
 
   if (response.ok) {
@@ -28,8 +28,8 @@ export function * newLocation (api, action) {
 }
 
 export function * updateLocation (api, action) {
-  const {locationToken, id, locationData} = action
-  const response = yield call(api.updateLocation, locationToken, id, locationData)
+  const {userToken, id, locationData} = action
+  const response = yield call(api.updateLocation, userToken, id, locationData)
 
   if (response.ok) {
     yield put(LocationActions.updateLocationSuccess())
