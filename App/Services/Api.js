@@ -32,12 +32,26 @@ const create = (baseURL = config.baseURL) => {
   const updateUser = (userToken, id, userData) =>
     api.put('users', {...userData, id}, addAuthorizationHeader(userToken))
 
+  const getLocations = (locationToken) =>
+    api.get('locations', {}, addAuthorizationHeader(locationToken))
+
+  const postLocation = (locationToken, name) =>
+    api.post('locations',
+             {name},
+             addAuthorizationHeader(locationToken))
+
+  const updateLocation = (locationToken, id, locationData) =>
+    api.put('locationss', {...locationData, id}, addAuthorizationHeader(locationToken))
+    
   return {
     login,
     getMe,
     getUsers,
     postUser,
-    updateUser
+    updateUser,
+    getLocations,
+    postLocation,
+    updateLocation
   }
 }
 
