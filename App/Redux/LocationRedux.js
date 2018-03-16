@@ -3,10 +3,7 @@ import Immutable from 'seamless-immutable'
 
 /* ------------- Types and Action Creators ------------- */
 
-const { Types, Creators } = createActions({
-  getMe: ['locationToken'],
-  getMeSuccess: ['location'],
-  getMeFailure: ['error'],
+const { Types, Creators } = createActions({  
 
   getLocations: ['locationToken'],
   getLocationsSuccess: ['locations'],
@@ -27,9 +24,6 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-    me: null,
-    fetchingMe: false,
-    fetchingMeError: null,
   
     locations: [],
     fetchingLocations: false,
@@ -43,19 +37,6 @@ export const INITIAL_STATE = Immutable({
   })
 
 /* ------------- Reducers ------------- */
-
-export const getMe = (state) =>
-state.merge({ fetchingMe: true, fetchingMeError: null })
-
-export const getMeSuccess = (state, action) => {
-const { location } = action
-return state.merge({ fetchingMe: false, me: location, fetchingMeError: null })
-}
-
-export const getMeFailure = (state, action) => {
-const { error } = action
-return state.merge({ fetchingMe: false, fetchingMeError: error })
-}
 
 export const getLocations = (state) =>
 state.merge({ fetchingLocations: true, fetchingLocationsError: null })
@@ -97,9 +78,6 @@ return state.merge({ updatingLocation: false, updatingLocationError: error })
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
-    [Types.GET_ME]: getMe,
-    [Types.GET_ME_SUCCESS]: getMeSuccess,
-    [Types.GET_ME_FAILURE]: getMeFailure,
   
     [Types.GET_LOCATIONS]: getLocations,
     [Types.GET_LOCATIONS_SUCCESS]: getLocationsSuccess,
