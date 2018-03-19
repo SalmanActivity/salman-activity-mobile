@@ -1,4 +1,5 @@
 const users = require('../Fixtures/users.json')
+const divisions = require('../Fixtures/divisions.json')
 
 export default {
   login: (username, password) => {
