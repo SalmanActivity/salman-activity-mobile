@@ -1,4 +1,5 @@
 const users = require('../Fixtures/users.json')
+const divisions = require('../Fixtures/divisions.json')
 const locations = require('../Fixtures/locations.json')
 
 export default {
@@ -122,11 +123,57 @@ export default {
     }
   },
 
+  getDivisions: (userToken) => {
+    if (userToken === 'abcd') {
+      return {
+        ok: true,
+        data: divisions
+      }
+    } else {
+      return {
+        ok: false,
+        data: {
+          msg: 'cannot perform action',
+          cause: 'unauthorized access'
+        }
+      }
+    }
+  },
+
   getLocations: (userToken) => {
     if (userToken === 'abcd') {
       return {
         ok: true,
         data: locations
+      }
+    } else {
+      return {
+        ok: false,
+        data: {
+          msg: 'cannot perform action',
+          cause: 'unauthorized access'
+        }
+      }
+    }
+  },
+
+  postDivision: (userToken, name) => {
+    if (userToken === 'abcd') {
+      divisions.forEach(division => {
+        if (division.name === name) {
+          return {
+            ok: false,
+            data: {
+              msg: 'cannot perform action',
+              cause: 'location exists'
+            }
+          }
+        }
+      })
+
+      return {
+        ok: true,
+        data: {}
       }
     } else {
       return {
@@ -156,6 +203,35 @@ export default {
       return {
         ok: true,
         data: {}
+      }
+    } else {
+      return {
+        ok: false,
+        data: {
+          msg: 'cannot perform action',
+          cause: 'unauthorized access'
+        }
+      }
+    }
+  },
+
+  updateDivision: (userToken, id, divisionData) => {
+    if (userToken === 'abcd') {
+      divisions.forEach(division => {
+        if (division.id === id) {
+          return {
+            ok: true,
+            data: {}
+          }
+        }
+      })
+
+      return {
+        ok: false,
+        data: {
+          msg: 'cannot perform action',
+          cause: 'location not found'
+        }
       }
     } else {
       return {
