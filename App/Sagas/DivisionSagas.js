@@ -2,8 +2,8 @@ import { call, put } from 'redux-saga/effects'
 import DivisionActions from '../Redux/DivisionRedux'
 
 export function * getDivisions (api, action) {
-  const {divisionToken} = action
-  const response = yield call(api.getDivisions, divisionToken)
+  const {userToken} = action
+  const response = yield call(api.getDivisions, userToken)
 
   if (response.ok) {
     yield put(DivisionActions.getDivisionsSuccess(response.data))
@@ -14,9 +14,9 @@ export function * getDivisions (api, action) {
 }
 
 export function * newDivision (api, action) {
-  const {divisionToken, name} = action
+  const {userToken, name} = action
   const response = yield call(api.postDivision,
-                              divisionToken,
+                              userToken,
                               name)
 
   if (response.ok) {
@@ -28,8 +28,8 @@ export function * newDivision (api, action) {
 }
 
 export function * updateDivision (api, action) {
-  const {divisionToken, id, divisionData} = action
-  const response = yield call(api.updateDivision, divisionToken, id, divisionData)
+  const {userToken, id, divisionData} = action
+  const response = yield call(api.updateDivision, userToken, id, divisionData)
 
   if (response.ok) {
     yield put(DivisionActions.updateDivisionSuccess())

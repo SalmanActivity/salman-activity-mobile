@@ -123,18 +123,19 @@ export default {
     }
   },
 
-  getDivision: (divisionToken) => {
-    if (divisionToken === 'abcd') {
+  getDivisions: (userToken) => {
+    if (userToken === 'abcd') {
       return {
         ok: true,
         data: divisions
-        }
+      }
     } else {
       return {
         ok: false,
         data: {
           msg: 'cannot perform action',
           cause: 'unauthorized access'
+        }
       }
     }
   },
@@ -156,9 +157,9 @@ export default {
     }
   },
 
-  postDivision: (divisionToken, name) => {
-    if (divisionToken === 'abcd') {
-      divisions.forEach(user => {
+  postDivision: (userToken, name) => {
+    if (userToken === 'abcd') {
+      divisions.forEach(division => {
         if (division.name === name) {
           return {
             ok: false,
@@ -214,8 +215,8 @@ export default {
     }
   },
 
-  updateDivision: (divisionToken, id, divisionData) => {
-    if (divisionToken === 'abcd') {
+  updateDivision: (userToken, id, divisionData) => {
+    if (userToken === 'abcd') {
       divisions.forEach(division => {
         if (division.id === id) {
           return {
