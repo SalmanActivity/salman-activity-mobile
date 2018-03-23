@@ -1,17 +1,27 @@
 [
   {
     "id": "abcdaaabaada",
-    "name": "User A",
-    "username": "usera",
-    "division": "divisionsatu",
+    "name": "Jauhar Arifin",
+    "username": "jauhar",
+    "email": "jauhar@ex.com",
+    "division": {
+      "id": "divdivsatu",
+      "name": "Bidang Datar",
+      "enabled": true
+    },
     "admin": false,
     "enabled": true
   },
   {
-    "id": "adgagadaga",
-    "name": "User B",
-    "username": "userb",
-    "division": "divisionsatu",
+    "id": "abzzcdaaabaada",
+    "name": "Arfinda Ilmania",
+    "username": "finda",
+    "email": "finda@ex.com",
+    "division": {
+      "id": "divdivsatu",
+      "name": "Bidang Miring",
+      "enabled": true
+    },
     "admin": false,
     "enabled": true
   }

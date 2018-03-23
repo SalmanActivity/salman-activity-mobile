@@ -1,5 +1,6 @@
 const users = require('../Fixtures/users.json')
 const divisions = require('../Fixtures/divisions.json')
+const locations = require('../Fixtures/locations.json')
 
 export default {
   login: (username, password) => {
@@ -17,7 +18,7 @@ export default {
         ok: false,
         data: {
           msg: 'cannot perform action',
-          cause: 'unauthorized access'
+          cause: 'Wrong username/password'
         }
       }
     }
@@ -127,6 +128,22 @@ export default {
       return {
         ok: true,
         data: divisions
+        }
+    } else {
+      return {
+        ok: false,
+        data: {
+          msg: 'cannot perform action',
+          cause: 'unauthorized access'
+      }
+    }
+  },
+
+  getLocations: (userToken) => {
+    if (userToken === 'abcd') {
+      return {
+        ok: true,
+        data: locations
       }
     } else {
       return {
@@ -168,10 +185,68 @@ export default {
     }
   },
 
+  postLocation: (userToken, name) => {
+    if (userToken === 'abcd') {
+      locations.forEach(location => {
+        if (location.name === name) {
+          return {
+            ok: false,
+            data: {
+              msg: 'cannot perform action',
+              cause: 'location exists'
+            }
+          }
+        }
+      })
+
+      return {
+        ok: true,
+        data: {}
+      }
+    } else {
+      return {
+        ok: false,
+        data: {
+          msg: 'cannot perform action',
+          cause: 'unauthorized access'
+        }
+      }
+    }
+  },
+
   updateDivision: (divisionToken, id, divisionData) => {
     if (divisionToken === 'abcd') {
       divisions.forEach(division => {
         if (division.id === id) {
+          return {
+            ok: true,
+            data: {}
+          }
+        }
+      })
+
+      return {
+        ok: false,
+        data: {
+          msg: 'cannot perform action',
+          cause: 'location not found'
+        }
+      }
+    } else {
+      return {
+        ok: false,
+        data: {
+          msg: 'cannot perform action',
+          cause: 'unauthorized access'
+        }
+      }
+    }
+  },
+
+  updateLocation: (userToken, id, locationData) => {
+    if (userToken === 'abcd') {
+      locations.forEach(location => {
+        if (location.id === id) {
           return {
             ok: true,
             data: {}

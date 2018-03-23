@@ -11,6 +11,7 @@ export const reducers = combineReducers({
   appState: require('./AppStateRedux').reducer,
   auth: require('./AuthRedux').reducer,
   user: require('./UserRedux').reducer,
+  location: require('./LocationRedux').reducer,
 
   form: formReducer
 })

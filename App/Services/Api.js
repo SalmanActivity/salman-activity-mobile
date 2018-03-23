@@ -43,6 +43,17 @@ const create = (baseURL = config.baseURL) => {
   const updateDivision = (DivisionToken, id, DivisionData) =>
     api.put('Divisionss', {...DivisionData, id}, addAuthorizationHeader(DivisionToken))
     
+  const getLocations = (userToken) =>
+    api.get('locations', {}, addAuthorizationHeader(userToken))
+
+  const postLocation = (userToken, name) =>
+    api.post('locations',
+             {name},
+             addAuthorizationHeader(userToken))
+
+  const updateLocation = (userToken, id, locationData) =>
+    api.put('locations', {...locationData, id}, addAuthorizationHeader(userToken))
+
   return {
     login,
     getMe,
@@ -51,7 +62,10 @@ const create = (baseURL = config.baseURL) => {
     updateUser,
     getDivisions,
     postDivision,
-    updateDivision
+    updateDivision,
+    getLocations,
+    postLocation,
+    updateLocation
   }
 }
 

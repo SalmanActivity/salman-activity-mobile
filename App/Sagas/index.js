@@ -19,6 +19,7 @@ import { getMe, getUsers, newUser, updateUser } from './UserSagas'
 import { getLocations, newLocation, updateLocation } from './LocationSagas'
 import { getDivisions, newDivision, updateDivision } from './DivisionSagas'
 
+
 /* ------------- API ------------- */
 
 const api = DebugConfig.useFixtures ? FixtureAPI : API.create()
