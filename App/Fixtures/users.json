@@ -4,11 +4,7 @@
     "name": "Jauhar Arifin",
     "username": "jauhar",
     "email": "jauhar@ex.com",
-    "division": {
-      "id": "divdivsatu",
-      "name": "Bidang Datar",
-      "enabled": true
-    },
+    "division": null,
     "admin": false,
     "enabled": true
   },

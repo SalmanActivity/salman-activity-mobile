@@ -1,0 +1,33 @@
+[
+  {
+    "id": "abadjaldjf",
+    "name": "Kajian Subuh",
+    "description": "Kajian Subuh hehehehehe",
+    "issuer": {
+      "id": "abcdaaabaada",
+      "name": "Jauhar Arifin",
+      "username": "jauhar",
+      "email": "jauhar@ex.com",
+      "division": null,
+      "admin": true,
+      "enabled": true
+    },
+    "division": {
+      "id": "divdivsatu",
+      "name": "Bidang Datar",
+      "enabled": true
+    },
+    "location": {
+      "id": "abcdaaabaada",
+      "name": "Ruang A",
+      "enabled": true
+    },
+    "startTime": "2018-04-09T05:00:00.270Z",
+    "endTime": "2018-04-09T10:00:00.270Z",
+    "participantNumber": 100,
+    "participantDescription": "Anak Sekolah",
+    "speaker": "Turfa Auliarachman",
+    "status": "pending",
+    "enabled": true
+  }
+]
