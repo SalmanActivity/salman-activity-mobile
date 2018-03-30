@@ -18,6 +18,7 @@ import { login } from './AuthSagas'
 import { getMe, getUsers, newUser, updateUser } from './UserSagas'
 import { getLocations, newLocation, updateLocation } from './LocationSagas'
 import { getDivisions, newDivision, updateDivision } from './DivisionSagas'
+import { getRequests, newRequest, updateRequest } from './RequestSagas'
 
 /* ------------- API ------------- */
 
@@ -42,6 +43,10 @@ export default function * root () {
 
     takeLatest(LocationTypes.GET_LOCATIONS, getLocations, api),
     takeEvery(LocationTypes.NEW_LOCATION, newLocation, api),
-    takeEvery(LocationTypes.UPDATE_LOCATION, updateLocation, api)
+    takeEvery(LocationTypes.UPDATE_LOCATION, updateLocation, api),
+
+    takeLatest(LocationTypes.GET_REQUESTS, getRequests, api),
+    takeEvery(LocationTypes.NEW_REQUEST, newRequest, api),
+    takeEvery(LocationTypes.UPDATE_REQUEST, updateRequest, api)
   ])
 }
