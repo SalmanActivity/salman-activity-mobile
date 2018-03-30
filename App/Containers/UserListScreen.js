@@ -21,7 +21,7 @@ class UserListScreen extends Component {
     const transformedUsers = users.map(user => ({
       id: user.id,
       title: `${user.name} (${user.enabled ? '' : 'Tidak '}Aktif)`,
-      subtitle: user.division.name
+      subtitle: user.division ? user.division.name : ''
     }))
 
     return (

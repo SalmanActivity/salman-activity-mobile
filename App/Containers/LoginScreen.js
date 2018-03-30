@@ -22,7 +22,7 @@ class LoginScreen extends Component {
   }
 
   render () {
-    const {error} = this.props
+    const {error, loggingIn} = this.props
 
     return (
       <View style={styles.mainContainer} keyboardShouldPersistTaps='handled'>
@@ -31,6 +31,7 @@ class LoginScreen extends Component {
             <Login
               loginHandler={this.loginHandler.bind(this)}
               error={error}
+              disabled={!!loggingIn}
             />
           </ScrollView>
         </ScrollView>
@@ -44,7 +45,8 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
-  error: state.auth.error
+  error: state.auth.error,
+  loggingIn: state.auth.loggingIn
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)

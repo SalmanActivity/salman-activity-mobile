@@ -8,7 +8,8 @@ export function * getLocations (api, action) {
   if (response.ok) {
     yield put(LocationActions.getLocationsSuccess(response.data))
   } else {
-    const {cause} = response.data
+    const { error } = response.data
+    const { cause } = error
     yield put(LocationActions.getLocationsFailure(cause))
   }
 }
@@ -22,7 +23,8 @@ export function * newLocation (api, action) {
   if (response.ok) {
     yield put(LocationActions.postLocationSuccess())
   } else {
-    const {cause} = response.data
+    const { error } = response.data
+    const { cause } = error
     yield put(LocationActions.postLocationFailure(cause))
   }
 }
@@ -34,7 +36,8 @@ export function * updateLocation (api, action) {
   if (response.ok) {
     yield put(LocationActions.updateLocationSuccess())
   } else {
-    const {cause} = response.data
+    const { error } = response.data
+    const { cause } = error
     yield put(LocationActions.updateLocationFailure(cause))
   }
 }

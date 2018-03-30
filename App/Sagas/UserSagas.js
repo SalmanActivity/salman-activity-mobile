@@ -20,7 +20,8 @@ export function * getUsers (api, action) {
   if (response.ok) {
     yield put(UserActions.getUsersSuccess(response.data))
   } else {
-    const {cause} = response.data
+    const { error } = response.data
+    const { cause } = error
     yield put(UserActions.getUsersFailure(cause))
   }
 }
@@ -38,7 +39,8 @@ export function * newUser (api, action) {
   if (response.ok) {
     yield put(UserActions.postUserSuccess())
   } else {
-    const {cause} = response.data
+    const { error } = response.data
+    const { cause } = error
     yield put(UserActions.postUserFailure(cause))
   }
 }
@@ -50,7 +52,8 @@ export function * updateUser (api, action) {
   if (response.ok) {
     yield put(UserActions.updateUserSuccess())
   } else {
-    const {cause} = response.data
+    const { error } = response.data
+    const { cause } = error
     yield put(UserActions.updateUserFailure(cause))
   }
 }

@@ -8,7 +8,8 @@ export function * getDivisions (api, action) {
   if (response.ok) {
     yield put(DivisionActions.getDivisionsSuccess(response.data))
   } else {
-    const {cause} = response.data
+    const { error } = response.data
+    const { cause } = error
     yield put(DivisionActions.getDivisionsFailure(cause))
   }
 }
@@ -22,7 +23,8 @@ export function * newDivision (api, action) {
   if (response.ok) {
     yield put(DivisionActions.postDivisionSuccess())
   } else {
-    const {cause} = response.data
+    const { error } = response.data
+    const { cause } = error
     yield put(DivisionActions.postDivisionFailure(cause))
   }
 }
@@ -34,7 +36,8 @@ export function * updateDivision (api, action) {
   if (response.ok) {
     yield put(DivisionActions.updateDivisionSuccess())
   } else {
-    const {cause} = response.data
+    const { error } = response.data
+    const { cause } = error
     yield put(DivisionActions.updateDivisionFailure(cause))
   }
 }

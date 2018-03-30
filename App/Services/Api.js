@@ -16,7 +16,7 @@ const create = (baseURL = config.baseURL) => {
   })
 
   const login = (username, password) =>
-    api.post('users/login', {username, password})
+    api.post('auth/login', {username, password})
 
   const getMe = (userToken) =>
     api.get('users/me', {}, addAuthorizationHeader(userToken))

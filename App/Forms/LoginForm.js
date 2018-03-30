@@ -26,6 +26,8 @@ const LoginForm = (props) => (
       title='Login'
       buttonStyle={styles.button}
       onPress={props.handleSubmit}
+      loading={!!props.disabled}
+      disabled={!!props.disabled}
     />
   </ScrollView>
 )

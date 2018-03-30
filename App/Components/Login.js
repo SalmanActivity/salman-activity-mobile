@@ -10,6 +10,7 @@ import styles from './Styles/LoginStyles'
 export default class Login extends Component {
   static propTypes = {
     loginHandler: PropTypes.func.isRequired,
+    disabled: PropTypes.bool,
     error: PropTypes.string
   }
 
@@ -21,11 +22,11 @@ export default class Login extends Component {
   }
 
   render () {
-    const {error} = this.props
+    const {error, disabled} = this.props
 
     return (
       <Card title='Login'>
-        <LoginForm onSubmit={this.onSubmit.bind(this)} />
+        <LoginForm onSubmit={this.onSubmit.bind(this)} disabled={disabled} />
         {error ? <Text style={styles.errorText}>{error}</Text> : <View />}
       </Card>
     )
