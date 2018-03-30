@@ -15,10 +15,22 @@ export function * getRequests (api, action) {
 }
 
 export function * newRequest (api, action) {
-  const {userToken, name} = action
+  const {userToken, name, description, division, location,
+    startTime, endTime, participantNumber, participantDescription,
+    speaker, issuedTime} = action
+
   const response = yield call(api.postRequest,
                               userToken,
-                              name)
+                              name,
+                              description,
+                              division,
+                              location,
+                              startTime,
+                              endTime,
+                              participantNumber,
+                              participantDescription,
+                              speaker,
+                              issuedTime)
 
   if (response.ok) {
     yield put(RequestActions.postRequestSuccess())

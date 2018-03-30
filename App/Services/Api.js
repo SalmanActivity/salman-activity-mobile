@@ -1,6 +1,7 @@
 // a library to wrap and simplify api calls
 import apisauce from 'apisauce'
 import config from '../Config/AppConfig'
+import ObjectFilter from '../Transforms/ObjectFolter'
 
 const addAuthorizationHeader = (userToken) => ({
   headers: {Authorization: `JWT ${userToken}`}
@@ -24,10 +25,15 @@ const create = (baseURL = config.baseURL) => {
   const getUsers = (userToken) =>
     api.get('users', {}, addAuthorizationHeader(userToken))
 
-  const postUser = (userToken, name, username, password, division, admin) =>
+  const postUser = (userToken, name, username, password, division, admin) => {
+    let data = {name, username, password, division, admin}
+
+    data = ObjectFilter(data, (key, value) => value != null)
+
     api.post('users',
-             {name, username, password, division, admin},
+             data,
              addAuthorizationHeader(userToken))
+  }
 
   const updateUser = (userToken, id, userData) => {
     const {id: _, ...data} = userData
@@ -60,6 +66,37 @@ const create = (baseURL = config.baseURL) => {
     return api.put(`locations/${id}`, data, addAuthorizationHeader(userToken))
   }
 
+  const getRequests = (userToken, month, year) =>
+    api.get('requests', {params: {month, year}},
+      addAuthorizationHeader(userToken))
+
+  const postRequest = (userToken, name, description, division, location,
+    startTime, endTime, participantNumber, participantDescription,
+    speaker, issuedTime) => {
+    let data = {
+      name,
+      description,
+      division,
+      location,
+      startTime,
+      endTime,
+      participantNumber,
+      participantDescription,
+      speaker,
+      issuedTime}
+
+    data = ObjectFilter(data, (key, value) => value != null)
+
+    return api.post('requests',
+             data,
+             addAuthorizationHeader(userToken))
+  }
+
+  const updateRequest = (userToken, id, requestData) => {
+    const {id: _, ...data} = requestData
+    return api.put(`requests/${id}`, data, addAuthorizationHeader(userToken))
+  }
+
   return {
     login,
     getMe,
@@ -71,7 +108,10 @@ const create = (baseURL = config.baseURL) => {
     updateDivision,
     getLocations,
     postLocation,
-    updateLocation
+    updateLocation,
+    getRequests,
+    postRequest,
+    updateRequest
   }
 }
 
