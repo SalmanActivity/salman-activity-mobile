@@ -1,7 +1,7 @@
 // a library to wrap and simplify api calls
 import apisauce from 'apisauce'
 import config from '../Config/AppConfig'
-import ObjectFilter from '../Transforms/ObjectFolter'
+import ObjectFilter from '../Transforms/ObjectFilter'
 
 const addAuthorizationHeader = (userToken) => ({
   headers: {Authorization: `JWT ${userToken}`}

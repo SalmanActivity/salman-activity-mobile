@@ -81,15 +81,15 @@ export const updateRequestFailure = (state, action) => {
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.GET_LOCATIONS]: getRequests,
-  [Types.GET_LOCATIONS_SUCCESS]: getRequestsSuccess,
-  [Types.GET_LOCATIONS_FAILURE]: getRequestsFailure,
+  [Types.GET_REQUESTS]: getRequests,
+  [Types.GET_REQUESTS_SUCCESS]: getRequestsSuccess,
+  [Types.GET_REQUESTS_FAILURE]: getRequestsFailure,
 
-  [Types.NEW_LOCATION]: newRequest,
-  [Types.NEW_LOCATION_SUCCESS]: newRequestSuccess,
-  [Types.NEW_LOCATION_FAILURE]: newRequestFailure,
+  [Types.NEW_REQUEST]: newRequest,
+  [Types.NEW_REQUEST_SUCCESS]: newRequestSuccess,
+  [Types.NEW_REQUEST_FAILURE]: newRequestFailure,
 
-  [Types.UPDATE_LOCATION]: updateRequest,
-  [Types.UPDATE_LOCATION_SUCCESS]: updateRequestSuccess,
-  [Types.UPDATE_LOCATION_FAILURE]: updateRequestFailure
+  [Types.UPDATE_REQUEST]: updateRequest,
+  [Types.UPDATE_REQUEST_SUCCESS]: updateRequestSuccess,
+  [Types.UPDATE_REQUEST_FAILURE]: updateRequestFailure
 })
