@@ -9,6 +9,8 @@ export const getToken = AuthSelectors.getToken
 // process STARTUP actions
 export function * startup (action) {
   yield put(AppStateActions.setRehydrationComplete())
+  yield put(AuthActions.startup())
+
   const loggedIn = yield select(isLoggedIn)
 
   if (loggedIn) {
