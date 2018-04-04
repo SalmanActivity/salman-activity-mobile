@@ -8,7 +8,7 @@ import styles from './Styles/MonthPickerStyles'
 
 const MONTHS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 
-const YEAR_START = 2011
+const YEAR_START = 2018
 const YEARS = Array.from({length: moment().year() - YEAR_START + 1},
   (x, i) => i + YEAR_START)
 
