@@ -16,7 +16,10 @@ const { Types, Creators } = createActions({
 
   updateRequest: ['userToken', 'id', 'requestData'],
   updateRequestSuccess: null,
-  updateRequestFailure: ['error']
+  updateRequestFailure: ['error'],
+
+  changeRequestMonth: ['month'],
+  changeRequestYear: ['year']
 })
 
 export const RequestTypes = Types
@@ -33,7 +36,10 @@ export const INITIAL_STATE = Immutable({
   postingRequestError: null,
 
   updatingRequest: false,
-  updatingRequestError: null
+  updatingRequestError: null,
+
+  month: null,
+  year: null
 })
 
 /* ------------- Reducers ------------- */
@@ -78,6 +84,16 @@ export const updateRequestFailure = (state, action) => {
   return state.merge({ updatingRequest: false, updatingRequestError: error })
 }
 
+export const changeRequestMonth = (state, action) => {
+  const { month } = action
+  return state.merge({ month })
+}
+
+export const changeRequestYear = (state, action) => {
+  const { year } = action
+  return state.merge({ year })
+}
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -91,5 +107,8 @@ export const reducer = createReducer(INITIAL_STATE, {
 
   [Types.UPDATE_REQUEST]: updateRequest,
   [Types.UPDATE_REQUEST_SUCCESS]: updateRequestSuccess,
-  [Types.UPDATE_REQUEST_FAILURE]: updateRequestFailure
+  [Types.UPDATE_REQUEST_FAILURE]: updateRequestFailure,
+
+  [Types.CHANGE_REQUEST_MONTH]: changeRequestMonth,
+  [Types.CHANGE_REQUEST_YEAR]: changeRequestYear
 })

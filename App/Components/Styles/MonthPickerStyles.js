@@ -12,7 +12,7 @@ export default StyleSheet.create({
   },
 
   separator: {
-    flex: 1
+    flex: 0
   },
 
   year: {

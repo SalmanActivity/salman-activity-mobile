@@ -1,5 +1,6 @@
 {
   "presets": ["react-native"],
+  "plugins": ["transform-function-bind"],
   "env": {
     "production": {
       "plugins": ["ignite-ignore-reactotron"]
