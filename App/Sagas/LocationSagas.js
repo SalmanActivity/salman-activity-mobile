@@ -8,8 +8,14 @@ export function * getLocations (api, action) {
   if (response.ok) {
     yield put(LocationActions.getLocationsSuccess(response.data))
   } else {
-    const { error } = response.data
-    const { cause } = error
+    let cause
+
+    if (response.data) {
+      cause = response.data.error.cause
+    } else {
+      cause = 'Connection Error'
+    }
+
     yield put(LocationActions.getLocationsFailure(cause))
   }
 }
@@ -23,8 +29,14 @@ export function * newLocation (api, action) {
   if (response.ok) {
     yield put(LocationActions.postLocationSuccess())
   } else {
-    const { error } = response.data
-    const { cause } = error
+    let cause
+
+    if (response.data) {
+      cause = response.data.error.cause
+    } else {
+      cause = 'Connection Error'
+    }
+
     yield put(LocationActions.postLocationFailure(cause))
   }
 }
@@ -36,8 +48,14 @@ export function * updateLocation (api, action) {
   if (response.ok) {
     yield put(LocationActions.updateLocationSuccess())
   } else {
-    const { error } = response.data
-    const { cause } = error
+    let cause
+
+    if (response.data) {
+      cause = response.data.error.cause
+    } else {
+      cause = 'Connection Error'
+    }
+
     yield put(LocationActions.updateLocationFailure(cause))
   }
 }

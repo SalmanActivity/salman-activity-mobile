@@ -11,8 +11,14 @@ export function * login (api, action) {
 
     yield put(AuthActions.loginSuccess(token))
   } else {
-    const { error } = response.data
-    const { cause } = error
+    let cause
+
+    if (response.data) {
+      cause = response.data.error.cause
+    } else {
+      cause = 'Connection Error'
+    }
+
     yield put(AuthActions.loginFailure(cause))
   }
 }
