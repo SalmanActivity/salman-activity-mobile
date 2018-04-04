@@ -4,6 +4,8 @@ import Immutable from 'seamless-immutable'
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
+  startupAuth: null,
+
   login: ['username', 'password'],
   loginSuccess: ['token'],
   loginFailure: ['error'],
@@ -32,6 +34,10 @@ export const AuthSelectors = {
 
 /* ------------- Reducers ------------- */
 
+// startup
+export const startup = (state) =>
+  state.merge({ loggingIn: false, loginError: null })
+
 // login
 export const login = (state) =>
   state.merge({ loggingIn: true, error: null })
@@ -58,6 +64,7 @@ export const autoLogin = state => state
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
+  [Types.STARTUP_AUTH]: startup,
   [Types.LOGIN]: login,
   [Types.LOGIN_SUCCESS]: loginSuccess,
   [Types.LOGIN_FAILURE]: loginFailure,

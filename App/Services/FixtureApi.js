@@ -17,8 +17,10 @@ export default {
       return {
         ok: false,
         data: {
-          msg: 'cannot perform action',
-          cause: 'Wrong username/password'
+          error: {
+            msg: 'cannot perform action',
+            cause: 'Wrong username/password'
+          }
         }
       }
     }
@@ -41,8 +43,10 @@ export default {
       return {
         ok: false,
         data: {
-          msg: 'cannot perform action',
-          cause: 'unauthorized access'
+          error: {
+            msg: 'cannot perform action',
+            cause: 'unauthorized access'
+          }
         }
       }
     }
@@ -58,8 +62,10 @@ export default {
       return {
         ok: false,
         data: {
-          msg: 'cannot perform action',
-          cause: 'unauthorized access'
+          error: {
+            msg: 'cannot perform action',
+            cause: 'unauthorized access'
+          }
         }
       }
     }
@@ -72,8 +78,10 @@ export default {
           return {
             ok: false,
             data: {
-              msg: 'cannot perform action',
-              cause: 'username exists'
+              error: {
+                msg: 'cannot perform action',
+                cause: 'username exists'
+              }
             }
           }
         }
@@ -87,8 +95,10 @@ export default {
       return {
         ok: false,
         data: {
-          msg: 'cannot perform action',
-          cause: 'unauthorized access'
+          error: {
+            msg: 'cannot perform action',
+            cause: 'unauthorized access'
+          }
         }
       }
     }
@@ -108,16 +118,20 @@ export default {
       return {
         ok: false,
         data: {
-          msg: 'cannot perform action',
-          cause: 'user not found'
+          error: {
+            msg: 'cannot perform action',
+            cause: 'user not found'
+          }
         }
       }
     } else {
       return {
         ok: false,
         data: {
-          msg: 'cannot perform action',
-          cause: 'unauthorized access'
+          error: {
+            msg: 'cannot perform action',
+            cause: 'unauthorized access'
+          }
         }
       }
     }
@@ -133,8 +147,10 @@ export default {
       return {
         ok: false,
         data: {
-          msg: 'cannot perform action',
-          cause: 'unauthorized access'
+          error: {
+            msg: 'cannot perform action',
+            cause: 'unauthorized access'
+          }
         }
       }
     }
@@ -150,8 +166,10 @@ export default {
       return {
         ok: false,
         data: {
-          msg: 'cannot perform action',
-          cause: 'unauthorized access'
+          error: {
+            msg: 'cannot perform action',
+            cause: 'unauthorized access'
+          }
         }
       }
     }
@@ -164,8 +182,10 @@ export default {
           return {
             ok: false,
             data: {
-              msg: 'cannot perform action',
-              cause: 'location exists'
+              error: {
+                msg: 'cannot perform action',
+                cause: 'location exists'
+              }
             }
           }
         }
@@ -179,8 +199,10 @@ export default {
       return {
         ok: false,
         data: {
-          msg: 'cannot perform action',
-          cause: 'unauthorized access'
+          error: {
+            msg: 'cannot perform action',
+            cause: 'unauthorized access'
+          }
         }
       }
     }
@@ -193,8 +215,10 @@ export default {
           return {
             ok: false,
             data: {
-              msg: 'cannot perform action',
-              cause: 'location exists'
+              error: {
+                msg: 'cannot perform action',
+                cause: 'location exists'
+              }
             }
           }
         }
@@ -208,8 +232,10 @@ export default {
       return {
         ok: false,
         data: {
-          msg: 'cannot perform action',
-          cause: 'unauthorized access'
+          error: {
+            msg: 'cannot perform action',
+            cause: 'unauthorized access'
+          }
         }
       }
     }
@@ -229,16 +255,20 @@ export default {
       return {
         ok: false,
         data: {
-          msg: 'cannot perform action',
-          cause: 'location not found'
+          error: {
+            msg: 'cannot perform action',
+            cause: 'location not found'
+          }
         }
       }
     } else {
       return {
         ok: false,
         data: {
-          msg: 'cannot perform action',
-          cause: 'unauthorized access'
+          error: {
+            msg: 'cannot perform action',
+            cause: 'unauthorized access'
+          }
         }
       }
     }
@@ -258,16 +288,20 @@ export default {
       return {
         ok: false,
         data: {
-          msg: 'cannot perform action',
-          cause: 'location not found'
+          error: {
+            msg: 'cannot perform action',
+            cause: 'location not found'
+          }
         }
       }
     } else {
       return {
         ok: false,
         data: {
-          msg: 'cannot perform action',
-          cause: 'unauthorized access'
+          error: {
+            msg: 'cannot perform action',
+            cause: 'unauthorized access'
+          }
         }
       }
     }

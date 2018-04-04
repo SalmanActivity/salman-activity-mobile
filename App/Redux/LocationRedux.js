@@ -42,12 +42,15 @@ state.merge({ fetchingLocations: true, fetchingLocationsError: null })
 
 export const getLocationsSuccess = (state, action) => {
   const { locations } = action
-  return state.merge({ fetchingLocations: false, locations, fetchingLocationsError: null })
+  return state.merge({ fetchingLocations: false,
+    locations,
+    fetchingLocationsError: null })
 }
 
 export const getLocationsFailure = (state, action) => {
   const { error } = action
-  return state.merge({ fetchingLocations: false, fetchingLocationsError: error })
+  return state.merge({ fetchingLocations: false,
+    fetchingLocationsError: error })
 }
 
 export const newLocation = (state) =>

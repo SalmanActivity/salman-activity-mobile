@@ -13,6 +13,7 @@ export const reducers = combineReducers({
   user: require('./UserRedux').reducer,
   location: require('./LocationRedux').reducer,
   division: require('./DivisionRedux').reducer,
+  request: require('./RequestRedux').reducer,
 
   form: formReducer
 })

@@ -8,7 +8,14 @@ export function * getMe (api, action) {
   if (response.ok) {
     yield put(UserActions.getMeSuccess(response.data))
   } else {
-    const {cause} = response.data
+    let cause
+
+    if (response.data) {
+      cause = response.data.error.cause
+    } else {
+      cause = 'Connection Error'
+    }
+
     yield put(UserActions.getMeFailure(cause))
   }
 }
@@ -20,8 +27,14 @@ export function * getUsers (api, action) {
   if (response.ok) {
     yield put(UserActions.getUsersSuccess(response.data))
   } else {
-    const { error } = response.data
-    const { cause } = error
+    let cause
+
+    if (response.data) {
+      cause = response.data.error.cause
+    } else {
+      cause = 'Connection Error'
+    }
+
     yield put(UserActions.getUsersFailure(cause))
   }
 }
@@ -39,8 +52,14 @@ export function * newUser (api, action) {
   if (response.ok) {
     yield put(UserActions.postUserSuccess())
   } else {
-    const { error } = response.data
-    const { cause } = error
+    let cause
+
+    if (response.data) {
+      cause = response.data.error.cause
+    } else {
+      cause = 'Connection Error'
+    }
+
     yield put(UserActions.postUserFailure(cause))
   }
 }
@@ -52,8 +71,14 @@ export function * updateUser (api, action) {
   if (response.ok) {
     yield put(UserActions.updateUserSuccess())
   } else {
-    const { error } = response.data
-    const { cause } = error
+    let cause
+
+    if (response.data) {
+      cause = response.data.error.cause
+    } else {
+      cause = 'Connection Error'
+    }
+
     yield put(UserActions.updateUserFailure(cause))
   }
 }

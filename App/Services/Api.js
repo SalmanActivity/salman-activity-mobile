@@ -1,6 +1,7 @@
 // a library to wrap and simplify api calls
 import apisauce from 'apisauce'
 import config from '../Config/AppConfig'
+import ObjectFilter from '../Transforms/ObjectFilter'
 
 const addAuthorizationHeader = (userToken) => ({
   headers: {Authorization: `JWT ${userToken}`}
@@ -12,7 +13,7 @@ const create = (baseURL = config.baseURL) => {
     headers: {
       'Cache-Control': 'no-cache'
     },
-    timeout: 10000
+    timeout: 5000
   })
 
   const login = (username, password) =>
@@ -24,24 +25,33 @@ const create = (baseURL = config.baseURL) => {
   const getUsers = (userToken) =>
     api.get('users', {}, addAuthorizationHeader(userToken))
 
-  const postUser = (userToken, name, username, password, division, admin) =>
-    api.post('users',
-             {name, username, password, division, admin},
-             addAuthorizationHeader(userToken))
+  const postUser = (userToken, name, username, password, division, admin) => {
+    let data = {name, username, password, division, admin}
 
-  const updateUser = (userToken, id, userData) =>
-    api.put('users', {...userData, id}, addAuthorizationHeader(userToken))
+    data = ObjectFilter(data, (key, value) => value != null)
+
+    api.post('users',
+             data,
+             addAuthorizationHeader(userToken))
+  }
+
+  const updateUser = (userToken, id, userData) => {
+    const {id: _, ...data} = userData
+    return api.put(`users/${id}`, data, addAuthorizationHeader(userToken))
+  }
 
   const getDivisions = (userToken) =>
-    api.get('Divisions', {}, addAuthorizationHeader(userToken))
+    api.get('divisions', {}, addAuthorizationHeader(userToken))
 
   const postDivision = (userToken, name) =>
-    api.post('Divisions',
+    api.post('divisions',
              {name},
              addAuthorizationHeader(userToken))
 
-  const updateDivision = (userToken, id, DivisionData) =>
-    api.put('Divisionss', {...DivisionData, id}, addAuthorizationHeader(userToken))
+  const updateDivision = (userToken, id, divisionData) => {
+    const {id: _, ...data} = divisionData
+    return api.put(`divisions/${id}`, data, addAuthorizationHeader(userToken))
+  }
 
   const getLocations = (userToken) =>
     api.get('locations', {}, addAuthorizationHeader(userToken))
@@ -51,8 +61,41 @@ const create = (baseURL = config.baseURL) => {
              {name},
              addAuthorizationHeader(userToken))
 
-  const updateLocation = (userToken, id, locationData) =>
-    api.put('locations', {...locationData, id}, addAuthorizationHeader(userToken))
+  const updateLocation = (userToken, id, locationData) => {
+    const {id: _, ...data} = locationData
+    return api.put(`locations/${id}`, data, addAuthorizationHeader(userToken))
+  }
+
+  const getRequests = (userToken, month, year) =>
+    api.get('requests', {month, year},
+      addAuthorizationHeader(userToken))
+
+  const postRequest = (userToken, name, description, division, location,
+    startTime, endTime, participantNumber, participantDescription,
+    speaker, issuedTime) => {
+    let data = {
+      name,
+      description,
+      division,
+      location,
+      startTime,
+      endTime,
+      participantNumber,
+      participantDescription,
+      speaker,
+      issuedTime}
+
+    data = ObjectFilter(data, (key, value) => value != null)
+
+    return api.post('requests',
+             data,
+             addAuthorizationHeader(userToken))
+  }
+
+  const updateRequest = (userToken, id, requestData) => {
+    const {id: _, ...data} = requestData
+    return api.put(`requests/${id}`, data, addAuthorizationHeader(userToken))
+  }
 
   return {
     login,
@@ -65,7 +108,10 @@ const create = (baseURL = config.baseURL) => {
     updateDivision,
     getLocations,
     postLocation,
-    updateLocation
+    updateLocation,
+    getRequests,
+    postRequest,
+    updateRequest
   }
 }
 
