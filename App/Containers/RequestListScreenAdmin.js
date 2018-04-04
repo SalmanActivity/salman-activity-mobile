@@ -16,9 +16,9 @@ class RequestListScreenAdmin extends Component {
     const {token, getRequests, changeRequestMonth,
       changeRequestYear} = this.props
 
-    changeRequestMonth(moment().month())
+    changeRequestMonth(moment().month() + 1)
     changeRequestYear(moment().year())
-    getRequests(token, moment().month(), moment().year())
+    getRequests(token, moment().month() + 1, moment().year())
   }
 
   onChangeMonth (month) {

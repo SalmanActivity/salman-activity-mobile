@@ -14,7 +14,7 @@ const YEARS = Array.from({length: moment().year() - YEAR_START + 1},
 
 export default class MonthSelector extends Component {
   static propTypes = {
-    style: PropTypes.object,
+    style: PropTypes.object | PropTypes.number,
     onChangeMonth: PropTypes.func,
     onChangeYear: PropTypes.func
   }
@@ -27,7 +27,7 @@ export default class MonthSelector extends Component {
         <ModalSelector
           data={MONTHS}
           keyExtractor={month => month}
-          labelExtractor={month => moment.months(month)}
+          labelExtractor={month => moment.months(month - 1)}
           initValue={moment.months(moment().month())}
           onChange={onChangeMonth}
           style={styles.month}
