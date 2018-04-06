@@ -39,7 +39,7 @@ class DivisionListScreen extends Component {
         </ScrollView>
 
         <ActionButton
-          buttonColor='rgba(231,76,60,1)'
+          buttonColor='rgba(00,96,88,1)'
           onPress={() => navigate('NewDivisionScreen')}
         />
       </View>
