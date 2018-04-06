@@ -5,7 +5,7 @@ import {Button} from 'react-native-elements'
 
 import TextInput from './TextInputWrapper'
 
-import styles from './Styles/LoginFormStyles'
+import styles from './Styles/FormStyles'
 
 const NewLocationForm = (props) => (
   <ScrollView keyboardShouldPersistTaps='always'>
@@ -17,7 +17,7 @@ const NewLocationForm = (props) => (
     />
     <Button
       title='Tambah Lokasi'
-      buttonStyle={styles.button}
+      buttonStyle={styles.primaryButton}
       onPress={props.handleSubmit}
       loading={!!props.disabled}
       disabled={!!props.disabled}

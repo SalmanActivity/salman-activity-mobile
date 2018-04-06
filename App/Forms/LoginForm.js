@@ -5,7 +5,7 @@ import {Button} from 'react-native-elements'
 
 import TextInput from './TextInputWrapper'
 
-import styles from './Styles/LoginFormStyles'
+import styles from './Styles/FormStyles'
 
 const LoginForm = (props) => (
   <ScrollView keyboardShouldPersistTaps='always'>
@@ -24,7 +24,7 @@ const LoginForm = (props) => (
 
     <Button
       title='Login'
-      buttonStyle={styles.button}
+      buttonStyle={styles.primaryButton}
       onPress={props.handleSubmit}
       loading={!!props.disabled}
       disabled={!!props.disabled}

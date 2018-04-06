@@ -9,8 +9,10 @@ const { getStateForAction } = AppNavigation.router
 const INITIAL_STATE = getStateForAction(
   navigate({ routeName: 'LoadingScreen' })
 )
-const NOT_LOGGED_IN_STATE = getStateForAction(navigate({ routeName: 'LoggedOutNavigation' }))
-const LOGGED_IN_STATE = getStateForAction(navigate({ routeName: 'LoggedInNavigation' }))
+const NOT_LOGGED_IN_STATE = getStateForAction(
+  navigate({ routeName: 'LoggedOutNavigation' }))
+const LOGGED_IN_STATE = getStateForAction(
+  navigate({ routeName: 'LoggedInNavigation' }))
 
 export function reducer (state = INITIAL_STATE, action) {
   let nextState

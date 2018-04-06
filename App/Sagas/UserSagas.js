@@ -13,7 +13,7 @@ export function * getMe (api, action) {
     if (response.data) {
       cause = response.data.error.cause
     } else {
-      cause = 'Connection Error'
+      cause = response.problem
     }
 
     yield put(UserActions.getMeFailure(cause))
@@ -32,7 +32,7 @@ export function * getUsers (api, action) {
     if (response.data) {
       cause = response.data.error.cause
     } else {
-      cause = 'Connection Error'
+      cause = response.problem
     }
 
     yield put(UserActions.getUsersFailure(cause))
@@ -57,7 +57,7 @@ export function * newUser (api, action) {
     if (response.data) {
       cause = response.data.error.cause
     } else {
-      cause = 'Connection Error'
+      cause = response.problem
     }
 
     yield put(UserActions.postUserFailure(cause))
@@ -76,7 +76,7 @@ export function * updateUser (api, action) {
     if (response.data) {
       cause = response.data.error.cause
     } else {
-      cause = 'Connection Error'
+      cause = response.problem
     }
 
     yield put(UserActions.updateUserFailure(cause))

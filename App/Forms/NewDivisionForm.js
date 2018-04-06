@@ -1,11 +1,11 @@
 import React from 'react'
-import {ScrollView} from 'react-native'
+import {View, ScrollView} from 'react-native'
 import {reduxForm, Field} from 'redux-form'
 import {Button} from 'react-native-elements'
 
 import TextInput from './TextInputWrapper'
 
-import styles from './Styles/LoginFormStyles'
+import styles from './Styles/FormStyles'
 
 const NewDivisionForm = (props) => (
   <ScrollView keyboardShouldPersistTaps='always'>
@@ -13,14 +13,20 @@ const NewDivisionForm = (props) => (
       name='name'
       component={TextInput}
       autoFocus
-      placeholder='Nama Divisi'
+      placeholder='Nama Bidang'
     />
 
     <Button
-      title='Tambah Divisi'
-      buttonStyle={styles.button}
+      title='Tambah Bidang'
+      buttonStyle={styles.primaryButton}
       onPress={props.handleSubmit}
       loading={!!props.disabled}
+      disabled={!!props.disabled}
+    />
+    <Button
+      title='Kembali'
+      buttonStyle={styles.backButton}
+      onPress={props.backHandler}
       disabled={!!props.disabled}
     />
   </ScrollView>

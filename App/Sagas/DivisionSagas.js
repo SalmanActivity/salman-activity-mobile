@@ -13,7 +13,7 @@ export function * getDivisions (api, action) {
     if (response.data) {
       cause = response.data.error.cause
     } else {
-      cause = 'Connection Error'
+      cause = response.problem
     }
 
     yield put(DivisionActions.getDivisionsFailure(cause))
@@ -27,17 +27,17 @@ export function * newDivision (api, action) {
                               name)
 
   if (response.ok) {
-    yield put(DivisionActions.postDivisionSuccess())
+    yield put(DivisionActions.newDivisionSuccess())
   } else {
     let cause
 
     if (response.data) {
       cause = response.data.error.cause
     } else {
-      cause = 'Connection Error'
+      cause = response.problem
     }
 
-    yield put(DivisionActions.postDivisionFailure(cause))
+    yield put(DivisionActions.newDivisionFailure(cause))
   }
 }
 
@@ -53,7 +53,7 @@ export function * updateDivision (api, action) {
     if (response.data) {
       cause = response.data.error.cause
     } else {
-      cause = 'Connection Error'
+      cause = response.problem
     }
 
     yield put(DivisionActions.updateDivisionFailure(cause))

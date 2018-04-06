@@ -10,6 +10,7 @@ import styles from './Styles/LoginStyles'
 export default class NewDivision extends Component {
   static propTypes = {
     newDivisionHandler: PropTypes.func.isRequired,
+    backHandler: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
     error: PropTypes.string
   }
@@ -22,11 +23,15 @@ export default class NewDivision extends Component {
   }
 
   render () {
-    const {error, disabled} = this.props
+    const {error, disabled, backHandler} = this.props
 
     return (
       <Card title='Divisi Baru'>
-        <NewDivisionForm onSubmit={this.onSubmit.bind(this)} disabled={disabled} />
+        <NewDivisionForm
+          onSubmit={this.onSubmit.bind(this)}
+          backHandler={backHandler}
+          disabled={disabled}
+        />
         {error ? <Text style={styles.errorText}>{error}</Text> : <View />}
       </Card>
     )

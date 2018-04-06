@@ -17,23 +17,30 @@ class NewDivisionScreen extends Component {
   }
 
   newDivisionHandler (name) {
-    const {newDivision} = this.props
-    newDivision(name)
+    const {newDivision, token} = this.props
+    newDivision(token, name)
   }
 
   render () {
-    const {error, loggingIn} = this.props
+    const {error, postingDivision, back} = this.props
 
     return (
       <View style={styles.mainContainer} keyboardShouldPersistTaps='handled'>
-        <ScrollView style={styles.container} keyboardShouldPersistTaps='handled'>
-          <ScrollView style={styles.section} keyboardShouldPersistTaps='handled' >
+        <ScrollView style={styles.container}
+          keyboardShouldPersistTaps='handled'>
+
+          <ScrollView style={styles.section}
+            keyboardShouldPersistTaps='handled'>
+
             <NewDivision
               newDivisionHandler={this.newDivisionHandler.bind(this)}
+              backHandler={back}
               error={error}
-              disabled={!!loggingIn}
+              disabled={!!postingDivision}
             />
+
           </ScrollView>
+
         </ScrollView>
       </View>
     )
@@ -41,12 +48,14 @@ class NewDivisionScreen extends Component {
 }
 
 const mapDispatchToProps = {
-  newDivision: DivisionActions.newDivision
+  newDivision: DivisionActions.newDivision,
+  back: () => ({ type: 'Navigation/BACK' })
 }
 
 const mapStateToProps = (state) => ({
-  //error: state.auth.error,
-  //loggingIn: state.auth.loggingIn
+  error: state.division.postingDivisionError,
+  postingDivision: state.division.postingDivision,
+  token: state.auth.token
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewDivisionScreen)

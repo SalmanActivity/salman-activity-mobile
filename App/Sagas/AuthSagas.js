@@ -16,7 +16,7 @@ export function * login (api, action) {
     if (response.data) {
       cause = response.data.error.cause
     } else {
-      cause = 'Connection Error'
+      cause = response.problem
     }
 
     yield put(AuthActions.loginFailure(cause))
