@@ -3,7 +3,7 @@ import {View} from 'react-native'
 import {Card, Text} from 'react-native-elements'
 import PropTypes from 'prop-types'
 
-import LoginForm from '../Forms/ActivityReportForm'
+import ActivityReportForm from '../Forms/ActivityReportForm'
 
 import styles from './Styles/LoginStyles'
 
