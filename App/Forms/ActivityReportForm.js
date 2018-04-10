@@ -10,7 +10,7 @@ import styles from './Styles/LoginFormStyles'
 const LoginForm = (props) => (
   <ScrollView keyboardShouldPersistTaps='always'>
     <Field
-      name='username'
+      name='Kegiatan'
       component={TextInput}
       autoFocus
       placeholder='Username'
@@ -23,7 +23,7 @@ const LoginForm = (props) => (
     />
 
     <Button
-      title='Login'
+      title='Lapor!'
       buttonStyle={styles.button}
       onPress={props.handleSubmit}
       loading={!!props.disabled}

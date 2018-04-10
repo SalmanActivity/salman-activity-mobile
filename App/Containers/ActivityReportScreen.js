@@ -3,7 +3,7 @@ import { ScrollView, View } from 'react-native'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 
-import Login from '../Components/Login'
+import Login from '../Components/ActivityReport'
 
 import AuthActions from '../Redux/AuthRedux'
 
@@ -28,7 +28,7 @@ class ActivityReportScreen extends Component {
       <View style={styles.mainContainer} keyboardShouldPersistTaps='handled'>
         <ScrollView style={styles.container} keyboardShouldPersistTaps='handled'>
           <ScrollView style={styles.section} keyboardShouldPersistTaps='handled' >
-            <Login
+            <ActivityReport
               loginHandler={this.loginHandler.bind(this)}
               error={error}
               disabled={!!loggingIn}

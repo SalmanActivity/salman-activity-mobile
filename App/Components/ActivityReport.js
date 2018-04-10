@@ -3,11 +3,11 @@ import {View} from 'react-native'
 import {Card, Text} from 'react-native-elements'
 import PropTypes from 'prop-types'
 
-import LoginForm from '../Forms/LoginForm'
+import LoginForm from '../Forms/ActivityReportForm'
 
 import styles from './Styles/LoginStyles'
 
-export default class Login extends Component {
+export default class ActivityReport extends Component {
   static propTypes = {
     loginHandler: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
@@ -25,8 +25,8 @@ export default class Login extends Component {
     const {error, disabled} = this.props
 
     return (
-      <Card title='Login'>
-        <LoginForm onSubmit={this.onSubmit.bind(this)} disabled={disabled} />
+      <Card title='Laporan Aktivitas'>
+        <ActivityReportForm onSubmit={this.onSubmit.bind(this)} disabled={disabled} />
         {error ? <Text style={styles.errorText}>{error}</Text> : <View />}
       </Card>
     )
