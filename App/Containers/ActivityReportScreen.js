@@ -3,7 +3,7 @@ import { ScrollView, View } from 'react-native'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 
-import Login from '../Components/ActivityReport'
+import ActivityReport from '../Components/ActivityReport'
 
 import AuthActions from '../Redux/AuthRedux'
 
