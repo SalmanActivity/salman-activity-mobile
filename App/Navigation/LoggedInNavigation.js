@@ -4,7 +4,7 @@ import UserListScreen from '../Containers/UserListScreen'
 import LocationListScreen from '../Containers/LocationListScreen'
 import DivisionListScreen from '../Containers/DivisionListScreen'
 import RequestListScreenAdmin from '../Containers/RequestListScreenAdmin'
-import FormReportScreen from '../Containers/ActivityReportScreen'
+import ActivityReportScreen from '../Containers/ActivityReportScreen'
 
 const LoggedInNavigation = DrawerNavigator({
   HomeScreen: { screen: HomeScreen, navigationOptions: {drawerLabel: 'Home'} },
