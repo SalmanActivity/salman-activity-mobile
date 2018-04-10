@@ -7,19 +7,21 @@ import TextInput from './TextInputWrapper'
 
 import styles from './Styles/LoginFormStyles'
 
-const LoginForm = (props) => (
+const ActivityReportForm = (props) => (
   <ScrollView keyboardShouldPersistTaps='always'>
     <Field
       name='Kegiatan'
       component={TextInput}
       autoFocus
-      placeholder='Username'
+      placeholder='Deskripsi Kegiatan'
     />
-    <Field
-      name='password'
-      component={TextInput}
-      placeholder='Password'
-      secureTextEntry
+
+    <Button
+      title='Unggah Foto'
+      buttonStyle={styles.button}
+      onPress={props.handleSubmit}
+      loading={!!props.disabled}
+      disabled={!!props.disabled}
     />
 
     <Button
@@ -32,4 +34,4 @@ const LoginForm = (props) => (
   </ScrollView>
 )
 
-export default reduxForm({form: 'login'})(LoginForm)
+export default reduxForm({form: 'login'})(ActivityReportForm)
