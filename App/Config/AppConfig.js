@@ -7,7 +7,8 @@ const defaultConfig = {
 }
 
 const debugConfig = {
-  baseURL: 'http://localhost:8080/api/v1/'
+  // baseURL: 'http://localhost:8080/api/v1/'
+  baseURL: 'http://salman-activity.herokuapp.com/api/v1/'
 }
 
-export default __DEV__ ? defaultConfig : {...defaultConfig, ...debugConfig}
+export default __DEV__ ? {...defaultConfig, ...debugConfig} : defaultConfig

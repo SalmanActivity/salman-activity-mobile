@@ -8,8 +8,14 @@ export function * getRequests (api, action) {
   if (response.ok) {
     yield put(RequestActions.getRequestsSuccess(response.data))
   } else {
-    const { error } = response.data
-    const { cause } = error
+    let cause
+
+    if (response.data) {
+      cause = response.data.error.cause
+    } else {
+      cause = 'Connection Error'
+    }
+
     yield put(RequestActions.getRequestsFailure(cause))
   }
 }
@@ -35,8 +41,14 @@ export function * newRequest (api, action) {
   if (response.ok) {
     yield put(RequestActions.postRequestSuccess())
   } else {
-    const { error } = response.data
-    const { cause } = error
+    let cause
+
+    if (response.data) {
+      cause = response.data.error.cause
+    } else {
+      cause = 'Connection Error'
+    }
+
     yield put(RequestActions.postRequestFailure(cause))
   }
 }
@@ -48,8 +60,14 @@ export function * updateRequest (api, action) {
   if (response.ok) {
     yield put(RequestActions.updateRequestSuccess())
   } else {
-    const { error } = response.data
-    const { cause } = error
+    let cause
+
+    if (response.data) {
+      cause = response.data.error.cause
+    } else {
+      cause = 'Connection Error'
+    }
+
     yield put(RequestActions.updateRequestFailure(cause))
   }
 }

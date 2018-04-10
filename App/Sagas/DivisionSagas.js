@@ -8,8 +8,14 @@ export function * getDivisions (api, action) {
   if (response.ok) {
     yield put(DivisionActions.getDivisionsSuccess(response.data))
   } else {
-    const { error } = response.data
-    const { cause } = error
+    let cause
+
+    if (response.data) {
+      cause = response.data.error.cause
+    } else {
+      cause = 'Connection Error'
+    }
+
     yield put(DivisionActions.getDivisionsFailure(cause))
   }
 }
@@ -23,8 +29,14 @@ export function * newDivision (api, action) {
   if (response.ok) {
     yield put(DivisionActions.postDivisionSuccess())
   } else {
-    const { error } = response.data
-    const { cause } = error
+    let cause
+
+    if (response.data) {
+      cause = response.data.error.cause
+    } else {
+      cause = 'Connection Error'
+    }
+
     yield put(DivisionActions.postDivisionFailure(cause))
   }
 }
@@ -36,8 +48,14 @@ export function * updateDivision (api, action) {
   if (response.ok) {
     yield put(DivisionActions.updateDivisionSuccess())
   } else {
-    const { error } = response.data
-    const { cause } = error
+    let cause
+
+    if (response.data) {
+      cause = response.data.error.cause
+    } else {
+      cause = 'Connection Error'
+    }
+
     yield put(DivisionActions.updateDivisionFailure(cause))
   }
 }

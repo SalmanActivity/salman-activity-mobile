@@ -13,7 +13,7 @@ const create = (baseURL = config.baseURL) => {
     headers: {
       'Cache-Control': 'no-cache'
     },
-    timeout: 10000
+    timeout: 5000
   })
 
   const login = (username, password) =>
@@ -67,7 +67,7 @@ const create = (baseURL = config.baseURL) => {
   }
 
   const getRequests = (userToken, month, year) =>
-    api.get('requests', {params: {month, year}},
+    api.get('requests', {month, year},
       addAuthorizationHeader(userToken))
 
   const postRequest = (userToken, name, description, division, location,
