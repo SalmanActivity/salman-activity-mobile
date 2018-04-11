@@ -20,7 +20,7 @@ export function * getRequests (api, action) {
   }
 }
 
-export function * getRequests (api, action) {
+export function * getRequest (api, action) {
   const {userToken, id} = action
   const response = yield call(api.getRequest, userToken, id)
 
