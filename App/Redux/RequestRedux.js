@@ -8,6 +8,10 @@ const { Types, Creators } = createActions({
   getRequestsSuccess: ['requests'],
   getRequestsFailure: ['error'],
 
+  getRequest: ['userToken', 'id'],
+  getRequestSuccess: ['request'],
+  getRequestFailure: ['error'],
+
   newRequest: ['userToken', 'name', 'description', 'division', 'location',
     'startTime', 'endTime', 'participantNumber', 'participantDescription',
     'speaker', 'issuedTime'],
@@ -31,6 +35,10 @@ export const INITIAL_STATE = Immutable({
   requests: [],
   fetchingRequests: false,
   fetchingRequestsError: null,
+
+  request: null,
+  fetchingRequest: false,
+  fetchingRequestError: null,
 
   postingRequest: false,
   postingRequestError: null,
@@ -58,6 +66,22 @@ export const getRequestsSuccess = (state, action) => {
 export const getRequestsFailure = (state, action) => {
   const { error } = action
   return state.merge({ fetchingRequests: false, fetchingRequestsError: error })
+}
+
+export const getRequest = (state) =>
+state.merge({ fetchingRequest: true, fetchingRequestError: null })
+
+export const getRequestSuccess = (state, action) => {
+  const { request } = action
+  return state.merge({
+    fetchingRequest: false,
+    request,
+    fetchingRequestError: null })
+}
+
+export const getRequestFailure = (state, action) => {
+  const { error } = action
+  return state.merge({ fetchingRequest: false, fetchingRequestError: error })
 }
 
 export const newRequest = (state) =>
@@ -100,6 +124,10 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.GET_REQUESTS]: getRequests,
   [Types.GET_REQUESTS_SUCCESS]: getRequestsSuccess,
   [Types.GET_REQUESTS_FAILURE]: getRequestsFailure,
+
+  [Types.GET_REQUEST]: getRequest,
+  [Types.GET_REQUEST_SUCCESS]: getRequestSuccess,
+  [Types.GET_REQUEST_FAILURE]: getRequestFailure,
 
   [Types.NEW_REQUEST]: newRequest,
   [Types.NEW_REQUEST_SUCCESS]: newRequestSuccess,
