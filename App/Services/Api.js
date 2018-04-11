@@ -70,6 +70,10 @@ const create = (baseURL = config.baseURL) => {
     api.get('requests', {month, year},
       addAuthorizationHeader(userToken))
 
+  const getRequest = (userToken, id) =>
+    api.get(`requests/${id}`, {},
+      addAuthorizationHeader(userToken))
+
   const postRequest = (userToken, name, description, division, location,
     startTime, endTime, participantNumber, participantDescription,
     speaker, issuedTime) => {
@@ -110,6 +114,7 @@ const create = (baseURL = config.baseURL) => {
     postLocation,
     updateLocation,
     getRequests,
+    getRequest,
     postRequest,
     updateRequest
   }
