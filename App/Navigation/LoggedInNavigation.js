@@ -13,6 +13,9 @@ const LoggedInNavigation = DrawerNavigator({
     screen: StackNavigator({
       RequestListScreenAdmin: { screen: RequestListScreenAdmin },
       RequestScreenAdmin: { screen: RequestScreenAdmin }
+    }, {
+      headerMode: 'none',
+      initialRouteName: 'RequestListScreenAdmin'
     }),
     navigationOptions: {drawerLabel: 'Permohonan Izin Aktivitas'}
   },

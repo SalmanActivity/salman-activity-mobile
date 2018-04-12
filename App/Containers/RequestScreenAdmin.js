@@ -25,13 +25,18 @@ class RequestListScreenAdmin extends Component {
   }
 
   render () {
+    const {back, getRequests, token} = this.props
     const {request, fetchingRequest, fetchingRequestError,
-      updatingRequest, updatingRequestError} = this.props.request
+      updatingRequest, updatingRequestError, month, year} = this.props.request
     const {status} = request || {}
 
     return (
       <ScrollView style={styles.mainContainer}>
         <ScrollView style={styles.container}>
+          <Button
+            title='Kembali'
+            onPress={() => { back(); getRequests(token, month, year) }}
+          />
           {fetchingRequest || !request
             ? <ActivityIndicator />
             : (
@@ -82,6 +87,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   getRequest: RequestActions.getRequest,
+  getRequests: RequestActions.getRequests,
+  back: () => ({ type: 'Navigation/BACK' }),
   updateRequest: RequestActions.updateRequest
 }
 
