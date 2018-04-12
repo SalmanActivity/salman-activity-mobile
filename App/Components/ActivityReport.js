@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import ActivityReportForm from '../Forms/ActivityReportForm'
 
-import styles from './Styles/LoginStyles'
+import styles from './Styles/ActivityReportStyles'
 
 export default class ActivityReport extends Component {
   static propTypes = {
