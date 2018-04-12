@@ -45,7 +45,12 @@ class RequestListScreenAdmin extends Component {
     const {request} = this.props
     const {requests, fetchingRequests, fetchingRequestsError} = request
 
-    const transformedRequests = requests.map(request => ({
+    const sortedRequest = [...requests].sort((requestX, requestY) =>
+      moment(requestX.startTime) < moment(requestY.startTime) ? 1 : -1)
+
+    console.tron.debug(sortedRequest)
+
+    const transformedRequests = sortedRequest.map(request => ({
       id: request.id,
       title: `${request.name} (${requestStatus(request.status)}) ` +
         `- ${request.division.name}`,
