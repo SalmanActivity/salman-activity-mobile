@@ -26,7 +26,7 @@ export default class NewDivision extends Component {
     const {error, disabled, backHandler} = this.props
 
     return (
-      <Card title='Divisi Baru'>
+      <Card title='Bidang Baru'>
         <NewDivisionForm
           onSubmit={this.onSubmit.bind(this)}
           backHandler={backHandler}

@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import LocationActions from '../Redux/LocationRedux'
 import {AuthSelectors} from '../Redux/AuthRedux'
 import DataList from '../Components/DataList'
+import ActionButton from 'react-native-action-button'
 
 // Styles
 import styles from './Styles/LocationListScreenStyles'
@@ -15,7 +16,7 @@ class LocationListScreen extends Component {
   }
 
   render () {
-    const {location} = this.props
+    const {location, navigation: {navigate}} = this.props
     const {locations, fetchingLocations, fetchingLocationsError} = location
 
     const transformedLocations = locations.map(location => ({
@@ -35,6 +36,11 @@ class LocationListScreen extends Component {
             )
           }
         </ScrollView>
+
+        <ActionButton
+          buttonColor='rgba(00,96,88,1)'
+          onPress={() => navigate('NewLocationScreen')}
+        />
       </View>
     )
   }

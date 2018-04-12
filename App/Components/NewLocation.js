@@ -18,14 +18,14 @@ export default class NewUser extends Component {
     const {newLocationHandler} = this.props
     const {name} = form
 
-    newUserHandler(name)
+    newLocationHandler(name)
   }
 
   render () {
     const {error, disabled} = this.props
 
     return (
-      <Card title='Lokasi Baru'>
+      <Card title='Tempat / Ruangan Baru'>
         <NewLocationForm onSubmit={this.onSubmit.bind(this)} disabled={disabled} />
         {error ? <Text style={styles.errorText}>{error}</Text> : <View />}
       </Card>
