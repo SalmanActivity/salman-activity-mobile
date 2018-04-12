@@ -20,6 +20,25 @@ export function * getRequests (api, action) {
   }
 }
 
+export function * getRequest (api, action) {
+  const {userToken, id} = action
+  const response = yield call(api.getRequest, userToken, id)
+
+  if (response.ok) {
+    yield put(RequestActions.getRequestSuccess(response.data))
+  } else {
+    let cause
+
+    if (response.data) {
+      cause = response.data.error.cause
+    } else {
+      cause = 'Connection Error'
+    }
+
+    yield put(RequestActions.getRequestFailure(cause))
+  }
+}
+
 export function * newRequest (api, action) {
   const {userToken, name, description, division, location,
     startTime, endTime, participantNumber, participantDescription,
@@ -39,7 +58,8 @@ export function * newRequest (api, action) {
                               issuedTime)
 
   if (response.ok) {
-    yield put(RequestActions.postRequestSuccess())
+    const {data} = response
+    yield put(RequestActions.postRequestSuccess(data))
   } else {
     let cause
 
@@ -58,7 +78,8 @@ export function * updateRequest (api, action) {
   const response = yield call(api.updateRequest, userToken, id, requestData)
 
   if (response.ok) {
-    yield put(RequestActions.updateRequestSuccess())
+    const {data} = response
+    yield put(RequestActions.updateRequestSuccess(data))
   } else {
     let cause
 

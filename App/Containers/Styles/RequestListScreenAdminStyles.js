@@ -24,7 +24,7 @@ export default StyleSheet.create({
     height: 30
   },
   refreshButton: {
-    backgroundColor: 'blue',
+    backgroundColor: Colors.tealPrimary,
     height: 40,
     borderRadius: 5
   }

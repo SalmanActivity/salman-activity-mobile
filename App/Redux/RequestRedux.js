@@ -8,14 +8,18 @@ const { Types, Creators } = createActions({
   getRequestsSuccess: ['requests'],
   getRequestsFailure: ['error'],
 
+  getRequest: ['userToken', 'id'],
+  getRequestSuccess: ['request'],
+  getRequestFailure: ['error'],
+
   newRequest: ['userToken', 'name', 'description', 'division', 'location',
     'startTime', 'endTime', 'participantNumber', 'participantDescription',
     'speaker', 'issuedTime'],
-  newRequestSuccess: null,
+  newRequestSuccess: ['request'],
   newRequestFailure: ['error'],
 
   updateRequest: ['userToken', 'id', 'requestData'],
-  updateRequestSuccess: null,
+  updateRequestSuccess: ['request'],
   updateRequestFailure: ['error'],
 
   changeRequestMonth: ['month'],
@@ -31,6 +35,10 @@ export const INITIAL_STATE = Immutable({
   requests: [],
   fetchingRequests: false,
   fetchingRequestsError: null,
+
+  request: null,
+  fetchingRequest: false,
+  fetchingRequestError: null,
 
   postingRequest: false,
   postingRequestError: null,
@@ -60,11 +68,31 @@ export const getRequestsFailure = (state, action) => {
   return state.merge({ fetchingRequests: false, fetchingRequestsError: error })
 }
 
-export const newRequest = (state) =>
+export const getRequest = (state) =>
+state.merge({ fetchingRequest: true, fetchingRequestError: null })
+
+export const getRequestSuccess = (state, action) => {
+  const { request } = action
+  return state.merge({
+    fetchingRequest: false,
+    request,
+    fetchingRequestError: null })
+}
+
+export const getRequestFailure = (state, action) => {
+  const { error } = action
+  return state.merge({ fetchingRequest: false, fetchingRequestError: error })
+}
+
+export const newRequest = (state, action) =>
 state.merge({ postingRequest: true, postingRequestError: null })
 
-export const newRequestSuccess = (state) => {
-  return state.merge({ postingRequest: false, postingRequestError: null })
+export const newRequestSuccess = (state, action) => {
+  const {request} = action
+
+  return state.merge({ postingRequest: false,
+    postingRequestError: null,
+    request })
 }
 
 export const newRequestFailure = (state, action) => {
@@ -75,8 +103,11 @@ export const newRequestFailure = (state, action) => {
 export const updateRequest = (state) =>
 state.merge({ updatingRequest: true, updatingRequestError: null })
 
-export const updateRequestSuccess = (state) => {
-  return state.merge({ updatingRequest: false, updatingRequestError: null })
+export const updateRequestSuccess = (state, action) => {
+  const {request} = action
+  return state.merge({ updatingRequest: false,
+    updatingRequestError: null,
+    request})
 }
 
 export const updateRequestFailure = (state, action) => {
@@ -100,6 +131,10 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.GET_REQUESTS]: getRequests,
   [Types.GET_REQUESTS_SUCCESS]: getRequestsSuccess,
   [Types.GET_REQUESTS_FAILURE]: getRequestsFailure,
+
+  [Types.GET_REQUEST]: getRequest,
+  [Types.GET_REQUEST_SUCCESS]: getRequestSuccess,
+  [Types.GET_REQUEST_FAILURE]: getRequestFailure,
 
   [Types.NEW_REQUEST]: newRequest,
   [Types.NEW_REQUEST_SUCCESS]: newRequestSuccess,

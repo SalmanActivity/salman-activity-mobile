@@ -7,6 +7,9 @@ import RequestActions from '../Redux/RequestRedux'
 import {AuthSelectors} from '../Redux/AuthRedux'
 import DataList from '../Components/DataList'
 import MonthPicker from '../Components/MonthPicker'
+import requestStatus from '../Transforms/RequestStatus'
+import transformDate from '../Transforms/TransformDate'
+import duration from '../Transforms/Duration'
 
 // Styles
 import styles from './Styles/RequestListScreenAdminStyles'
@@ -44,8 +47,11 @@ class RequestListScreenAdmin extends Component {
 
     const transformedRequests = requests.map(request => ({
       id: request.id,
-      title: `${request.name} (${request.status}) - ${request.division.name}`,
-      subtitle: `${request.startTime} - ${request.endTime}`
+      title: `${request.name} (${requestStatus(request.status)}) ` +
+        `- ${request.division.name}`,
+      subtitle: `${transformDate(request.startTime)} ` +
+      `(${duration(request.startTime, request.endTime)} jam), ` +
+        `di ${request.location.name}`
     }))
 
     return (
@@ -73,7 +79,10 @@ class RequestListScreenAdmin extends Component {
             : (
               fetchingRequestsError
               ? <Text style={styles.error}>{fetchingRequestsError}</Text>
-              : <DataList data={transformedRequests} />
+              : <DataList
+                data={transformedRequests}
+                onPress={(id) =>
+                  this.props.navigation.navigate('RequestScreenAdmin', {id})} />
             )
           }
         </ScrollView>
