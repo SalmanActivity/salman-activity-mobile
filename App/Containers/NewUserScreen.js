@@ -18,7 +18,7 @@ class NewUserScreen extends Component {
 
   newUserHandler (name, division, username, password, admin) {
     const {newUser} = this.props
-    newUser(name, username, password, division, admin)
+    newUser(token, name, username, password, division, admin)
     //newUser: ['userToken', 'name', 'username', 'password', 'division', 'admin']
   }
 
@@ -31,6 +31,7 @@ class NewUserScreen extends Component {
           <ScrollView style={styles.section} keyboardShouldPersistTaps='handled' >
             <NewUser
               newUserHandler={this.newUserHandler.bind(this)}
+              backHandler={back}
               error={error}
               disabled={!!loggingIn}
             />
@@ -42,10 +43,14 @@ class NewUserScreen extends Component {
 }
 
 const mapDispatchToProps = {
-  newUser: UserActions.newUser
+  newUser: UserActions.newUser,
+  back: () => ({ type: 'Navigation/BACK' })
 }
 
 const mapStateToProps = (state) => ({
+  error: state.user.postingLocationError,
+  postingUser: state.user.postingLocation,
+  token: state.auth.token
   //error: state.auth.error,
   //loggingIn: state.auth.loggingIn
 })

@@ -17,8 +17,8 @@ class NewLocationScreen extends Component {
   }
 
   newLocationHandler (name) {
-    const {newLocation} = this.props
-    newLocation(name)
+    const {newLocation, token} = this.props
+    newLocation(token, name)
   }
 
   render () {
@@ -30,6 +30,7 @@ class NewLocationScreen extends Component {
           <ScrollView style={styles.section} keyboardShouldPersistTaps='handled' >
             <NewLocation
               newLocationHandler={this.newLocationHandler.bind(this)}
+              backHandler={back}
               error={error}
               disabled={!!loggingIn}
             />
@@ -41,12 +42,14 @@ class NewLocationScreen extends Component {
 }
 
 const mapDispatchToProps = {
-  newLocation: LocationActions.newLocation
+  newLocation: LocationActions.newLocation,
+  back: () => ({ type: 'Navigation/BACK' })
 }
 
 const mapStateToProps = (state) => ({
-  //error: state.auth.error,
-  //loggingIn: state.auth.loggingIn
+  error: state.location.postingLocationError,
+  postingLocation: state.location.postingLocation,
+  token: state.auth.token
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewLocationScreen)

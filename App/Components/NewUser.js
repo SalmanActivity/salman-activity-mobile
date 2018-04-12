@@ -1,5 +1,3 @@
-import React, {Component} from 'react'
-import {View} from 'react-native'
 import {Card, Text} from 'react-native-elements'
 import PropTypes from 'prop-types'
 
@@ -10,6 +8,7 @@ import styles from './Styles/LoginStyles'
 export default class NewUser extends Component {
   static propTypes = {
     newUserHandler: PropTypes.func.isRequired,
+    backHandler: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
     error: PropTypes.string
   }
@@ -32,8 +31,9 @@ export default class NewUser extends Component {
     return (
       <Card title='Pengguna Baru'>
         <NewUserForm
-        onSubmit={this.onSubmit.bind(this)}
-        disabled={disabled} />
+          onSubmit={this.onSubmit.bind(this)}
+          backHandler={backHandler}
+          disabled={disabled} />
         {error ? <Text style={styles.errorText}>{error}</Text> : <View />}
       </Card>
     )
