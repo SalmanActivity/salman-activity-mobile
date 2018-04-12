@@ -49,6 +49,7 @@ export function * updateDivision (api, action) {
 
   if (response.ok) {
     yield put(DivisionActions.updateDivisionSuccess())
+    yield put(DivisionActions.getDivisions(userToken))
   } else {
     let cause
 

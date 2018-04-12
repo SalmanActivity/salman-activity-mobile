@@ -49,6 +49,7 @@ export function * updateLocation (api, action) {
 
   if (response.ok) {
     yield put(LocationActions.updateLocationSuccess())
+    yield put(LocationActions.getLocations(userToken))
   } else {
     let cause
 

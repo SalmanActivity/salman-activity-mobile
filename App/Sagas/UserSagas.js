@@ -72,6 +72,7 @@ export function * updateUser (api, action) {
 
   if (response.ok) {
     yield put(UserActions.updateUserSuccess())
+    yield put(UserActions.getUsers(userToken))
   } else {
     let cause
 

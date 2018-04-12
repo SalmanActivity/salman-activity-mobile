@@ -1,4 +1,4 @@
-import { call, put } from 'redux-saga/effects'
+import { call, put, select } from 'redux-saga/effects'
 import RequestActions from '../Redux/RequestRedux'
 
 export function * getRequests (api, action) {
@@ -79,7 +79,12 @@ export function * updateRequest (api, action) {
 
   if (response.ok) {
     const {data} = response
+    const request = yield select(state => state.request)
+
     yield put(RequestActions.updateRequestSuccess(data))
+    yield put(RequestActions.getRequests(userToken,
+      request.month,
+      request.year))
   } else {
     let cause
 

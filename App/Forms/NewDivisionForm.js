@@ -23,12 +23,6 @@ const NewDivisionForm = (props) => (
       loading={!!props.disabled}
       disabled={!!props.disabled}
     />
-    <Button
-      title='Kembali'
-      buttonStyle={styles.backButton}
-      onPress={props.backHandler}
-      disabled={!!props.disabled}
-    />
   </ScrollView>
 )
 
