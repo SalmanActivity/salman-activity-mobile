@@ -5,7 +5,7 @@ import {Button} from 'react-native-elements'
 
 import TextInput from './TextInputWrapper'
 
-import styles from './Styles/LoginFormStyles'
+import styles from './Styles/ActivityReportFormStyles'
 
 const ActivityReportForm = (props) => (
   <ScrollView keyboardShouldPersistTaps='always'>
@@ -18,7 +18,7 @@ const ActivityReportForm = (props) => (
 
     <Button
       title='Unggah Foto'
-      buttonStyle={styles.button}
+      buttonStyle={styles.buttonUpload}
       onPress={props.handleSubmit}
       loading={!!props.disabled}
       disabled={!!props.disabled}
@@ -26,7 +26,7 @@ const ActivityReportForm = (props) => (
 
     <Button
       title='Lapor!'
-      buttonStyle={styles.button}
+      buttonStyle={styles.buttonPost}
       onPress={props.handleSubmit}
       loading={!!props.disabled}
       disabled={!!props.disabled}
