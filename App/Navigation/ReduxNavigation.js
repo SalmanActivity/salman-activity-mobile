@@ -1,30 +1,47 @@
 import React from 'react'
-import * as ReactNavigation from 'react-navigation'
+import { BackHandler, Platform } from 'react-native'
+import { addNavigationHelpers } from 'react-navigation'
+import { createReactNavigationReduxMiddleware,
+  createReduxBoundAddListener } from 'react-navigation-redux-helpers'
 import { connect } from 'react-redux'
 import AppNavigation from './AppNavigation'
-
-// for react-navigation 1.0.0-beta.30
-import {
-  createReduxBoundAddListener,
-  createReactNavigationReduxMiddleware
-} from 'react-navigation-redux-helpers'
 
 createReactNavigationReduxMiddleware(
   'root',
   state => state.nav
 )
-const addListener = createReduxBoundAddListener('root')
-// end for react-navigation 1.0.0-beta.30
 
-function ReduxNavigation (props) {
-  const { dispatch, nav } = props
-  const navigation = ReactNavigation.addNavigationHelpers({
-    dispatch,
-    state: nav,
-    addListener // <-- add this as well
-  })
+class ReduxNavigation extends React.Component {
+  componentWillMount () {
+    if (Platform.OS === 'ios') return
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      const { dispatch, nav } = this.props
 
-  return <AppNavigation navigation={navigation} />
+      if (nav.routes[0].routes[0].index === 0) {
+        return false
+      }
+
+      dispatch({ type: 'Navigation/BACK' })
+      return true
+    })
+  }
+
+  componentWillUnmount () {
+    if (Platform.OS === 'ios') return
+    BackHandler.removeEventListener('hardwareBackPress')
+  }
+
+  render () {
+    return (
+      <AppNavigation
+        navigation={addNavigationHelpers({
+          dispatch: this.props.dispatch,
+          state: this.props.nav,
+          addListener: createReduxBoundAddListener('root')
+        })}
+      />
+    )
+  }
 }
 
 const mapStateToProps = state => ({ nav: state.nav })

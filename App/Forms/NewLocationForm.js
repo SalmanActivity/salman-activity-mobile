@@ -7,23 +7,16 @@ import TextInput from './TextInputWrapper'
 
 import styles from './Styles/FormStyles'
 
-const LoginForm = (props) => (
+const NewLocationForm = (props) => (
   <ScrollView keyboardShouldPersistTaps='always'>
     <Field
-      name='username'
+      name='name'
       component={TextInput}
       autoFocus
-      placeholder='Username'
+      placeholder='Nama Lokasi'
     />
-    <Field
-      name='password'
-      component={TextInput}
-      placeholder='Password'
-      secureTextEntry
-    />
-
     <Button
-      title='Login'
+      title='Tambah Lokasi'
       buttonStyle={styles.primaryButton}
       onPress={props.handleSubmit}
       loading={!!props.disabled}
@@ -32,4 +25,4 @@ const LoginForm = (props) => (
   </ScrollView>
 )
 
-export default reduxForm({form: 'login'})(LoginForm)
+export default reduxForm({form: 'newLocation'})(NewLocationForm)

@@ -13,7 +13,7 @@ export function * getLocations (api, action) {
     if (response.data) {
       cause = response.data.error.cause
     } else {
-      cause = 'Connection Error'
+      cause = response.problem
     }
 
     yield put(LocationActions.getLocationsFailure(cause))
@@ -34,7 +34,7 @@ export function * newLocation (api, action) {
     if (response.data) {
       cause = response.data.error.cause
     } else {
-      cause = 'Connection Error'
+      cause = response.problem
     }
 
     yield put(LocationActions.postLocationFailure(cause))
@@ -53,7 +53,7 @@ export function * updateLocation (api, action) {
     if (response.data) {
       cause = response.data.error.cause
     } else {
-      cause = 'Connection Error'
+      cause = response.problem
     }
 
     yield put(LocationActions.updateLocationFailure(cause))

@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { Metrics, ApplicationStyles, Colors } from '../../Themes'
+import { Metrics, ApplicationStyles } from '../../Themes/'
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
@@ -12,16 +12,7 @@ export default StyleSheet.create({
     width: Metrics.images.logo,
     resizeMode: 'contain'
   },
-  error: {
-    alignSelf: 'center',
-    color: Colors.fire
-  },
   centered: {
     alignItems: 'center'
-  },
-  actionButtonIcon: {
-    fontSize: 20,
-    height: 22,
-    color: 'white'
   }
 })

@@ -13,7 +13,7 @@ export function * getRequests (api, action) {
     if (response.data) {
       cause = response.data.error.cause
     } else {
-      cause = 'Connection Error'
+      cause = response.problem
     }
 
     yield put(RequestActions.getRequestsFailure(cause))
@@ -66,7 +66,7 @@ export function * newRequest (api, action) {
     if (response.data) {
       cause = response.data.error.cause
     } else {
-      cause = 'Connection Error'
+      cause = response.problem
     }
 
     yield put(RequestActions.postRequestFailure(cause))
@@ -86,7 +86,7 @@ export function * updateRequest (api, action) {
     if (response.data) {
       cause = response.data.error.cause
     } else {
-      cause = 'Connection Error'
+      cause = response.problem
     }
 
     yield put(RequestActions.updateRequestFailure(cause))

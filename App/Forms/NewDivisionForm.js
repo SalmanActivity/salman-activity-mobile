@@ -7,29 +7,29 @@ import TextInput from './TextInputWrapper'
 
 import styles from './Styles/FormStyles'
 
-const LoginForm = (props) => (
+const NewDivisionForm = (props) => (
   <ScrollView keyboardShouldPersistTaps='always'>
     <Field
-      name='username'
+      name='name'
       component={TextInput}
       autoFocus
-      placeholder='Username'
-    />
-    <Field
-      name='password'
-      component={TextInput}
-      placeholder='Password'
-      secureTextEntry
+      placeholder='Nama Bidang'
     />
 
     <Button
-      title='Login'
+      title='Tambah Bidang'
       buttonStyle={styles.primaryButton}
       onPress={props.handleSubmit}
       loading={!!props.disabled}
       disabled={!!props.disabled}
     />
+    <Button
+      title='Kembali'
+      buttonStyle={styles.backButton}
+      onPress={props.backHandler}
+      disabled={!!props.disabled}
+    />
   </ScrollView>
 )
 
-export default reduxForm({form: 'login'})(LoginForm)
+export default reduxForm({form: 'newDivision'})(NewDivisionForm)
