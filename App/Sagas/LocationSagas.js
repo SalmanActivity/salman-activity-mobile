@@ -28,6 +28,8 @@ export function * newLocation (api, action) {
 
   if (response.ok) {
     yield put(LocationActions.postLocationSuccess())
+    yield put({type: 'Navigation/BACK'})
+    yield put(LocationActions.getLocations(userToken))
   } else {
     let cause
 
@@ -47,6 +49,7 @@ export function * updateLocation (api, action) {
 
   if (response.ok) {
     yield put(LocationActions.updateLocationSuccess())
+    yield put(LocationActions.getLocations(userToken))
   } else {
     let cause
 

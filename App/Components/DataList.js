@@ -7,14 +7,18 @@ import styles from './Styles/DataListStyles'
 
 export default class DataList extends Component {
   static propTypes = {
-    data: PropTypes.array.isRequired
+    data: PropTypes.array.isRequired,
+    onPress: PropTypes.func
   }
 
   renderRow (item) {
+    const {onPress} = this.props
+
     return (
       <ListItem
         title={item.title}
-        subtitle={item.subtitle} />
+        subtitle={item.subtitle}
+        onPress={onPress ? () => onPress(item.id) : () => {}} />
     )
   }
 

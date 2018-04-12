@@ -51,6 +51,8 @@ export function * newUser (api, action) {
 
   if (response.ok) {
     yield put(UserActions.postUserSuccess())
+    yield put({type: 'Navigation/BACK'})
+    yield put(UserActions.getUsers(userToken))
   } else {
     let cause
 
@@ -70,6 +72,7 @@ export function * updateUser (api, action) {
 
   if (response.ok) {
     yield put(UserActions.updateUserSuccess())
+    yield put(UserActions.getUsers(userToken))
   } else {
     let cause
 

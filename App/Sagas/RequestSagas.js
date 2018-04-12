@@ -1,4 +1,4 @@
-import { call, put } from 'redux-saga/effects'
+import { call, put, select } from 'redux-saga/effects'
 import RequestActions from '../Redux/RequestRedux'
 
 export function * getRequests (api, action) {
@@ -17,6 +17,25 @@ export function * getRequests (api, action) {
     }
 
     yield put(RequestActions.getRequestsFailure(cause))
+  }
+}
+
+export function * getRequest (api, action) {
+  const {userToken, id} = action
+  const response = yield call(api.getRequest, userToken, id)
+
+  if (response.ok) {
+    yield put(RequestActions.getRequestSuccess(response.data))
+  } else {
+    let cause
+
+    if (response.data) {
+      cause = response.data.error.cause
+    } else {
+      cause = 'Connection Error'
+    }
+
+    yield put(RequestActions.getRequestFailure(cause))
   }
 }
 
@@ -39,7 +58,8 @@ export function * newRequest (api, action) {
                               issuedTime)
 
   if (response.ok) {
-    yield put(RequestActions.postRequestSuccess())
+    const {data} = response
+    yield put(RequestActions.postRequestSuccess(data))
   } else {
     let cause
 
@@ -58,7 +78,13 @@ export function * updateRequest (api, action) {
   const response = yield call(api.updateRequest, userToken, id, requestData)
 
   if (response.ok) {
-    yield put(RequestActions.updateRequestSuccess())
+    const {data} = response
+    const request = yield select(state => state.request)
+
+    yield put(RequestActions.updateRequestSuccess(data))
+    yield put(RequestActions.getRequests(userToken,
+      request.month,
+      request.year))
   } else {
     let cause
 

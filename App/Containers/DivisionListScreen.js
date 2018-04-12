@@ -22,7 +22,7 @@ class DivisionListScreen extends Component {
 
     const transformedDivisions = divisions.map(division => ({
       id: division.id,
-      title: division.name
+      title: `${division.name} (${division.enabled ? 'Aktif' : 'Tidak Aktif'})`
     }))
 
     return (
