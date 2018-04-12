@@ -22,7 +22,7 @@ class NewDivisionScreen extends Component {
   }
 
   render () {
-    const {error, postingDivision, back} = this.props
+    const {error, postingDivision, back, getDivisions, token} = this.props
 
     return (
       <View style={styles.mainContainer} keyboardShouldPersistTaps='handled'>
@@ -34,7 +34,7 @@ class NewDivisionScreen extends Component {
 
             <NewDivision
               newDivisionHandler={this.newDivisionHandler.bind(this)}
-              backHandler={back}
+              backHandler={() => { back(); getDivisions(token) }}
               error={error}
               disabled={!!postingDivision}
             />
@@ -49,6 +49,7 @@ class NewDivisionScreen extends Component {
 
 const mapDispatchToProps = {
   newDivision: DivisionActions.newDivision,
+  getDivisions: DivisionActions.getDivisions,
   back: () => ({ type: 'Navigation/BACK' })
 }
 

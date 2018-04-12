@@ -18,7 +18,7 @@ export default class NewUser extends Component {
     const {newLocationHandler} = this.props
     const {name} = form
 
-    newUserHandler(name)
+    newLocationHandler(name)
   }
 
   render () {
