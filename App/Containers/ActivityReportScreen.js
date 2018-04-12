@@ -8,7 +8,7 @@ import ActivityReport from '../Components/ActivityReport'
 import AuthActions from '../Redux/AuthRedux'
 
 // Styles
-import styles from './Styles/LoginScreenStyles'
+import styles from './Styles/ActivityReportScreenStyles'
 
 class ActivityReportScreen extends Component {
   static PropTypes = {

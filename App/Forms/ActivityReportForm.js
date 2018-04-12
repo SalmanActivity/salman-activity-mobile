@@ -34,4 +34,4 @@ const ActivityReportForm = (props) => (
   </ScrollView>
 )
 
-export default reduxForm({form: 'login'})(ActivityReportForm)
+export default reduxForm({form: 'activityReport'})(ActivityReportForm)
