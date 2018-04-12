@@ -15,11 +15,11 @@ const { Types, Creators } = createActions({
   newRequest: ['userToken', 'name', 'description', 'division', 'location',
     'startTime', 'endTime', 'participantNumber', 'participantDescription',
     'speaker', 'issuedTime'],
-  newRequestSuccess: null,
+  newRequestSuccess: ['request'],
   newRequestFailure: ['error'],
 
   updateRequest: ['userToken', 'id', 'requestData'],
-  updateRequestSuccess: null,
+  updateRequestSuccess: ['request'],
   updateRequestFailure: ['error'],
 
   changeRequestMonth: ['month'],
@@ -84,11 +84,15 @@ export const getRequestFailure = (state, action) => {
   return state.merge({ fetchingRequest: false, fetchingRequestError: error })
 }
 
-export const newRequest = (state) =>
+export const newRequest = (state, action) =>
 state.merge({ postingRequest: true, postingRequestError: null })
 
-export const newRequestSuccess = (state) => {
-  return state.merge({ postingRequest: false, postingRequestError: null })
+export const newRequestSuccess = (state, action) => {
+  const {request} = action
+
+  return state.merge({ postingRequest: false,
+    postingRequestError: null,
+    request })
 }
 
 export const newRequestFailure = (state, action) => {
@@ -99,8 +103,11 @@ export const newRequestFailure = (state, action) => {
 export const updateRequest = (state) =>
 state.merge({ updatingRequest: true, updatingRequestError: null })
 
-export const updateRequestSuccess = (state) => {
-  return state.merge({ updatingRequest: false, updatingRequestError: null })
+export const updateRequestSuccess = (state, action) => {
+  const {request} = action
+  return state.merge({ updatingRequest: false,
+    updatingRequestError: null,
+    request})
 }
 
 export const updateRequestFailure = (state, action) => {

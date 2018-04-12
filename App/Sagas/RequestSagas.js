@@ -58,7 +58,8 @@ export function * newRequest (api, action) {
                               issuedTime)
 
   if (response.ok) {
-    yield put(RequestActions.postRequestSuccess())
+    const {data} = response
+    yield put(RequestActions.postRequestSuccess(data))
   } else {
     let cause
 
@@ -77,7 +78,8 @@ export function * updateRequest (api, action) {
   const response = yield call(api.updateRequest, userToken, id, requestData)
 
   if (response.ok) {
-    yield put(RequestActions.updateRequestSuccess())
+    const {data} = response
+    yield put(RequestActions.updateRequestSuccess(data))
   } else {
     let cause
 

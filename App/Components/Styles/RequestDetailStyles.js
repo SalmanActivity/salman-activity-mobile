@@ -36,16 +36,11 @@ export default StyleSheet.create({
   },
   button: {
     padding: Metrics.baseMargin,
-    margin: Metrics.baseMargin,
-    marginBottom: 0
-  },
-  buttonAccept: {
-    backgroundColor: Colors.tealPrimary
+    margin: Metrics.baseMargin
   },
   buttonReject: {
-    backgroundColor: Colors.fire
-  },
-  separator: {
-    height: 10
+    padding: Metrics.baseMargin,
+    margin: Metrics.baseMargin,
+    backgroundColor: 'red'
   }
 })
