@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import UserActions from '../Redux/UserRedux'
 import {AuthSelectors} from '../Redux/AuthRedux'
 import DataList from '../Components/DataList'
+import ActionButton from 'react-native-action-button'
 
 // Styles
 import styles from './Styles/UserListScreenStyles'
@@ -15,7 +16,7 @@ class UserListScreen extends Component {
   }
 
   render () {
-    const {user} = this.props
+    const {user, navigation: {navigate}} = this.props
     const {users, fetchingUsers, fetchingUsersError} = user
 
     const transformedUsers = users.map(user => ({
@@ -37,6 +38,11 @@ class UserListScreen extends Component {
             )
           }
         </ScrollView>
+
+        <ActionButton
+          buttonColor='rgba(00,96,88,1)'
+          onPress={() => navigate('NewUserScreen')}
+        />
       </View>
     )
   }
