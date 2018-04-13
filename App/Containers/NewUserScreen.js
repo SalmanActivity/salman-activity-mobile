@@ -16,9 +16,9 @@ class NewUserScreen extends Component {
     error: PropTypes.string
   }
 
-  newUserHandler (name, division, username, password, admin) {
+  newUserHandler (name, division, username, email, password, admin) {
     const {token, newUser} = this.props
-    newUser(token, name, username, password, division, admin)
+    newUser(token, name, username, email, password, division, admin)
   }
 
   onError (error) {
@@ -27,7 +27,7 @@ class NewUserScreen extends Component {
   }
 
   render () {
-    const {error, loggingIn} = this.props
+    const {error, postingUser} = this.props
 
     return (
       <View style={styles.mainContainer} keyboardShouldPersistTaps='handled'>
@@ -36,7 +36,7 @@ class NewUserScreen extends Component {
             <NewUser
               newUserHandler={::this.newUserHandler}
               error={error}
-              disabled={!!loggingIn}
+              disabled={!!postingUser}
               onError={::this.onError}
             />
           </ScrollView>
@@ -53,8 +53,8 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
-  error: state.user.postingLocationError,
-  postingUser: state.user.postingLocation,
+  error: state.user.postingUserError,
+  postingUser: state.user.postingUser,
   token: state.auth.token
 })
 

@@ -17,12 +17,12 @@ export default class NewUser extends Component {
 
   onSubmit (form) {
     const {newUserHandler, onError} = this.props
-    const {name, division, username, password, admin, repassword} = form
+    const {name, division, username, email, password, admin, repassword} = form
 
     if (password !== repassword) {
       if (onError) onError('Password tidak sama')
     } else {
-      newUserHandler(name, division, username, password, !!admin)
+      newUserHandler(name, division, username, email, password, !!admin)
     }
   }
 

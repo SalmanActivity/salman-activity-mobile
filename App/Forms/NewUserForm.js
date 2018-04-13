@@ -8,12 +8,6 @@ import TextInput from './TextInputWrapper'
 
 import styles from './Styles/FormStyles'
 
-const renderCheckbox = props => (
-  <Switch
-    value={props.value}
-    onValueChange={props.onChange} />
-)
-
 const NewUserForm = (props) => (
   <ScrollView keyboardShouldPersistTaps='always'>
     <Field
@@ -31,6 +25,12 @@ const NewUserForm = (props) => (
       name='username'
       component={TextInput}
       placeholder='Username'
+    />
+    <Field
+      name='email'
+      component={TextInput}
+      placeholder='Email'
+      keyboardType='email-address'
     />
     <Field
       name='password'
