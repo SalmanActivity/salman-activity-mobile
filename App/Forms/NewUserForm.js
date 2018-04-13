@@ -5,6 +5,7 @@ import {Switch} from 'react-native-clean-form/redux-form-immutable'
 
 import {Button} from 'react-native-elements'
 import TextInput from './TextInputWrapper'
+import Picker from './PickerWrapper'
 
 import styles from './Styles/FormStyles'
 
@@ -15,11 +16,6 @@ const NewUserForm = (props) => (
       component={TextInput}
       autoFocus
       placeholder='Nama'
-    />
-    <Field
-      name='division'
-      component={TextInput}
-      placeholder='Bidang'
     />
     <Field
       name='username'
@@ -43,6 +39,13 @@ const NewUserForm = (props) => (
       component={TextInput}
       placeholder='Ketik ulang password'
       secureTextEntry
+    />
+    <Field
+      name='division'
+      component={Picker}
+      placeholder='Bidang'
+      data={props.divisions}
+      value={props.division}
     />
     <Switch label='Admin' border={false} name='admin' />
     <Button
