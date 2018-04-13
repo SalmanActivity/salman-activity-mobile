@@ -27,7 +27,7 @@ export function * newLocation (api, action) {
                               name)
 
   if (response.ok) {
-    yield put(LocationActions.postLocationSuccess())
+    yield put(LocationActions.newLocationSuccess())
     yield put({type: 'Navigation/BACK'})
     yield put(LocationActions.getLocations(userToken))
   } else {
@@ -39,7 +39,7 @@ export function * newLocation (api, action) {
       cause = response.problem
     }
 
-    yield put(LocationActions.postLocationFailure(cause))
+    yield put(LocationActions.newLocationFailure(cause))
   }
 }
 

@@ -25,14 +25,15 @@ const create = (baseURL = config.baseURL) => {
   const getUsers = (userToken) =>
     api.get('users', {}, addAuthorizationHeader(userToken))
 
-  const postUser = (userToken, name, username, password, division, admin) => {
-    let data = {name, username, password, division, admin}
+  const postUser = (userToken, name, username, email,
+    password, division, admin) => {
+    let data = {name, username, email, password, division, admin}
 
     data = ObjectFilter(data, (key, value) => value != null)
 
-    api.post('users',
-             data,
-             addAuthorizationHeader(userToken))
+    return api.post('users',
+                    data,
+                    addAuthorizationHeader(userToken))
   }
 
   const updateUser = (userToken, id, userData) => {

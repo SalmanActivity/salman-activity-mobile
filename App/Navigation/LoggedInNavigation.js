@@ -1,7 +1,9 @@
 import { DrawerNavigator, StackNavigator } from 'react-navigation'
 import HomeScreen from '../Containers/HomeScreen'
 import UserListScreen from '../Containers/UserListScreen'
+import NewUserScreen from '../Containers/NewUserScreen'
 import LocationListScreen from '../Containers/LocationListScreen'
+import NewLocationScreen from '../Containers/NewLocationScreen'
 import DivisionListScreen from '../Containers/DivisionListScreen'
 import NewDivisionScreen from '../Containers/NewDivisionScreen'
 import RequestListScreenAdmin from '../Containers/RequestListScreenAdmin'
@@ -19,13 +21,25 @@ const LoggedInNavigation = DrawerNavigator({
     }),
     navigationOptions: {drawerLabel: 'Permohonan Izin Aktivitas'}
   },
-  UserListScreen: {
-    screen: UserListScreen,
+  UserNavigation: {
+    screen: StackNavigator({
+      UserListScreen: { screen: UserListScreen },
+      NewUserScreen: { screen: NewUserScreen }
+    }, {
+      headerMode: 'none',
+      initialRouteName: 'UserListScreen'
+    }),
     navigationOptions: {drawerLabel: 'Manajemen Pengguna'}
   },
-  LocationListScreen: {
-    screen: LocationListScreen,
-    navigationOptions: {drawerLabel: 'Manajemen Ruangan / Tempat'}
+  LocationNavigation: {
+    screen: StackNavigator({
+      LocationListScreen: {screen: LocationListScreen},
+      NewLocationScreen: {screen: NewLocationScreen}
+    }, {
+      headerMode: 'none',
+      initialRouteName: 'LocationListScreen'
+    }),
+    navigationOptions: {drawerLabel: 'Manajemen Tempat / Ruangan'}
   },
   DivisionNavigation: {
     screen: StackNavigator({

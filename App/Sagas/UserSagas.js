@@ -40,17 +40,18 @@ export function * getUsers (api, action) {
 }
 
 export function * newUser (api, action) {
-  const {userToken, name, username, password, division, admin} = action
+  const {userToken, name, username, email, password, division, admin} = action
   const response = yield call(api.postUser,
                               userToken,
                               name,
                               username,
+                              email,
                               password,
                               division,
                               admin)
 
   if (response.ok) {
-    yield put(UserActions.postUserSuccess())
+    yield put(UserActions.newUserSuccess())
     yield put({type: 'Navigation/BACK'})
     yield put(UserActions.getUsers(userToken))
   } else {
@@ -62,7 +63,7 @@ export function * newUser (api, action) {
       cause = response.problem
     }
 
-    yield put(UserActions.postUserFailure(cause))
+    yield put(UserActions.newUserFailure(cause))
   }
 }
 

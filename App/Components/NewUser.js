@@ -10,30 +10,35 @@ import styles from './Styles/LoginStyles'
 export default class NewUser extends Component {
   static propTypes = {
     newUserHandler: PropTypes.func.isRequired,
+    divisions: PropTypes.array.isRequired,
+    onError: PropTypes.func,
     disabled: PropTypes.bool,
     error: PropTypes.string
   }
 
-
   onSubmit (form) {
-    const {newUserHandler} = this.props
-    const {name, division, username, password, admin} = form
-    if (admin !== true) {
-      newadmin = false
+    const {newUserHandler, onError} = this.props
+    const {name, division, username, email, password, admin, repassword} = form
+
+    if (!division) {
+      if (onError) onError('Anda harus memilih divisi')
+    } else if (password !== repassword) {
+      if (onError) onError('Password tidak sama')
     } else {
-      newadmin = true
+      newUserHandler(name, division, username, email, password, !!admin)
     }
-    newUserHandler(name, division, username, password, newadmin)
   }
 
   render () {
-    const {error, disabled} = this.props
+    const {error, disabled, divisions} = this.props
 
     return (
       <Card title='Pengguna Baru'>
         <NewUserForm
-        onSubmit={this.onSubmit.bind(this)}
-        disabled={disabled} />
+          onSubmit={this.onSubmit.bind(this)}
+          disabled={disabled}
+          divisions={divisions}
+        />
         {error ? <Text style={styles.errorText}>{error}</Text> : <View />}
       </Card>
     )
