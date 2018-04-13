@@ -20,7 +20,7 @@ export default class NewUser extends Component {
     const {newUserHandler, onError} = this.props
     const {name, division, username, email, password, admin, repassword} = form
 
-    if (!division) {
+    if (!division && !admin) {
       if (onError) onError('Anda harus memilih divisi')
     } else if (password !== repassword) {
       if (onError) onError('Password tidak sama')
