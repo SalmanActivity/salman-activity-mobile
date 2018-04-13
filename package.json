@@ -112,7 +112,8 @@
       "__DEV__",
       "XMLHttpRequest",
       "FormData",
-      "React$Element"
+      "React$Element",
+      "requestAnimationFrame"
     ]
   }
 }
