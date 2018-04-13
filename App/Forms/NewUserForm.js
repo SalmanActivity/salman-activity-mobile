@@ -11,7 +11,7 @@ import styles from './Styles/FormStyles'
 const renderCheckbox = props => (
   <Switch
     value={props.value}
-    onValueChange={props.onChange}/>
+    onValueChange={props.onChange} />
 )
 
 const NewUserForm = (props) => (
