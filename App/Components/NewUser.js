@@ -21,7 +21,9 @@ export default class NewUser extends Component {
     const {name, division, username, email, password, admin, repassword} = form
 
     if (!division && !admin) {
-      if (onError) onError('Anda harus memilih divisi')
+      if (onError) onError('Non-Admin harus memiliki bidang')
+    } else if (division && admin) {
+      if (onError) onError('Admin tidak boleh memiliki bidang')
     } else if (password !== repassword) {
       if (onError) onError('Password tidak sama')
     } else {
