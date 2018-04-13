@@ -17,9 +17,13 @@ class NewUserScreen extends Component {
   }
 
   newUserHandler (name, division, username, password, admin) {
-    const {newUser} = this.props
-    newUser(name, username, password, division, admin)
-    //newUser: ['userToken', 'name', 'username', 'password', 'division', 'admin']
+    const {token, newUser} = this.props
+    newUser(token, name, username, password, division, admin)
+  }
+
+  onError (error) {
+    const {newUserFailure} = this.props
+    newUserFailure(error)
   }
 
   render () {
@@ -28,11 +32,12 @@ class NewUserScreen extends Component {
     return (
       <View style={styles.mainContainer} keyboardShouldPersistTaps='handled'>
         <ScrollView style={styles.container} keyboardShouldPersistTaps='handled'>
-          <ScrollView style={styles.section} keyboardShouldPersistTaps='handled' >
+          <ScrollView style={styles.section} keyboardShouldPersistTaps='handled'>
             <NewUser
-              newUserHandler={this.newUserHandler.bind(this)}
+              newUserHandler={::this.newUserHandler}
               error={error}
               disabled={!!loggingIn}
+              onError={::this.onError}
             />
           </ScrollView>
         </ScrollView>
@@ -42,12 +47,15 @@ class NewUserScreen extends Component {
 }
 
 const mapDispatchToProps = {
-  newUser: UserActions.newUser
+  newUser: UserActions.newUser,
+  newUserFailure: UserActions.newUserFailure,
+  back: () => ({ type: 'Navigation/BACK' })
 }
 
 const mapStateToProps = (state) => ({
-  //error: state.auth.error,
-  //loggingIn: state.auth.loggingIn
+  error: state.user.postingLocationError,
+  postingUser: state.user.postingLocation,
+  token: state.auth.token
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewUserScreen)

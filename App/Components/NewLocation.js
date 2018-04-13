@@ -10,6 +10,7 @@ import styles from './Styles/LoginStyles'
 export default class NewUser extends Component {
   static propTypes = {
     newLocationHandler: PropTypes.func.isRequired,
+    backHandler: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
     error: PropTypes.string
   }
@@ -26,7 +27,9 @@ export default class NewUser extends Component {
 
     return (
       <Card title='Tempat / Ruangan Baru'>
-        <NewLocationForm onSubmit={this.onSubmit.bind(this)} disabled={disabled} />
+        <NewLocationForm
+          onSubmit={this.onSubmit.bind(this)}
+          disabled={disabled} />
         {error ? <Text style={styles.errorText}>{error}</Text> : <View />}
       </Card>
     )
