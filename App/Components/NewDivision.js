@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import NewDivisionForm from '../Forms/NewDivisionForm'
 
-import styles from './Styles/LoginStyles'
+import styles from './Styles/NewDivisionStyles'
 
 export default class NewDivision extends Component {
   static propTypes = {
