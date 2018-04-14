@@ -7,6 +7,7 @@ const DatePickerWrapper = (props) => {
   return (
     <DatePicker
       {...inputProps}
+      date={input.value}
       format='DD-MM-YYYY'
       onDateChange={date => input.onChange(date)}
     />
