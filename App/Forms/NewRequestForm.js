@@ -2,12 +2,14 @@ import React from 'react'
 import {ScrollView} from 'react-native'
 import {Field, reduxForm} from 'redux-form/immutable'
 import {Button} from 'react-native-elements'
+import DatePicker from './DatePickerWrapper'
+import moment from 'moment'
 import TextInput from './TextInputWrapper'
 import Picker from './PickerWrapper'
 
 import styles from './Styles/FormStyles'
 
-const RequestForm = (props) => (
+const NewRequestForm = (props) => (
   <ScrollView keyboardShouldPersistTaps='always'>
     <Field
       name='name'
@@ -24,7 +26,6 @@ const RequestForm = (props) => (
       <Field
         name='division'
         component={Picker}
-        placeholder='Bidang'
         data={props.divisions}
         value={props.division}
       />
@@ -32,24 +33,20 @@ const RequestForm = (props) => (
     <Field
       name='location'
       component={Picker}
-      placeholder='Lokasi'
       data={props.locations}
       value={props.location}
     />
     <Field
-      name='startTime'
-      component={TextInput}
-      placeholder='Waktu Mulai'
-    />
-    <Field
-      name='endTime'
-      component={TextInput}
-      placeholder='Waktu Selesai'
+      name='date'
+      component={DatePicker}
+      placeholder='Tanggal Kegiatan'
+      minDate={moment().toDate()}
     />
     <Field
       name='participantNumber'
       component={TextInput}
-      placeholder='Jumlah Perkiraan Peserta'
+      placeholder='Perkiraan Jumlah Peserta'
+      keyboardType='numeric'
     />
     <Field
       name='participantDescription'
@@ -59,7 +56,7 @@ const RequestForm = (props) => (
     <Field
       name='speaker'
       component={TextInput}
-      placeholder='Pembicara'
+      placeholder='Narasumber'
     />
     <Button
       title='Ajukan Permohonan'
@@ -71,4 +68,4 @@ const RequestForm = (props) => (
   </ScrollView>
 )
 
-export default reduxForm({form: 'requestForm'})(RequestForm)
+export default reduxForm({form: 'requestForm'})(NewRequestForm)
