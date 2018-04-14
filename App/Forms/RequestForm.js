@@ -1,15 +1,12 @@
 import React from 'react'
 import {ScrollView} from 'react-native'
 import {Field, reduxForm} from 'redux-form/immutable'
-import {Switch} from 'react-native-clean-form/redux-form-immutable'
-
 import {Button} from 'react-native-elements'
 import TextInput from './TextInputWrapper'
 
 import styles from './Styles/FormStyles'
 
-
-const NewUserForm = (props) => (
+const RequestForm = (props) => (
   <ScrollView keyboardShouldPersistTaps='always'>
     <Field
       name='name'
@@ -57,9 +54,8 @@ const NewUserForm = (props) => (
       component={TextInput}
       placeholder='Pembicara'
     />
-    <Switch label='Admin' border={false} name='admin' />
     <Button
-      title='Tambah Pengguna'
+      title='Ajukan Permohonan'
       buttonStyle={styles.primaryButton}
       onPress={props.handleSubmit}
       loading={!!props.disabled}
