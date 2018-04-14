@@ -12,7 +12,8 @@ const { Types, Creators } = createActions({
   getUsersSuccess: ['users'],
   getUsersFailure: ['error'],
 
-  newUser: ['userToken', 'name', 'username', 'password', 'division', 'admin'],
+  newUser: ['userToken', 'name', 'username',
+    'email', 'password', 'division', 'admin'],
   newUserSuccess: null,
   newUserFailure: ['error'],
 

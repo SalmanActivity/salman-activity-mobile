@@ -17,23 +17,30 @@ class NewLocationScreen extends Component {
   }
 
   newLocationHandler (name) {
-    const {newLocation} = this.props
-    newLocation(name)
+    const {newLocation, token} = this.props
+    newLocation(token, name)
   }
 
   render () {
-    const {error, loggingIn} = this.props
+    const {error, postingLocation, back, getLocations, token} = this.props
 
     return (
       <View style={styles.mainContainer} keyboardShouldPersistTaps='handled'>
-        <ScrollView style={styles.container} keyboardShouldPersistTaps='handled'>
-          <ScrollView style={styles.section} keyboardShouldPersistTaps='handled' >
+        <ScrollView style={styles.container}
+          keyboardShouldPersistTaps='handled'>
+
+          <ScrollView style={styles.section}
+            keyboardShouldPersistTaps='handled'>
+
             <NewLocation
               newLocationHandler={this.newLocationHandler.bind(this)}
+              backHandler={() => { back(); getLocations(token) }}
               error={error}
-              disabled={!!loggingIn}
+              disabled={!!postingLocation}
             />
+
           </ScrollView>
+
         </ScrollView>
       </View>
     )
@@ -41,12 +48,15 @@ class NewLocationScreen extends Component {
 }
 
 const mapDispatchToProps = {
-  newLocation: LocationActions.newLocation
+  newLocation: LocationActions.newLocation,
+  getLocations: LocationActions.getLocations,
+  back: () => ({ type: 'Navigation/BACK' })
 }
 
 const mapStateToProps = (state) => ({
-  //error: state.auth.error,
-  //loggingIn: state.auth.loggingIn
+  error: state.location.postingLocationError,
+  postingLocation: state.location.postingLocation,
+  token: state.auth.token
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewLocationScreen)
