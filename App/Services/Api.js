@@ -100,7 +100,7 @@ const create = (baseURL = config.baseURL) => {
   const getReports = (userToken) =>
     api.get('reports', {}, addAuthorizationHeader(userToken))
 
-  const postReports = (userToken, request_id, content, photo) => {
+  const postReport = (userToken, request_id, content, photo) => {
     let data = {
       request_id,
       content,
