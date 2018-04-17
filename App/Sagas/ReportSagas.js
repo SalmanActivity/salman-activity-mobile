@@ -1,12 +1,12 @@
 import { call, put } from 'redux-saga/effects'
-import LocationActions from '../Redux/LocationRedux'
+import ReportActions from '../Redux/ReportRedux'
 
-export function * getLocations (api, action) {
+export function * getReports (api, action) {
   const {userToken} = action
-  const response = yield call(api.getLocations, userToken)
+  const response = yield call(api.getReports, userToken)
 
   if (response.ok) {
-    yield put(LocationActions.getLocationsSuccess(response.data))
+    yield put(ReportActions.getReportsSuccess(response.data))
   } else {
     let cause
 
@@ -16,18 +16,20 @@ export function * getLocations (api, action) {
       cause = 'Connection Error'
     }
 
-    yield put(LocationActions.getLocationsFailure(cause))
+    yield put(ReportActions.getReportsFailure(cause))
   }
 }
 
-export function * newLocation (api, action) {
-  const {userToken, name} = action
-  const response = yield call(api.postLocation,
+export function * newReport (api, action) {
+  const {userToken, request_id, content, photo} = action
+  const response = yield call(api.postReport,
                               userToken,
-                              name)
+                              request_id,
+                              content,
+                              photo)
 
   if (response.ok) {
-    yield put(LocationActions.postLocationSuccess())
+    yield put(ReportActions.postReportSuccess())
   } else {
     let cause
 
@@ -37,16 +39,20 @@ export function * newLocation (api, action) {
       cause = 'Connection Error'
     }
 
-    yield put(LocationActions.postLocationFailure(cause))
+    yield put(ReportActions.postReportFailure(cause))
   }
 }
 
-export function * updateLocation (api, action) {
-  const {userToken, id, locationData} = action
-  const response = yield call(api.updateLocation, userToken, id, locationData)
+export function * updateReport (api, action) {
+  const {userToken, request_id, content, photo} = action
+  const response = yield call(api.updateReport,
+                              userToken,
+                              request_id,
+                              content,
+                              photo)
 
   if (response.ok) {
-    yield put(LocationActions.updateLocationSuccess())
+    yield put(ReportActions.updateReportSuccess())
   } else {
     let cause
 
@@ -56,6 +62,6 @@ export function * updateLocation (api, action) {
       cause = 'Connection Error'
     }
 
-    yield put(LocationActions.updateLocationFailure(cause))
+    yield put(ReportActions.updateReportFailure(cause))
   }
 }
