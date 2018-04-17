@@ -5,91 +5,91 @@ import Immutable from 'seamless-immutable'
 
 const { Types, Creators } = createActions({
 
-  getLocations: ['userToken'],
-  getLocationsSuccess: ['locations'],
-  getLocationsFailure: ['error'],
+  getReports: ['userToken'],
+  getReportsSuccess: ['reports'],
+  getReportsFailure: ['error'],
 
-  newLocation: ['userToken', 'name'],
-  newLocationSuccess: null,
-  newLocationFailure: ['error'],
+  newReport: ['userToken', 'request_id', 'content', 'photo'],
+  newReportSuccess: null,
+  newReportFailure: ['error'],
 
-  updateLocation: ['userToken', 'id', 'locationData'],
-  updateLocationSuccess: null,
-  updateLocationFailure: ['error']
+  updateReport: ['userToken', 'request_id', 'content', 'photo'],
+  updateReportSuccess: null,
+  updateReportFailure: ['error']
 })
 
-export const LocationTypes = Types
+export const ReportTypes = Types
 export default Creators
 
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  locations: [],
-  fetchingLocations: false,
-  fetchingLocationsError: null,
+  reports: [],
+  fetchingReports: false,
+  fetchingReportsError: null,
 
-  postingLocation: false,
-  postingLocationError: null,
+  postingReport: false,
+  postingReportError: null,
 
-  updatingLocation: false,
-  updatingLocationError: null
+  updatingReport: false,
+  updatingReportError: null
 })
 
 /* ------------- Reducers ------------- */
 
-export const getLocations = (state) =>
-state.merge({ fetchingLocations: true, fetchingLocationsError: null })
+export const getReports = (state) =>
+state.merge({ fetchingReports: true, fetchingReportsError: null })
 
-export const getLocationsSuccess = (state, action) => {
-  const { locations } = action
-  return state.merge({ fetchingLocations: false,
-    locations,
-    fetchingLocationsError: null })
+export const getReportsSuccess = (state, action) => {
+  const { reports } = action
+  return state.merge({ fetchingReports: false,
+    reports,
+    fetchingReportsError: null })
 }
 
-export const getLocationsFailure = (state, action) => {
+export const getReportsFailure = (state, action) => {
   const { error } = action
-  return state.merge({ fetchingLocations: false,
-    fetchingLocationsError: error })
+  return state.merge({ fetchingReports: false,
+    fetchingReportsError: error })
 }
 
-export const newLocation = (state) =>
-state.merge({ postingLocation: true, postingLocationError: null })
+export const newReport = (state) =>
+state.merge({ postingReport: true, postingReportError: null })
 
-export const newLocationSuccess = (state) => {
-  return state.merge({ postingLocation: false, postingLocationError: null })
+export const newReportSuccess = (state) => {
+  return state.merge({ postingReport: false, postingReportError: null })
 }
 
-export const newLocationFailure = (state, action) => {
+export const newReportFailure = (state, action) => {
   const { error } = action
-  return state.merge({ postingLocation: false, postingLocationError: error })
+  return state.merge({ postingReport: false, postingReportError: error })
 }
 
-export const updateLocation = (state) =>
-state.merge({ updatingLocation: true, updatingLocationError: null })
+export const updateReport = (state) =>
+state.merge({ updatingReport: true, updatingReportError: null })
 
-export const updateLocationSuccess = (state) => {
-  return state.merge({ updatingLocation: false, updatingLocationError: null })
+export const updateReportSuccess = (state) => {
+  return state.merge({ updatingReport: false, updatingReportError: null })
 }
 
-export const updateLocationFailure = (state, action) => {
+export const updateReportFailure = (state, action) => {
   const { error } = action
-  return state.merge({ updatingLocation: false, updatingLocationError: error })
+  return state.merge({ updatingReport: false, updatingReportError: error })
 }
 
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
 
-  [Types.GET_LOCATIONS]: getLocations,
-  [Types.GET_LOCATIONS_SUCCESS]: getLocationsSuccess,
-  [Types.GET_LOCATIONS_FAILURE]: getLocationsFailure,
+  [Types.GET_REPORTS]: getReports,
+  [Types.GET_REPORTS_SUCCESS]: getReportsSuccess,
+  [Types.GET_REPORTS_FAILURE]: getReportsFailure,
 
-  [Types.NEW_LOCATION]: newLocation,
-  [Types.NEW_LOCATION_SUCCESS]: newLocationSuccess,
-  [Types.NEW_LOCATION_FAILURE]: newLocationFailure,
+  [Types.NEW_REPORT]: newReport,
+  [Types.NEW_REPORT_SUCCESS]: newReportSuccess,
+  [Types.NEW_REPORT_FAILURE]: newReportFailure,
 
-  [Types.UPDATE_LOCATION]: updateLocation,
-  [Types.UPDATE_LOCATION_SUCCESS]: updateLocationSuccess,
-  [Types.UPDATE_LOCATION_FAILURE]: updateLocationFailure
+  [Types.UPDATE_REPORT]: updateReport,
+  [Types.UPDATE_REPORT_SUCCESS]: updateReportSuccess,
+  [Types.UPDATE_REPORT_FAILURE]: updateReportFailure
 })
