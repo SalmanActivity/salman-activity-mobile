@@ -48,6 +48,16 @@ const NewUserForm = (props) => (
       placeholder='Jumlah Perkiraan Peserta'
     />
     <Field
+      name = 'personInCharge'
+      component={TextInput}
+      placeholder='Penanggung Jawab Kegiatan'
+    />
+    <Field
+      name = 'phoneNumber'
+      component={TextInput}
+      placeholder='Nomor Telfon Penanggung Jawab'
+    />
+    <Field
       name='participantDescription'
       component={TextInput}
       placeholder='Deskripsi Peserta'
