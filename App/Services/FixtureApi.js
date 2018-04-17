@@ -1,6 +1,7 @@
 const users = require('../Fixtures/users.json')
 const divisions = require('../Fixtures/divisions.json')
 const locations = require('../Fixtures/locations.json')
+const reports = require('../Fixtures/reports.json')
 
 export default {
   login: (username, password) => {
@@ -291,6 +292,91 @@ export default {
           error: {
             msg: 'cannot perform action',
             cause: 'location not found'
+          }
+        }
+      }
+    } else {
+      return {
+        ok: false,
+        data: {
+          error: {
+            msg: 'cannot perform action',
+            cause: 'unauthorized access'
+          }
+        }
+      }
+    }
+  },
+
+  getReports: (userToken) => {
+    if (userToken === 'abcd') {
+      return {
+        ok: true,
+        data: reports
+      }
+    } else {
+      return {
+        ok: false,
+        data: {
+          error: {
+            msg: 'cannot perform action',
+            cause: 'unauthorized access'
+          }
+        }
+      }
+    }
+  },
+
+  postReport: (userToken, request_id, content, photo) => {
+    if (userToken === 'abcd') {
+      reports.forEach(report => {
+        if (report.request_id === request_id) {
+          return {
+            ok: false,
+            data: {
+              error: {
+                msg: 'cannot perform action',
+                cause: 'report exists'
+              }
+            }
+          }
+        }
+      })
+
+      return {
+        ok: true,
+        data: {}
+      }
+    } else {
+      return {
+        ok: false,
+        data: {
+          error: {
+            msg: 'cannot perform action',
+            cause: 'unauthorized access'
+          }
+        }
+      }
+    }
+  },
+
+  updateReport: (userToken, request_id, reportData) => {
+    if (userToken === 'abcd') {
+      reports.forEach(report => {
+        if (report.request_id === request_id) {
+          return {
+            ok: true,
+            data: {}
+          }
+        }
+      })
+
+      return {
+        ok: false,
+        data: {
+          error: {
+            msg: 'cannot perform action',
+            cause: 'report not found'
           }
         }
       }
