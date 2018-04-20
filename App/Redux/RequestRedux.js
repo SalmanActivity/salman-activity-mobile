@@ -14,7 +14,7 @@ const { Types, Creators } = createActions({
 
   newRequest: ['userToken', 'name', 'description', 'division', 'location',
     'startTime', 'endTime', 'participantNumber', 'participantDescription',
-    'speaker', 'issuedTime'],
+    'personInCharge', 'phoneNumber', 'speaker'],
   newRequestSuccess: ['request'],
   newRequestFailure: ['error'],
 

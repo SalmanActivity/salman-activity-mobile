@@ -42,7 +42,7 @@ export function * getRequest (api, action) {
 export function * newRequest (api, action) {
   const {userToken, name, description, division, location,
     startTime, endTime, participantNumber, participantDescription,
-    speaker, issuedTime} = action
+    personInCharge, phoneNumber, speaker} = action
 
   const response = yield call(api.postRequest,
                               userToken,
@@ -54,8 +54,9 @@ export function * newRequest (api, action) {
                               endTime,
                               participantNumber,
                               participantDescription,
-                              speaker,
-                              issuedTime)
+                              personInCharge,
+                              phoneNumber,
+                              speaker)
 
   if (response.ok) {
     const {data} = response
