@@ -11,13 +11,11 @@ export function * login (api, action) {
 
     yield put(AuthActions.loginSuccess(token))
   } else {
-    let cause
-
-    if (response.data) {
-      cause = response.data.error.cause
-    } else {
-      cause = response.problem
-    }
+    const cause = response.data
+      ? (response.data.error
+        ? (response.data.error.cause : response.problem)
+        : response.problem)
+      : response.problem
 
     yield put(AuthActions.loginFailure(cause))
   }

@@ -8,13 +8,11 @@ export function * getRequests (api, action) {
   if (response.ok) {
     yield put(RequestActions.getRequestsSuccess(response.data))
   } else {
-    let cause
-
-    if (response.data) {
-      cause = response.data.error.cause
-    } else {
-      cause = response.problem
-    }
+    const cause = response.data
+      ? (response.data.error
+        ? (response.data.error.cause : response.problem)
+        : response.problem)
+      : response.problem
 
     yield put(RequestActions.getRequestsFailure(cause))
   }
@@ -27,13 +25,11 @@ export function * getRequest (api, action) {
   if (response.ok) {
     yield put(RequestActions.getRequestSuccess(response.data))
   } else {
-    let cause
-
-    if (response.data) {
-      cause = response.data.error.cause
-    } else {
-      cause = 'Connection Error'
-    }
+    const cause = response.data
+      ? (response.data.error
+        ? (response.data.error.cause : response.problem)
+        : response.problem)
+      : response.problem
 
     yield put(RequestActions.getRequestFailure(cause))
   }
@@ -62,13 +58,11 @@ export function * newRequest (api, action) {
     const {data} = response
     yield put(RequestActions.postRequestSuccess(data))
   } else {
-    let cause
-
-    if (response.data) {
-      cause = response.data.error.cause
-    } else {
-      cause = response.problem
-    }
+    const cause = response.data
+      ? (response.data.error
+        ? (response.data.error.cause : response.problem)
+        : response.problem)
+      : response.problem
 
     yield put(RequestActions.postRequestFailure(cause))
   }
@@ -87,13 +81,11 @@ export function * updateRequest (api, action) {
       request.month,
       request.year))
   } else {
-    let cause
-
-    if (response.data) {
-      cause = response.data.error.cause
-    } else {
-      cause = response.problem
-    }
+    const cause = response.data
+      ? (response.data.error
+        ? (response.data.error.cause : response.problem)
+        : response.problem)
+      : response.problem
 
     yield put(RequestActions.updateRequestFailure(cause))
   }
