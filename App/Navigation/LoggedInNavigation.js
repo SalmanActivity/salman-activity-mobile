@@ -7,6 +7,7 @@ import NewLocationScreen from '../Containers/NewLocationScreen'
 import DivisionListScreen from '../Containers/DivisionListScreen'
 import NewDivisionScreen from '../Containers/NewDivisionScreen'
 import RequestListScreenAdmin from '../Containers/RequestListScreenAdmin'
+import NewRequestScreen from '../Containers/NewRequestScreen'
 import RequestScreenAdmin from '../Containers/RequestScreenAdmin'
 
 const LoggedInNavigation = DrawerNavigator({
@@ -14,7 +15,8 @@ const LoggedInNavigation = DrawerNavigator({
   RequestAdminNavigation: {
     screen: StackNavigator({
       RequestListScreenAdmin: { screen: RequestListScreenAdmin },
-      RequestScreenAdmin: { screen: RequestScreenAdmin }
+      RequestScreenAdmin: { screen: RequestScreenAdmin },
+      NewRequestScreen: { screen: NewRequestScreen }
     }, {
       headerMode: 'none',
       initialRouteName: 'RequestListScreenAdmin'

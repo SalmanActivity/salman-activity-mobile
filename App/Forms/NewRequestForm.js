@@ -49,16 +49,6 @@ const NewRequestForm = (props) => (
       keyboardType='numeric'
     />
     <Field
-      name = 'personInCharge'
-      component={TextInput}
-      placeholder='Penanggung Jawab Kegiatan'
-    />
-    <Field
-      name = 'phoneNumber'
-      component={TextInput}
-      placeholder='Nomor Telfon Penanggung Jawab'
-    />
-    <Field
       name='participantDescription'
       component={TextInput}
       placeholder='Deskripsi Peserta'
@@ -67,6 +57,16 @@ const NewRequestForm = (props) => (
       name='speaker'
       component={TextInput}
       placeholder='Narasumber'
+    />
+    <Field
+      name='personInCharge'
+      component={TextInput}
+      placeholder='Penanggung Jawab Kegiatan'
+    />
+    <Field
+      name='phoneNumber'
+      component={TextInput}
+      placeholder='Nomor Telepon Penanggung Jawab'
     />
     <Button
       title='Ajukan Permohonan'
