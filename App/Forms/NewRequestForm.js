@@ -9,6 +9,12 @@ import Picker from './PickerWrapper'
 
 import styles from './Styles/FormStyles'
 
+const hoursFrom = [{label: 'Jam Mulai', value: -1},
+  ...Array.from({length: 24}, (x, i) => ({label: `${i}:00`, value: i}))]
+
+const hoursTo = [{label: 'Jam Selesai', value: -1},
+  ...Array.from({length: 24}, (x, i) => ({label: `${i + 1}:00`, value: i + 1}))]
+
 const NewRequestForm = (props) => (
   <ScrollView keyboardShouldPersistTaps='always'>
     <Field
@@ -43,6 +49,18 @@ const NewRequestForm = (props) => (
       minDate={moment().toDate()}
     />
     <Field
+      name='startHour'
+      component={Picker}
+      data={hoursFrom}
+      value={props.startHour}
+    />
+    <Field
+      name='endHour'
+      component={Picker}
+      data={hoursTo}
+      value={props.endHour}
+    />
+    <Field
       name='participantNumber'
       component={TextInput}
       placeholder='Perkiraan Jumlah Peserta'
@@ -67,6 +85,7 @@ const NewRequestForm = (props) => (
       name='phoneNumber'
       component={TextInput}
       placeholder='Nomor Telepon Penanggung Jawab'
+      keyboardType='numeric'
     />
     <Button
       title='Ajukan Permohonan'

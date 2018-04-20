@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {View} from 'react-native'
 import {Card, Text} from 'react-native-elements'
 import PropTypes from 'prop-types'
+import moment from 'moment'
 
 import NewRequestForm from '../Forms/NewRequestForm'
 
@@ -9,7 +10,7 @@ import styles from './Styles/NewRequestStyles'
 
 export default class NewRequest extends Component {
   static propTypes = {
-    newRequestForm: PropTypes.func.isRequired,
+    newRequestHandler: PropTypes.func.isRequired,
     divisions: PropTypes.array.isRequired,
     locations: PropTypes.array.isRequired,
     admin: PropTypes.bool,
@@ -19,7 +20,28 @@ export default class NewRequest extends Component {
   }
 
   onSubmit (form) {
-    console.tron.debug(form)
+    const {onError, newRequestHandler} = this.props
+    const {name, description, division, location, date, startHour, endHour,
+      participantNumber, participantDescription, speaker, personInCharge,
+      phoneNumber} = form
+
+    if (!date) return onError('Masukkan tanggal.')
+    if (startHour === null || startHour === -1) {
+      return onError('Masukkan jam mulai.')
+    }
+    if (endHour === null || startHour === -1) {
+      return onError('Masukkan jam selesai.')
+    }
+
+    const startTime = moment(date, 'DD-MM-YYYY').hour(startHour).unix() * 1000
+    const endTime = moment(date, 'DD-MM-YYYY')
+      .hour(endHour - 1)
+      .minute(59).second(59)
+      .unix() * 1000
+
+    newRequestHandler(name, description, division, location, startTime,
+      endTime, participantNumber, participantDescription, speaker,
+      personInCharge, phoneNumber)
   }
 
   render () {

@@ -56,7 +56,8 @@ export function * newRequest (api, action) {
 
   if (response.ok) {
     const {data} = response
-    yield put(RequestActions.postRequestSuccess(data))
+    yield put(RequestActions.newRequestSuccess(data))
+    yield put({type: 'Navigation/BACK'})
   } else {
     const cause = response.data
       ? (response.data.error
@@ -64,7 +65,7 @@ export function * newRequest (api, action) {
         : response.problem)
       : response.problem
 
-    yield put(RequestActions.postRequestFailure(cause))
+    yield put(RequestActions.newRequestFailure(cause))
   }
 }
 

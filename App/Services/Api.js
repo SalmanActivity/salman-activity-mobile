@@ -87,7 +87,9 @@ const create = (baseURL = config.baseURL) => {
       endTime,
       participantNumber,
       participantDescription,
-      speaker}
+      speaker,
+      personInCharge,
+      phoneNumber}
 
     data = ObjectFilter(data, (key, value) => value != null)
 

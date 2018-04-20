@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 
 import NewRequest from '../Components/NewRequest'
 
-import RequestActions from '../Redux/UserRedux'
+import RequestActions from '../Redux/RequestRedux'
 import DivisionActions from '../Redux/DivisionRedux'
 import LocationActions from '../Redux/LocationRedux'
 
@@ -13,14 +13,19 @@ import styles from './Styles/NewRequestScreenStyles'
 
 class NewRequestScreen extends Component {
   componentDidMount () {
-    const {token, getDivisions} = this.props
+    const {token, getDivisions, getLocations} = this.props
     getDivisions(token)
+    getLocations(token)
   }
 
-  newUserHandler (name, description, division, location, date,
+  newRequestHandler (name, description, division, location, startTime, endTime,
     participantNumber, participantDescription, speaker, personInCharge,
     phoneNumber) {
+    const {newRequest, token} = this.props
 
+    newRequest(token, name, description, division, location, startTime, endTime,
+      participantNumber, participantDescription, speaker, personInCharge,
+      phoneNumber)
   }
 
   onError (error) {
@@ -29,7 +34,7 @@ class NewRequestScreen extends Component {
   }
 
   render () {
-    const {error, postingUser, divisions: initialDivisions,
+    const {admin, error, postingRequest, divisions: initialDivisions,
       locations: initialLocations, fetchingDivisions,
       fetchingLocations} = this.props
 
@@ -51,12 +56,13 @@ class NewRequestScreen extends Component {
               ? <ActivityIndicator />
               : (
                 <NewRequest
-                  newUserHandler={::this.newUserHandler}
+                  newRequestHandler={::this.newRequestHandler}
                   error={error}
-                  disabled={!!postingUser}
+                  disabled={!!postingRequest}
                   onError={::this.onError}
                   divisions={divisions}
                   locations={locations}
+                  admin={admin}
                 />
               )
             }
@@ -75,6 +81,7 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
+  admin: !!state.auth.token,
   error: state.request.postingRequestError,
   postingRequest: state.request.postingRequest,
   token: state.auth.token,
