@@ -8,13 +8,11 @@ export function * getLocations (api, action) {
   if (response.ok) {
     yield put(LocationActions.getLocationsSuccess(response.data))
   } else {
-    let cause
-
-    if (response.data) {
-      cause = response.data.error.cause
-    } else {
-      cause = response.problem
-    }
+    const cause = response.data
+      ? (response.data.error
+        ? (response.data.error.cause : response.problem)
+        : response.problem)
+      : response.problem
 
     yield put(LocationActions.getLocationsFailure(cause))
   }
@@ -31,13 +29,11 @@ export function * newLocation (api, action) {
     yield put({type: 'Navigation/BACK'})
     yield put(LocationActions.getLocations(userToken))
   } else {
-    let cause
-
-    if (response.data) {
-      cause = response.data.error.cause
-    } else {
-      cause = response.problem
-    }
+    const cause = response.data
+      ? (response.data.error
+        ? (response.data.error.cause : response.problem)
+        : response.problem)
+      : response.problem
 
     yield put(LocationActions.newLocationFailure(cause))
   }
@@ -51,13 +47,11 @@ export function * updateLocation (api, action) {
     yield put(LocationActions.updateLocationSuccess())
     yield put(LocationActions.getLocations(userToken))
   } else {
-    let cause
-
-    if (response.data) {
-      cause = response.data.error.cause
-    } else {
-      cause = response.problem
-    }
+    const cause = response.data
+      ? (response.data.error
+        ? (response.data.error.cause : response.problem)
+        : response.problem)
+      : response.problem
 
     yield put(LocationActions.updateLocationFailure(cause))
   }

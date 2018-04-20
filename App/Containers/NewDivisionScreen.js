@@ -8,7 +8,7 @@ import NewDivision from '../Components/NewDivision'
 import DivisionActions from '../Redux/DivisionRedux'
 
 // Styles
-import styles from './Styles/LoginScreenStyles'
+import styles from './Styles/NewDivisionScreenStyles'
 
 class NewDivisionScreen extends Component {
   static PropTypes = {

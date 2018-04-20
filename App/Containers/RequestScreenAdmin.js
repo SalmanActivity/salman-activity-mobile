@@ -5,6 +5,7 @@ import RequestActions from '../Redux/RequestRedux'
 import {AuthSelectors} from '../Redux/AuthRedux'
 import RequestDetail from '../Components/RequestDetail'
 import {Button, Card} from 'react-native-elements'
+import ActionButton from 'react-native-action-button'
 
 // Styles
 import styles from './Styles/RequestScreenAdminStyles'
@@ -25,8 +26,9 @@ class RequestListScreenAdmin extends Component {
   }
 
   render () {
-    const {request, fetchingRequest, fetchingRequestError,
-      updatingRequest, updatingRequestError} = this.props.request
+    const {navigation: {navigate}, request: {request, fetchingRequest,
+      fetchingRequestError, updatingRequest, updatingRequestError}} = this.props
+
     const {status} = request || {}
 
     return (
@@ -70,6 +72,11 @@ class RequestListScreenAdmin extends Component {
             )
           }
         </ScrollView>
+
+        <ActionButton
+          buttonColor='rgba(00,96,88,1)'
+          onPress={() => navigate('NewRequestScreen')}
+        />
       </ScrollView>
     )
   }

@@ -3,6 +3,7 @@ import { ScrollView, View, ActivityIndicator, Text } from 'react-native'
 import {connect} from 'react-redux'
 import moment from 'moment'
 import {Button} from 'react-native-elements'
+import ActionButton from 'react-native-action-button'
 import RequestActions from '../Redux/RequestRedux'
 import {AuthSelectors} from '../Redux/AuthRedux'
 import DataList from '../Components/DataList'
@@ -42,7 +43,7 @@ class RequestListScreenAdmin extends Component {
   }
 
   render () {
-    const {request} = this.props
+    const {request, navigation: {navigate}} = this.props
     const {requests, fetchingRequests, fetchingRequestsError} = request
 
     const sortedRequest = [...requests].sort((requestX, requestY) =>
@@ -91,6 +92,11 @@ class RequestListScreenAdmin extends Component {
             )
           }
         </ScrollView>
+
+        <ActionButton
+          buttonColor='rgba(00,96,88,1)'
+          onPress={() => navigate('NewRequestScreen')}
+        />
       </View>
     )
   }

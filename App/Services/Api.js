@@ -77,7 +77,7 @@ const create = (baseURL = config.baseURL) => {
 
   const postRequest = (userToken, name, description, division, location,
     startTime, endTime, participantNumber, participantDescription,
-    speaker, issuedTime) => {
+    personInCharge, phoneNumber, speaker) => {
     let data = {
       name,
       description,
@@ -88,7 +88,8 @@ const create = (baseURL = config.baseURL) => {
       participantNumber,
       participantDescription,
       speaker,
-      issuedTime}
+      personInCharge,
+      phoneNumber}
 
     data = ObjectFilter(data, (key, value) => value != null)
 

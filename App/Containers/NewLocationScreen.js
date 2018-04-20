@@ -8,7 +8,7 @@ import NewLocation from '../Components/NewLocation'
 import LocationActions from '../Redux/LocationRedux'
 
 // Styles
-import styles from './Styles/LoginScreenStyles'
+import styles from './Styles/NewLocationScreenStyles'
 
 class NewLocationScreen extends Component {
   static PropTypes = {

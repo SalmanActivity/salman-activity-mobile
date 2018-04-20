@@ -8,13 +8,11 @@ export function * getDivisions (api, action) {
   if (response.ok) {
     yield put(DivisionActions.getDivisionsSuccess(response.data))
   } else {
-    let cause
-
-    if (response.data) {
-      cause = response.data.error.cause
-    } else {
-      cause = response.problem
-    }
+    const cause = response.data
+      ? (response.data.error
+        ? (response.data.error.cause : response.problem)
+        : response.problem)
+      : response.problem
 
     yield put(DivisionActions.getDivisionsFailure(cause))
   }
@@ -31,13 +29,11 @@ export function * newDivision (api, action) {
     yield put({type: 'Navigation/BACK'})
     yield put(DivisionActions.getDivisions(userToken))
   } else {
-    let cause
-
-    if (response.data) {
-      cause = response.data.error.cause
-    } else {
-      cause = response.problem
-    }
+    const cause = response.data
+      ? (response.data.error
+        ? (response.data.error.cause : response.problem)
+        : response.problem)
+      : response.problem
 
     yield put(DivisionActions.newDivisionFailure(cause))
   }
@@ -51,13 +47,11 @@ export function * updateDivision (api, action) {
     yield put(DivisionActions.updateDivisionSuccess())
     yield put(DivisionActions.getDivisions(userToken))
   } else {
-    let cause
-
-    if (response.data) {
-      cause = response.data.error.cause
-    } else {
-      cause = response.problem
-    }
+    const cause = response.data
+      ? (response.data.error
+        ? (response.data.error.cause : response.problem)
+        : response.problem)
+      : response.problem
 
     yield put(DivisionActions.updateDivisionFailure(cause))
   }

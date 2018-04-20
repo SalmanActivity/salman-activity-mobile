@@ -8,13 +8,11 @@ export function * getMe (api, action) {
   if (response.ok) {
     yield put(UserActions.getMeSuccess(response.data))
   } else {
-    let cause
-
-    if (response.data) {
-      cause = response.data.error.cause
-    } else {
-      cause = response.problem
-    }
+    const cause = response.data
+      ? (response.data.error
+        ? (response.data.error.cause : response.problem)
+        : response.problem)
+      : response.problem
 
     yield put(UserActions.getMeFailure(cause))
   }
@@ -27,13 +25,11 @@ export function * getUsers (api, action) {
   if (response.ok) {
     yield put(UserActions.getUsersSuccess(response.data))
   } else {
-    let cause
-
-    if (response.data) {
-      cause = response.data.error.cause
-    } else {
-      cause = response.problem
-    }
+    const cause = response.data
+      ? (response.data.error
+        ? (response.data.error.cause : response.problem)
+        : response.problem)
+      : response.problem
 
     yield put(UserActions.getUsersFailure(cause))
   }
@@ -55,13 +51,11 @@ export function * newUser (api, action) {
     yield put({type: 'Navigation/BACK'})
     yield put(UserActions.getUsers(userToken))
   } else {
-    let cause
-
-    if (response.data) {
-      cause = response.data.error.cause
-    } else {
-      cause = response.problem
-    }
+    const cause = response.data
+      ? (response.data.error
+        ? (response.data.error.cause : response.problem)
+        : response.problem)
+      : response.problem
 
     yield put(UserActions.newUserFailure(cause))
   }
@@ -75,13 +69,11 @@ export function * updateUser (api, action) {
     yield put(UserActions.updateUserSuccess())
     yield put(UserActions.getUsers(userToken))
   } else {
-    let cause
-
-    if (response.data) {
-      cause = response.data.error.cause
-    } else {
-      cause = response.problem
-    }
+    const cause = response.data
+      ? (response.data.error
+        ? (response.data.error.cause : response.problem)
+        : response.problem)
+      : response.problem
 
     yield put(UserActions.updateUserFailure(cause))
   }

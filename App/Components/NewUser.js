@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import NewUserForm from '../Forms/NewUserForm'
 
-import styles from './Styles/LoginStyles'
+import styles from './Styles/NewUserStyles'
 
 export default class NewUser extends Component {
   static propTypes = {

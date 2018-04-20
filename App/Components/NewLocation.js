@@ -5,9 +5,9 @@ import PropTypes from 'prop-types'
 
 import NewLocationForm from '../Forms/NewLocationForm'
 
-import styles from './Styles/LoginStyles'
+import styles from './Styles/NewLocationStyles'
 
-export default class NewUser extends Component {
+export default class NewLocation extends Component {
   static propTypes = {
     newLocationHandler: PropTypes.func.isRequired,
     backHandler: PropTypes.func.isRequired,

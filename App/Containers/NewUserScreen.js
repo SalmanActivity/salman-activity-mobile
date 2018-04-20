@@ -8,7 +8,7 @@ import UserActions from '../Redux/UserRedux'
 import DivisionActions from '../Redux/DivisionRedux'
 
 // Styles
-import styles from './Styles/LoginScreenStyles'
+import styles from './Styles/NewUserScreenStyles'
 
 class NewUserScreen extends Component {
   componentDidMount () {
