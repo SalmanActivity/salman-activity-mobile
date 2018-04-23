@@ -24,7 +24,7 @@ const LoggedInNavigation = DrawerNavigator({
     screen: DivisionListScreen,
     navigationOptions: {drawerLabel: 'Manajemen Bidang'}
   },
-  DivisionListScreen: {
+  FormReportScreen: {
     screen: ActivityReportScreen,
     navigationOptions: {drawerLabel: 'Form Report (Developed)'}
   }
