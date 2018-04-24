@@ -13,7 +13,7 @@ export function * login (api, action) {
 
     if (response.ok) {
       if (response.data.admin) yield put(AuthActions.loginSuccessAdmin(token))
-      else yield put(AuthActions.loginSuccessReguler(token))
+      else yield put(AuthActions.loginSuccessRegular(token))
     } else {
       const cause = response.data
         ? (response.data.error
