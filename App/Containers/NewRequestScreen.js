@@ -34,9 +34,9 @@ class NewRequestScreen extends Component {
   }
 
   render () {
-    const {admin, error, postingRequest, divisions: initialDivisions,
+    const {error, postingRequest, divisions: initialDivisions,
       locations: initialLocations, fetchingDivisions,
-      fetchingLocations} = this.props
+      fetchingLocations, navigation: {state: {params: {admin}}}} = this.props
 
     const divisions = [{label: 'Bidang', value: null},
       ...initialDivisions.map(division =>
@@ -81,7 +81,6 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
-  admin: !!state.auth.token,
   error: state.request.postingRequestError,
   postingRequest: state.request.postingRequest,
   token: state.auth.token,
