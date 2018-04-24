@@ -30,7 +30,7 @@ const api = DebugConfig.useFixtures ? FixtureAPI : API.create()
 
 export default function * root () {
   yield all([
-    takeLatest(StartupTypes.STARTUP, startup),
+    takeLatest(StartupTypes.STARTUP, startup, api),
 
     takeLatest(AuthTypes.LOGIN, login, api),
 

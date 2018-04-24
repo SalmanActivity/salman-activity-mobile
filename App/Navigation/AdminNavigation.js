@@ -10,7 +10,7 @@ import RequestListScreenAdmin from '../Containers/RequestListScreenAdmin'
 import NewRequestScreen from '../Containers/NewRequestScreen'
 import RequestScreenAdmin from '../Containers/RequestScreenAdmin'
 
-const LoggedInNavigation = DrawerNavigator({
+const AdminNavigation = DrawerNavigator({
   HomeScreen: { screen: HomeScreen, navigationOptions: {drawerLabel: 'Home'} },
   RequestAdminNavigation: {
     screen: StackNavigator({
@@ -55,4 +55,4 @@ const LoggedInNavigation = DrawerNavigator({
   }
 })
 
-export default LoggedInNavigation
+export default AdminNavigation
