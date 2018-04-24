@@ -5,7 +5,6 @@ import RequestActions from '../Redux/RequestRedux'
 import {AuthSelectors} from '../Redux/AuthRedux'
 import RequestDetail from '../Components/RequestDetail'
 import {Button, Card} from 'react-native-elements'
-import ActionButton from 'react-native-action-button'
 
 // Styles
 import styles from './Styles/RequestScreenAdminStyles'
@@ -26,8 +25,9 @@ class RequestListScreenAdmin extends Component {
   }
 
   render () {
-    const {navigation: {navigate}, request: {request, fetchingRequest,
-      fetchingRequestError, updatingRequest, updatingRequestError}} = this.props
+    const {navigation: {state: {params: {admin}}},
+      request: {request, fetchingRequest, fetchingRequestError,
+        updatingRequest, updatingRequestError}} = this.props
 
     const {status} = request || {}
 
@@ -45,7 +45,7 @@ class RequestListScreenAdmin extends Component {
 
                     <View style={styles.separator} />
 
-                    {status !== 'accepted' && (
+                    {!!admin && status !== 'accepted' && (
                       <Button
                         title='Setujui'
                         buttonStyle={[styles.button, styles.buttonAccept]}
@@ -55,7 +55,7 @@ class RequestListScreenAdmin extends Component {
                       />
                     )}
 
-                    {status !== 'rejected' && (
+                    {!!admin && status !== 'rejected' && (
                       <Button
                         title='Tolak'
                         buttonStyle={[styles.button, styles.buttonReject]}
@@ -72,11 +72,6 @@ class RequestListScreenAdmin extends Component {
             )
           }
         </ScrollView>
-
-        <ActionButton
-          buttonColor='rgba(00,96,88,1)'
-          onPress={() => navigate('NewRequestScreen')}
-        />
       </ScrollView>
     )
   }

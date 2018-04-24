@@ -49,6 +49,7 @@ class RequestListScreenAdmin extends Component {
     const {request, user: {fetchingMe, fetchingMeError, me},
       navigation: {navigate}} = this.props
     const {requests, fetchingRequests, fetchingRequestsError} = request
+    const admin = me ? me.admin : false
 
     const sortedRequest = [...requests].sort((requestX, requestY) =>
       moment(requestX.startTime) < moment(requestY.startTime) ? 1 : -1)
@@ -58,8 +59,9 @@ class RequestListScreenAdmin extends Component {
       title: `${request.name} (${requestStatus(request.status)}) ` +
         `- ${request.division.name}`,
       subtitle: `${transformDate(request.startTime)} ` +
-      `(${duration(request.startTime, request.endTime)} jam), ` +
-        `di ${request.location.name}`
+      `(${duration(request.startTime,
+        moment(request.endTime).add(1, 'seconds'))} jam), ` +
+      `di ${request.location.name}`
     }))
 
     return (
@@ -91,7 +93,8 @@ class RequestListScreenAdmin extends Component {
               : <DataList
                 data={transformedRequests}
                 onPress={(id) =>
-                  this.props.navigation.navigate('RequestScreenAdmin', {id})} />
+                  this.props.navigation.navigate('RequestScreenAdmin',
+                    {id, admin})} />
             )
           }
         </ScrollView>
@@ -99,7 +102,7 @@ class RequestListScreenAdmin extends Component {
         {!!me && !fetchingMe && !fetchingMeError && (
           <ActionButton
             buttonColor='rgba(00,96,88,1)'
-            onPress={() => navigate('NewRequestScreen', {admin: me.admin})}
+            onPress={() => navigate('NewRequestScreen', {admin})}
           />
         )}
       </View>
