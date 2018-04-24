@@ -13,7 +13,7 @@ const create = (baseURL = config.baseURL) => {
     headers: {
       'Cache-Control': 'no-cache'
     },
-    timeout: 5000
+    timeout: 10000
   })
 
   const login = (username, password) =>

@@ -8,15 +8,14 @@ export const getToken = AuthSelectors.getToken
 
 // process STARTUP actions
 export function * startup (api, action) {
-  yield put(AppStateActions.setRehydrationComplete())
   yield put(AuthActions.startupAuth())
-
   const loggedIn = yield select(isLoggedIn)
 
   if (loggedIn) {
     const token = yield select(AuthSelectors.getToken)
-    const response = yield call(api.getRequests, token)
+    const response = yield call(api.getMe, token)
 
+    yield put(AppStateActions.setRehydrationComplete())
     if (response.ok) {
       if (response.data.admin) {
         yield put(AuthActions.autoLoginAdmin())
@@ -24,5 +23,7 @@ export function * startup (api, action) {
         yield put(AuthActions.autoLoginRegular())
       }
     }
+  } else {
+    yield put(AppStateActions.setRehydrationComplete())
   }
 }
