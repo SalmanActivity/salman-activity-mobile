@@ -22,8 +22,10 @@ export function reducer (state = INITIAL_STATE, action) {
       return NOT_LOGGED_IN_STATE
     case AuthTypes.LOGOUT:
       return NOT_LOGGED_IN_STATE
-    case AuthTypes.LOGIN_SUCCESS:
+    case AuthTypes.LOGIN_SUCCESS_ADMIN:
       return ADMIN_STATE
+    case AuthTypes.LOGIN_SUCCESS_REGULAR:
+      return REGULAR_STATE
     case AuthTypes.AUTO_LOGIN_ADMIN:
       return ADMIN_STATE
     case AuthTypes.AUTO_LOGIN_REGULAR:

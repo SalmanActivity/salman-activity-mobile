@@ -4,11 +4,12 @@ import AuthActions from '../Redux/AuthRedux'
 export function * login (api, action) {
   const { username, password } = action
   // make the call to the api
-  const response = yield call(api.login, username, password)
+  let response = yield call(api.login, username, password)
 
   if (response.ok) {
     const { token } = response.data
 
+    response = yield call(api.getMe, token)
     yield put(AuthActions.loginSuccess(token))
   } else {
     const cause = response.data

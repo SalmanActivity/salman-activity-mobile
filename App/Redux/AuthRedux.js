@@ -7,7 +7,8 @@ const { Types, Creators } = createActions({
   startupAuth: null,
 
   login: ['username', 'password'],
-  loginSuccess: ['token'],
+  loginSuccessAdmin: ['token'],
+  loginSuccessRegular: ['token'],
   loginFailure: ['error'],
 
   logout: null,
@@ -68,7 +69,8 @@ export const autoLoginRegular = state => state
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.STARTUP_AUTH]: startup,
   [Types.LOGIN]: login,
-  [Types.LOGIN_SUCCESS]: loginSuccess,
+  [Types.LOGIN_SUCCESS_ADMIN]: loginSuccess,
+  [Types.LOGIN_SUCCESS_REGULAR]: loginSuccess,
   [Types.LOGIN_FAILURE]: loginFailure,
 
   [Types.LOGOUT]: logout,
