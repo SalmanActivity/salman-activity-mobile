@@ -1,4 +1,4 @@
-import { select, put } from 'redux-saga/effects'
+import { select, put, call } from 'redux-saga/effects'
 import AuthActions, { AuthSelectors } from '../Redux/AuthRedux'
 import AppStateActions from '../Redux/AppStateRedux'
 
@@ -7,13 +7,23 @@ export const isLoggedIn = AuthSelectors.isLoggedIn
 export const getToken = AuthSelectors.getToken
 
 // process STARTUP actions
-export function * startup (action) {
-  yield put(AppStateActions.setRehydrationComplete())
+export function * startup (api, action) {
   yield put(AuthActions.startupAuth())
-
   const loggedIn = yield select(isLoggedIn)
 
   if (loggedIn) {
-    yield put(AuthActions.autoLogin())
+    const token = yield select(AuthSelectors.getToken)
+    const response = yield call(api.getMe, token)
+
+    yield put(AppStateActions.setRehydrationComplete())
+    if (response.ok) {
+      if (response.data.admin) {
+        yield put(AuthActions.autoLoginAdmin())
+      } else {
+        yield put(AuthActions.autoLoginRegular())
+      }
+    }
+  } else {
+    yield put(AppStateActions.setRehydrationComplete())
   }
 }

@@ -56,7 +56,12 @@ export function * newRequest (api, action) {
 
   if (response.ok) {
     const {data} = response
+    const request = yield select(state => state.request)
+
     yield put(RequestActions.newRequestSuccess(data))
+    yield put(RequestActions.getRequests(userToken,
+      request.month,
+      request.year))
     yield put({type: 'Navigation/BACK'})
   } else {
     const cause = response.data

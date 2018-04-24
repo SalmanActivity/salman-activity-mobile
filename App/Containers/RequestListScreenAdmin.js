@@ -5,6 +5,7 @@ import moment from 'moment'
 import {Button} from 'react-native-elements'
 import ActionButton from 'react-native-action-button'
 import RequestActions from '../Redux/RequestRedux'
+import UserActions from '../Redux/UserRedux'
 import {AuthSelectors} from '../Redux/AuthRedux'
 import DataList from '../Components/DataList'
 import MonthPicker from '../Components/MonthPicker'
@@ -17,8 +18,10 @@ import styles from './Styles/RequestListScreenAdminStyles'
 
 class RequestListScreenAdmin extends Component {
   componentDidMount () {
-    const {token, getRequests, changeRequestMonth,
+    const {token, getRequests, changeRequestMonth, getMe,
       changeRequestYear} = this.props
+
+    getMe(token)
 
     changeRequestMonth(moment().month() + 1)
     changeRequestYear(moment().year())
@@ -43,21 +46,22 @@ class RequestListScreenAdmin extends Component {
   }
 
   render () {
-    const {request, navigation: {navigate}} = this.props
+    const {request, user: {fetchingMe, fetchingMeError, me},
+      navigation: {navigate}} = this.props
     const {requests, fetchingRequests, fetchingRequestsError} = request
+    const admin = me ? me.admin : false
 
     const sortedRequest = [...requests].sort((requestX, requestY) =>
       moment(requestX.startTime) < moment(requestY.startTime) ? 1 : -1)
-
-    console.tron.debug(sortedRequest)
 
     const transformedRequests = sortedRequest.map(request => ({
       id: request.id,
       title: `${request.name} (${requestStatus(request.status)}) ` +
         `- ${request.division.name}`,
       subtitle: `${transformDate(request.startTime)} ` +
-      `(${duration(request.startTime, request.endTime)} jam), ` +
-        `di ${request.location.name}`
+      `(${duration(request.startTime,
+        moment(request.endTime).add(1, 'seconds'))} jam), ` +
+      `di ${request.location.name}`
     }))
 
     return (
@@ -80,23 +84,27 @@ class RequestListScreenAdmin extends Component {
             />
           </View>
 
-          {fetchingRequests
+          {fetchingRequests || fetchingMe
             ? <ActivityIndicator />
             : (
-              fetchingRequestsError
-              ? <Text style={styles.error}>{fetchingRequestsError}</Text>
+              fetchingRequestsError || fetchingMeError
+              ? <Text style={styles.error}>
+                {`${fetchingRequestsError}\n${fetchingMeError}`}</Text>
               : <DataList
                 data={transformedRequests}
                 onPress={(id) =>
-                  this.props.navigation.navigate('RequestScreenAdmin', {id})} />
+                  this.props.navigation.navigate('RequestScreenAdmin',
+                    {id, admin})} />
             )
           }
         </ScrollView>
 
-        <ActionButton
-          buttonColor='rgba(00,96,88,1)'
-          onPress={() => navigate('NewRequestScreen')}
-        />
+        {!!me && !fetchingMe && !fetchingMeError && (
+          <ActionButton
+            buttonColor='rgba(00,96,88,1)'
+            onPress={() => navigate('NewRequestScreen', {admin})}
+          />
+        )}
       </View>
     )
   }
@@ -104,10 +112,12 @@ class RequestListScreenAdmin extends Component {
 
 const mapStateToProps = (state) => ({
   token: AuthSelectors.getToken(state),
-  request: state.request
+  request: state.request,
+  user: state.user
 })
 
 const mapDispatchToProps = {
+  getMe: UserActions.getMe,
   getRequests: RequestActions.getRequests,
   changeRequestMonth: RequestActions.changeRequestMonth,
   changeRequestYear: RequestActions.changeRequestYear
