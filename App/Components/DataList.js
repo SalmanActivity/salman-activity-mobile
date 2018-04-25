@@ -18,7 +18,7 @@ export default class DataList extends Component {
       <ListItem
         title={item.title}
         subtitle={item.subtitle}
-        onPress={onPress ? () => onPress(item.id) : () => {}} />
+        onPress={onPress ? () => onPress(item.id, item) : () => {}} />
     )
   }
 

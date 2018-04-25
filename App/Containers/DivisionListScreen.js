@@ -10,6 +10,12 @@ import ActionButton from 'react-native-action-button'
 import styles from './Styles/DivisionListScreenStyles'
 
 class DivisionListScreen extends Component {
+  updateDivision (id, divisionData) {
+    const {token, updateDivision} = this.props
+
+    updateDivision(token, id, divisionData)
+  }
+
   componentDidMount () {
     const { token, getDivisions } = this.props
     getDivisions(token)
@@ -17,12 +23,14 @@ class DivisionListScreen extends Component {
 
   render () {
     const { division, navigation } = this.props
-    const { divisions, fetchingDivisions, fetchingDivisionsError } = division
+    const { divisions, updatingDivision, updatingDivisionError,
+      fetchingDivisions, fetchingDivisionsError } = division
     const {navigate} = navigation
 
     const transformedDivisions = divisions.map(division => ({
       id: division.id,
-      title: `${division.name} (${division.enabled ? 'Aktif' : 'Tidak Aktif'})`
+      title: `${division.name} (${division.enabled ? 'Aktif' : 'Tidak Aktif'})`,
+      division
     }))
 
     return (
@@ -33,7 +41,16 @@ class DivisionListScreen extends Component {
             : (
               fetchingDivisionsError
               ? <Text style={styles.error}>{fetchingDivisionsError}</Text>
-              : <DataList data={transformedDivisions} />
+              : <DataList
+                data={transformedDivisions}
+                onPress={(id, item) => navigate('ActivationScreen', {
+                  id,
+                  category: 'Bidang',
+                  name: item.division.name,
+                  active: item.division.enabled,
+                  loading: updatingDivision,
+                  update: ::this.updateDivision,
+                  error: updatingDivisionError})} />
             )
           }
         </ScrollView>
@@ -52,7 +69,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  getDivisions: DivisionActions.getDivisions
+  getDivisions: DivisionActions.getDivisions,
+  updateDivision: DivisionActions.updateDivision
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DivisionListScreen)
