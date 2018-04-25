@@ -13,7 +13,7 @@ const create = (baseURL = config.baseURL) => {
     headers: {
       'Cache-Control': 'no-cache'
     },
-    timeout: 5000
+    timeout: 10000
   })
 
   const login = (username, password) =>
@@ -25,14 +25,15 @@ const create = (baseURL = config.baseURL) => {
   const getUsers = (userToken) =>
     api.get('users', {}, addAuthorizationHeader(userToken))
 
-  const postUser = (userToken, name, username, password, division, admin) => {
-    let data = {name, username, password, division, admin}
+  const postUser = (userToken, name, username, email,
+    password, division, admin) => {
+    let data = {name, username, email, password, division, admin}
 
     data = ObjectFilter(data, (key, value) => value != null)
 
-    api.post('users',
-             data,
-             addAuthorizationHeader(userToken))
+    return api.post('users',
+                    data,
+                    addAuthorizationHeader(userToken))
   }
 
   const updateUser = (userToken, id, userData) => {
@@ -70,9 +71,13 @@ const create = (baseURL = config.baseURL) => {
     api.get('requests', {month, year},
       addAuthorizationHeader(userToken))
 
+  const getRequest = (userToken, id) =>
+    api.get(`requests/${id}`, {},
+      addAuthorizationHeader(userToken))
+
   const postRequest = (userToken, name, description, division, location,
     startTime, endTime, participantNumber, participantDescription,
-    speaker, issuedTime) => {
+    personInCharge, phoneNumber, speaker) => {
     let data = {
       name,
       description,
@@ -83,7 +88,8 @@ const create = (baseURL = config.baseURL) => {
       participantNumber,
       participantDescription,
       speaker,
-      issuedTime}
+      personInCharge,
+      phoneNumber}
 
     data = ObjectFilter(data, (key, value) => value != null)
 
@@ -96,28 +102,29 @@ const create = (baseURL = config.baseURL) => {
     const {id: _, ...data} = requestData
     return api.put(`requests/${id}`, data, addAuthorizationHeader(userToken))
   }
-  
+
   const getReports = (userToken) =>
     api.get('reports', {}, addAuthorizationHeader(userToken))
 
-  const postReport = (userToken, request_id, content, photo) => {
+  const postReport = (userToken, requestId, content, photo) => {
     let data = {
-      request_id,
       content,
-      photo,
-      }
-  
+      photo
+    }
+
     data = ObjectFilter(data, (key, value) => value != null)
-  
-    return api.post(`requests/${request_id}/report`,
-              data,
-              addAuthorizationHeader(userToken))
-    }
-  
-  const updateReport = (userToken, request_id, reportData) => {
-      const {request_id: _, ...data} = reportData
-      return api.put(`requests/${request_id}/report`, data, addAuthorizationHeader(userToken))
-    }
+
+    return api.post(`requests/${requestId}/report`,
+      data,
+      addAuthorizationHeader(userToken))
+  }
+
+  const updateReport = (userToken, requestId, reportData) => {
+    const {requestId: reqId, ...data} = reportData
+    return api.put(`requests/${reqId}/report`,
+      data,
+      addAuthorizationHeader(userToken))
+  }
 
   return {
     login,
@@ -132,6 +139,7 @@ const create = (baseURL = config.baseURL) => {
     postLocation,
     updateLocation,
     getRequests,
+    getRequest,
     postRequest,
     updateRequest,
     getReports,

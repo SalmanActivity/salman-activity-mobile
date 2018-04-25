@@ -8,13 +8,11 @@ export function * getDivisions (api, action) {
   if (response.ok) {
     yield put(DivisionActions.getDivisionsSuccess(response.data))
   } else {
-    let cause
-
-    if (response.data) {
-      cause = response.data.error.cause
-    } else {
-      cause = 'Connection Error'
-    }
+    const cause = response.data
+      ? (response.data.error
+        ? (response.data.error.cause : response.problem)
+        : response.problem)
+      : response.problem
 
     yield put(DivisionActions.getDivisionsFailure(cause))
   }
@@ -27,17 +25,17 @@ export function * newDivision (api, action) {
                               name)
 
   if (response.ok) {
-    yield put(DivisionActions.postDivisionSuccess())
+    yield put(DivisionActions.newDivisionSuccess())
+    yield put({type: 'Navigation/BACK'})
+    yield put(DivisionActions.getDivisions(userToken))
   } else {
-    let cause
+    const cause = response.data
+      ? (response.data.error
+        ? (response.data.error.cause : response.problem)
+        : response.problem)
+      : response.problem
 
-    if (response.data) {
-      cause = response.data.error.cause
-    } else {
-      cause = 'Connection Error'
-    }
-
-    yield put(DivisionActions.postDivisionFailure(cause))
+    yield put(DivisionActions.newDivisionFailure(cause))
   }
 }
 
@@ -47,14 +45,13 @@ export function * updateDivision (api, action) {
 
   if (response.ok) {
     yield put(DivisionActions.updateDivisionSuccess())
+    yield put(DivisionActions.getDivisions(userToken))
   } else {
-    let cause
-
-    if (response.data) {
-      cause = response.data.error.cause
-    } else {
-      cause = 'Connection Error'
-    }
+    const cause = response.data
+      ? (response.data.error
+        ? (response.data.error.cause : response.problem)
+        : response.problem)
+      : response.problem
 
     yield put(DivisionActions.updateDivisionFailure(cause))
   }

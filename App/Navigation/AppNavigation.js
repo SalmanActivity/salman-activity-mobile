@@ -1,7 +1,8 @@
 import { StackNavigator } from 'react-navigation'
 
 import LoadingScreen from '../Containers/LoadingScreen'
-import LoggedInNavigation from './LoggedInNavigation'
+import AdminNavigation from './AdminNavigation'
+import RegularNavigation from './RegularNavigation'
 import LoggedOutNavigation from './LoggedOutNavigation'
 
 import styles from './Styles/NavigationStyles'
@@ -9,7 +10,8 @@ import styles from './Styles/NavigationStyles'
 // Manifest of possible screens
 const PrimaryNav = StackNavigator({
   LoadingScreen: { screen: LoadingScreen },
-  LoggedInNavigation: { screen: LoggedInNavigation },
+  AdminNavigation: { screen: AdminNavigation },
+  RegularNavigation: { screen: RegularNavigation },
   LoggedOutNavigation: { screen: LoggedOutNavigation }
 }, {
   // Default config for all screens

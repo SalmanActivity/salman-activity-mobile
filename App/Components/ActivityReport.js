@@ -15,10 +15,6 @@ export default class ActivityReport extends Component {
   }
 
   onSubmit (form) {
-    const {loginHandler} = this.props
-    const {username, password} = form
-
-    loginHandler(username, password)
   }
 
   render () {

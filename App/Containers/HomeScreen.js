@@ -9,14 +9,14 @@ import styles from './Styles/HomeScreenStyles'
 
 class HomeScreen extends Component {
   render () {
-    const {isLoggedIn, auth, logout} = this.props
+    const {isLoggedIn, logout} = this.props
 
     return (
       <View style={styles.mainContainer}>
         <ScrollView style={styles.container}>
           <View style={styles.section} >
             <Text style={styles.sectionText}>
-              {isLoggedIn ? auth.token : 'Not logged in'}
+              {isLoggedIn ? 'Logged in (Ini harusnya jadwal)' : 'Not logged in (Ini harusnya jadwal)'}
             </Text>
 
             {isLoggedIn && (

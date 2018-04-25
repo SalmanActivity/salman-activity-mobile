@@ -19,7 +19,8 @@ import { login } from './AuthSagas'
 import { getMe, getUsers, newUser, updateUser } from './UserSagas'
 import { getLocations, newLocation, updateLocation } from './LocationSagas'
 import { getDivisions, newDivision, updateDivision } from './DivisionSagas'
-import { getRequests, newRequest, updateRequest } from './RequestSagas'
+import { getRequests, getRequest,
+  newRequest, updateRequest } from './RequestSagas'
 
 /* ------------- API ------------- */
 
@@ -29,7 +30,7 @@ const api = DebugConfig.useFixtures ? FixtureAPI : API.create()
 
 export default function * root () {
   yield all([
-    takeLatest(StartupTypes.STARTUP, startup),
+    takeLatest(StartupTypes.STARTUP, startup, api),
 
     takeLatest(AuthTypes.LOGIN, login, api),
 
@@ -47,6 +48,7 @@ export default function * root () {
     takeEvery(LocationTypes.UPDATE_LOCATION, updateLocation, api),
 
     takeLatest(RequestTypes.GET_REQUESTS, getRequests, api),
+    takeLatest(RequestTypes.GET_REQUEST, getRequest, api),
     takeEvery(RequestTypes.NEW_REQUEST, newRequest, api),
     takeEvery(RequestTypes.UPDATE_REQUEST, updateRequest, api)
   ])

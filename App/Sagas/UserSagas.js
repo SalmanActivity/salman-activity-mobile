@@ -8,13 +8,11 @@ export function * getMe (api, action) {
   if (response.ok) {
     yield put(UserActions.getMeSuccess(response.data))
   } else {
-    let cause
-
-    if (response.data) {
-      cause = response.data.error.cause
-    } else {
-      cause = 'Connection Error'
-    }
+    const cause = response.data
+      ? (response.data.error
+        ? (response.data.error.cause : response.problem)
+        : response.problem)
+      : response.problem
 
     yield put(UserActions.getMeFailure(cause))
   }
@@ -27,40 +25,39 @@ export function * getUsers (api, action) {
   if (response.ok) {
     yield put(UserActions.getUsersSuccess(response.data))
   } else {
-    let cause
-
-    if (response.data) {
-      cause = response.data.error.cause
-    } else {
-      cause = 'Connection Error'
-    }
+    const cause = response.data
+      ? (response.data.error
+        ? (response.data.error.cause : response.problem)
+        : response.problem)
+      : response.problem
 
     yield put(UserActions.getUsersFailure(cause))
   }
 }
 
 export function * newUser (api, action) {
-  const {userToken, name, username, password, division, admin} = action
+  const {userToken, name, username, email, password, division, admin} = action
   const response = yield call(api.postUser,
                               userToken,
                               name,
                               username,
+                              email,
                               password,
                               division,
                               admin)
 
   if (response.ok) {
-    yield put(UserActions.postUserSuccess())
+    yield put(UserActions.newUserSuccess())
+    yield put({type: 'Navigation/BACK'})
+    yield put(UserActions.getUsers(userToken))
   } else {
-    let cause
+    const cause = response.data
+      ? (response.data.error
+        ? (response.data.error.cause : response.problem)
+        : response.problem)
+      : response.problem
 
-    if (response.data) {
-      cause = response.data.error.cause
-    } else {
-      cause = 'Connection Error'
-    }
-
-    yield put(UserActions.postUserFailure(cause))
+    yield put(UserActions.newUserFailure(cause))
   }
 }
 
@@ -70,14 +67,13 @@ export function * updateUser (api, action) {
 
   if (response.ok) {
     yield put(UserActions.updateUserSuccess())
+    yield put(UserActions.getUsers(userToken))
   } else {
-    let cause
-
-    if (response.data) {
-      cause = response.data.error.cause
-    } else {
-      cause = 'Connection Error'
-    }
+    const cause = response.data
+      ? (response.data.error
+        ? (response.data.error.cause : response.problem)
+        : response.problem)
+      : response.problem
 
     yield put(UserActions.updateUserFailure(cause))
   }

@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { ScrollView, View, ActivityIndicator } from 'react-native'
+import { ScrollView, View, ActivityIndicator, Text } from 'react-native'
 import { connect } from 'react-redux'
 import DivisionActions from '../Redux/DivisionRedux'
 import { AuthSelectors } from '../Redux/AuthRedux'
 import DataList from '../Components/DataList'
+import ActionButton from 'react-native-action-button'
 
 // Styles
 import styles from './Styles/DivisionListScreenStyles'
@@ -15,23 +16,32 @@ class DivisionListScreen extends Component {
   }
 
   render () {
-    const { division } = this.props
-    const { divisions, fetchingDivisions } = division
+    const { division, navigation } = this.props
+    const { divisions, fetchingDivisions, fetchingDivisionsError } = division
+    const {navigate} = navigation
 
     const transformedDivisions = divisions.map(division => ({
       id: division.id,
-      title: division.name
+      title: `${division.name} (${division.enabled ? 'Aktif' : 'Tidak Aktif'})`
     }))
 
     return (
       <View style={styles.mainContainer}>
         <ScrollView style={styles.container}>
-          {fetchingDivisions ? (
-            <ActivityIndicator />
-          ) : (
-            <DataList data={transformedDivisions} />
-          )}
+          {fetchingDivisions
+            ? <ActivityIndicator />
+            : (
+              fetchingDivisionsError
+              ? <Text style={styles.error}>{fetchingDivisionsError}</Text>
+              : <DataList data={transformedDivisions} />
+            )
+          }
         </ScrollView>
+
+        <ActionButton
+          buttonColor='rgba(00,96,88,1)'
+          onPress={() => navigate('NewDivisionScreen')}
+        />
       </View>
     )
   }

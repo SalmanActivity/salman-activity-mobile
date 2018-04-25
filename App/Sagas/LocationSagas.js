@@ -8,13 +8,11 @@ export function * getLocations (api, action) {
   if (response.ok) {
     yield put(LocationActions.getLocationsSuccess(response.data))
   } else {
-    let cause
-
-    if (response.data) {
-      cause = response.data.error.cause
-    } else {
-      cause = 'Connection Error'
-    }
+    const cause = response.data
+      ? (response.data.error
+        ? (response.data.error.cause : response.problem)
+        : response.problem)
+      : response.problem
 
     yield put(LocationActions.getLocationsFailure(cause))
   }
@@ -27,17 +25,17 @@ export function * newLocation (api, action) {
                               name)
 
   if (response.ok) {
-    yield put(LocationActions.postLocationSuccess())
+    yield put(LocationActions.newLocationSuccess())
+    yield put({type: 'Navigation/BACK'})
+    yield put(LocationActions.getLocations(userToken))
   } else {
-    let cause
+    const cause = response.data
+      ? (response.data.error
+        ? (response.data.error.cause : response.problem)
+        : response.problem)
+      : response.problem
 
-    if (response.data) {
-      cause = response.data.error.cause
-    } else {
-      cause = 'Connection Error'
-    }
-
-    yield put(LocationActions.postLocationFailure(cause))
+    yield put(LocationActions.newLocationFailure(cause))
   }
 }
 
@@ -47,14 +45,13 @@ export function * updateLocation (api, action) {
 
   if (response.ok) {
     yield put(LocationActions.updateLocationSuccess())
+    yield put(LocationActions.getLocations(userToken))
   } else {
-    let cause
-
-    if (response.data) {
-      cause = response.data.error.cause
-    } else {
-      cause = 'Connection Error'
-    }
+    const cause = response.data
+      ? (response.data.error
+        ? (response.data.error.cause : response.problem)
+        : response.problem)
+      : response.problem
 
     yield put(LocationActions.updateLocationFailure(cause))
   }
