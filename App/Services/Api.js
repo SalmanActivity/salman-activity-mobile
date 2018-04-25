@@ -107,7 +107,7 @@ const create = (baseURL = config.baseURL) => {
     api.get('reports', {}, addAuthorizationHeader(userToken))
 
   const getReport = (userToken, requestId) =>
-    api.get(`request/${requestId}/report`,
+    api.get(`requests/${requestId}/report`,
       {}, addAuthorizationHeader(userToken))
 
   const postReport = (userToken, requestId, content, photo) => {

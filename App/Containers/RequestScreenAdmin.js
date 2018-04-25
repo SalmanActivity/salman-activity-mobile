@@ -6,6 +6,7 @@ import ReportActions from '../Redux/ReportRedux'
 import {AuthSelectors} from '../Redux/AuthRedux'
 import RequestDetail from '../Components/RequestDetail'
 import {Button, Card} from 'react-native-elements'
+import moment from 'moment'
 
 // Styles
 import styles from './Styles/RequestScreenAdminStyles'
@@ -27,12 +28,12 @@ class RequestListScreenAdmin extends Component {
   }
 
   render () {
-    const {navigation: {state: {params: {admin}}},
+    const {navigation: {navigate, state: {params: {admin}}},
       request: {request, fetchingRequest, fetchingRequestError,
         updatingRequest, updatingRequestError},
       report: {report, fetchingReport}} = this.props
 
-    const {status} = request || {}
+    const {status, startTime} = request || {}
 
     return (
       <ScrollView style={styles.mainContainer}>
@@ -51,6 +52,18 @@ class RequestListScreenAdmin extends Component {
                     />
 
                     <View style={styles.separator} />
+
+                    {!admin && !report && status === 'accepted' &&
+                      moment(startTime).isBefore(moment()) && (
+
+                      <Button
+                        title='Buat Laporan'
+                        buttonStyle={[styles.button, styles.buttonAccept]}
+                        onPress={() =>
+                          navigate('ActivityReportScreen',
+                            {requestId: request.id})}
+                      />
+                    )}
 
                     {!!admin && status !== 'accepted' && (
                       <Button

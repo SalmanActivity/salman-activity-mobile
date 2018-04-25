@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
-import {View, Text, Img} from 'react-native'
+import {View, Text, Image, TouchableOpacity} from 'react-native'
 import transformDate from '../Transforms/TransformDate'
 import requestStatus from '../Transforms/RequestStatus'
+import Lightbox from 'react-native-lightbox'
 
 import styles from './Styles/RequestDetailStyles'
 
@@ -23,7 +24,21 @@ export default class RequestDetail extends Component {
     return (
       <View>
         <Text style={styles.text}>{title}</Text>
-        <Img style={styles.innerText} src={{uri: photo}} />
+        <Lightbox
+          underlayColor='white'
+          backgroundColor='white'
+          renderHeader={(close) => (
+            <TouchableOpacity onPress={close}>
+              <Text style={styles.closeButton}>×</Text>
+            </TouchableOpacity>)}
+          >
+          <Image
+            style={styles.picture}
+            source={{uri: 'https://raw.githubusercontent.com/turfaa/opengl-projects/master/texture/turfafildah.bmp'}}
+            resizeMode='contain'
+            resizeMethod='resize'
+          />
+        </Lightbox>
       </View>
     )
   }
@@ -48,7 +63,7 @@ export default class RequestDetail extends Component {
         {this.renderUnit('Pembicara', speaker)}
         {this.renderUnit('Status Pengajuan', requestStatus(status))}
         {this.renderUnit('Laporan', reportContent)}
-        {this.renderPhoto('Laporan', reportPhoto)}
+        {this.renderPicture('', reportPhoto)}
       </View>
     )
   }

@@ -12,13 +12,7 @@ import styles from './Styles/ActivityReportScreenStyles'
 
 class ActivityReportScreen extends Component {
   static PropTypes = {
-    login: PropTypes.func.isRequired,
     error: PropTypes.string
-  }
-
-  loginHandler (username, password) {
-    const {login} = this.props
-    login(username, password)
   }
 
   render () {
