@@ -62,7 +62,7 @@ export const getReportsFailure = (state, action) => {
 }
 
 export const getReport = (state) =>
-state.merge({ fetchingReport: true, fetchingReportError: null })
+state.merge({ report: null, fetchingReport: true, fetchingReportError: null })
 
 export const getReportSuccess = (state, action) => {
   const { report } = action

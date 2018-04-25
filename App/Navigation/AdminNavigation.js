@@ -10,6 +10,7 @@ import RequestListScreenAdmin from '../Containers/RequestListScreenAdmin'
 import NewRequestScreen from '../Containers/NewRequestScreen'
 import RequestScreenAdmin from '../Containers/RequestScreenAdmin'
 import LogoutScreen from '../Containers/LogoutScreen'
+import ActivationScreen from '../Containers/ActivationScreen'
 
 const AdminNavigation = DrawerNavigator({
   HomeScreen: { screen: HomeScreen, navigationOptions: {drawerLabel: 'Home'} },
@@ -37,7 +38,8 @@ const AdminNavigation = DrawerNavigator({
   LocationNavigation: {
     screen: StackNavigator({
       LocationListScreen: {screen: LocationListScreen},
-      NewLocationScreen: {screen: NewLocationScreen}
+      NewLocationScreen: {screen: NewLocationScreen},
+      ActivationScreen: {screen: ActivationScreen}
     }, {
       headerMode: 'none',
       initialRouteName: 'LocationListScreen'
@@ -47,7 +49,8 @@ const AdminNavigation = DrawerNavigator({
   DivisionNavigation: {
     screen: StackNavigator({
       DivisionListScreen: {screen: DivisionListScreen},
-      NewDivisionScreen: {screen: NewDivisionScreen}
+      NewDivisionScreen: {screen: NewDivisionScreen},
+      ActivationScreen: {screen: ActivationScreen}
     }, {
       headerMode: 'none',
       initialRouteName: 'DivisionListScreen'
