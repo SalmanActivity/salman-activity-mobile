@@ -3,6 +3,7 @@ import {FlatList, View, SectionList} from 'react-native'
 import {List, ListItem, Text} from 'react-native-elements'
 import PropTypes from 'prop-types'
 import Accordion from 'react-native-collapsible/Accordion';
+import ContentList from '../Components/ContentList'
 
 import styles from './Styles/ScheduleListStyles'
 
@@ -73,7 +74,7 @@ export default class ScheduleList extends Component {
   _renderContent(section) {
     return (
       <View>
-        <Text>{section.data}</Text>
+        <ContentList data={section.data}/>
       </View>
     );
   }

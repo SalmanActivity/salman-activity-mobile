@@ -83,16 +83,13 @@ class HomeScreen extends Component {
               </View>
           <View style={styles.section} >
             <Text style={styles.sectionText}>
-              {isLoggedIn ? '' : 'Not logged in (Ini harusnya jadwal)'}
+              {isLoggedIn ? '' : 'Not logged in'}
             </Text>
 
             {isLoggedIn && (
               <Button title='Logout' onPress={logout} />
             )}
           </View>
-
-          
-
         </ScrollView>
       </View>
     )
