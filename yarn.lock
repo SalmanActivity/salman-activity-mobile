@@ -7367,6 +7367,12 @@ react-native-clean-form@^0.5.0:
     react-native-vector-icons ">=4.0.0"
     styled-components ">=1.4"
 
+react-native-collapsible@^0.11.2:
+  version "0.11.2"
+  resolved "https://registry.yarnpkg.com/react-native-collapsible/-/react-native-collapsible-0.11.2.tgz#35a2e7a335f5acf8c959c889731a604cfc3fcd09"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-compat@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-native-compat/-/react-native-compat-1.0.0.tgz#491dbd8a0105ac061b8d0d926463ce6a3dff33bc"
