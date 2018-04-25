@@ -6,7 +6,7 @@ moment.locale('id')
 const defaultConfig = {
   // font scaling override - RN default is on
   allowTextFontScaling: true,
-  baseURL: 'http://salman-activity.herokuapp.com/api/v1/'
+  baseURL: 'http://pplk1h.if.itb.ac.id/api/v1/'
 }
 
 const debugConfig = {

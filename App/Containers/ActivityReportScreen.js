@@ -17,9 +17,10 @@ class ActivityReportScreen extends Component {
   }
 
   newReport (content, photo) {
-    const {token, newReport, navigation: {state: {params: {id}}}} = this.props
+    const {token, newReport,
+      navigation: {state: {params: {requestId}}}} = this.props
 
-    newReport(token, id, content, photo)
+    newReport(token, requestId, content, photo)
   }
 
   render () {
@@ -48,7 +49,7 @@ const mapDispatchToProps = {
 const mapStateToProps = (state) => ({
   error: state.report.postingReportError,
   postingReport: state.report.postingReport,
-  token: AuthSelectors.getToken
+  token: AuthSelectors.getToken(state)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActivityReportScreen)

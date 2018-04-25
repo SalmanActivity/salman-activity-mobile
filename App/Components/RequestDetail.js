@@ -21,6 +21,7 @@ export default class RequestDetail extends Component {
   renderPicture (title, photo) {
     if (!photo) return null
 
+    console.tron.debug(photo)
     return (
       <View>
         <Text style={styles.text}>{title}</Text>
@@ -34,7 +35,7 @@ export default class RequestDetail extends Component {
           >
           <Image
             style={styles.picture}
-            source={{uri: 'https://raw.githubusercontent.com/turfaa/opengl-projects/master/texture/turfafildah.bmp'}}
+            source={{uri: photo}}
             resizeMode='contain'
             resizeMethod='resize'
           />

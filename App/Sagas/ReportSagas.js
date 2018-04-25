@@ -46,7 +46,7 @@ export function * newReport (api, action) {
                               photo)
 
   if (response.ok) {
-    yield put(ReportActions.postReportSuccess())
+    yield put(ReportActions.newReportSuccess())
     yield put(ReportActions.getReport(requestId))
     yield put({type: 'Navigation/BACK'})
   } else {
@@ -58,7 +58,7 @@ export function * newReport (api, action) {
       cause = 'Connection Error'
     }
 
-    yield put(ReportActions.postReportFailure(cause))
+    yield put(ReportActions.newReportFailure(cause))
   }
 }
 

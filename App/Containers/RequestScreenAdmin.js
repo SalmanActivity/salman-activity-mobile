@@ -53,7 +53,7 @@ class RequestListScreenAdmin extends Component {
 
                     <View style={styles.separator} />
 
-                    {!admin && !report && status !== 'accepted' &&
+                    {!admin && !report && status === 'accepted' &&
                       moment(startTime).isBefore(moment()) && (
 
                       <Button
