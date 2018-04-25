@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { ScrollView, View, ActivityIndicator, Text } from 'react-native'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import LocationActions from '../Redux/LocationRedux'
-import {AuthSelectors} from '../Redux/AuthRedux'
+import { AuthSelectors } from '../Redux/AuthRedux'
 import DataList from '../Components/DataList'
 import ActionButton from 'react-native-action-button'
 
@@ -10,18 +10,27 @@ import ActionButton from 'react-native-action-button'
 import styles from './Styles/LocationListScreenStyles'
 
 class LocationListScreen extends Component {
+  updateLocation (id, locationData) {
+    const {token, updateLocation} = this.props
+
+    updateLocation(token, id, locationData)
+  }
+
   componentDidMount () {
-    const {token, getLocations} = this.props
+    const { token, getLocations } = this.props
     getLocations(token)
   }
 
   render () {
-    const {location, navigation: {navigate}} = this.props
-    const {locations, fetchingLocations, fetchingLocationsError} = location
+    const { location, navigation } = this.props
+    const { locations, updatingLocation, updatingLocationError,
+      fetchingLocations, fetchingLocationsError } = location
+    const {navigate} = navigation
 
     const transformedLocations = locations.map(location => ({
       id: location.id,
-      title: `${location.name} (${location.enabled ? '' : 'Tidak '}Aktif)`
+      title: `${location.name} (${location.enabled ? 'Aktif' : 'Tidak Aktif'})`,
+      location
     }))
 
     return (
@@ -32,7 +41,16 @@ class LocationListScreen extends Component {
             : (
               fetchingLocationsError
               ? <Text style={styles.error}>{fetchingLocationsError}</Text>
-              : <DataList data={transformedLocations} />
+              : <DataList
+                data={transformedLocations}
+                onPress={(id, item) => navigate('ActivationScreen', {
+                  id,
+                  category: 'Ruangan / Tempat',
+                  name: item.location.name,
+                  active: item.location.enabled,
+                  loading: updatingLocation,
+                  update: ::this.updateLocation,
+                  error: updatingLocationError})} />
             )
           }
         </ScrollView>
@@ -45,14 +63,14 @@ class LocationListScreen extends Component {
     )
   }
 }
-
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   token: AuthSelectors.getToken(state),
   location: state.location
 })
 
 const mapDispatchToProps = {
-  getLocations: LocationActions.getLocations
+  getLocations: LocationActions.getLocations,
+  updateLocation: LocationActions.updateLocation
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LocationListScreen)
