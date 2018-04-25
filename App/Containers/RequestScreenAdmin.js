@@ -53,7 +53,7 @@ class RequestListScreenAdmin extends Component {
 
                     <View style={styles.separator} />
 
-                    {!admin && !report && status === 'accepted' &&
+                    {!admin && !report && status !== 'accepted' &&
                       moment(startTime).isBefore(moment()) && (
 
                       <Button
@@ -65,7 +65,9 @@ class RequestListScreenAdmin extends Component {
                       />
                     )}
 
-                    {!!admin && status !== 'accepted' && (
+                    {!!admin && status !== 'accepted' &&
+                      moment().isBefore(moment(startTime)) && (
+
                       <Button
                         title='Setujui'
                         buttonStyle={[styles.button, styles.buttonAccept]}
@@ -75,7 +77,9 @@ class RequestListScreenAdmin extends Component {
                       />
                     )}
 
-                    {!!admin && status !== 'rejected' && (
+                    {!!admin && status !== 'rejected' &&
+                      moment().isBefore(moment(startTime)) && (
+
                       <Button
                         title='Tolak'
                         buttonStyle={[styles.button, styles.buttonReject]}

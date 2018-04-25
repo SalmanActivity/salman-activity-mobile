@@ -9,12 +9,16 @@ import styles from './Styles/ActivityReportStyles'
 
 export default class ActivityReport extends Component {
   static propTypes = {
-    loginHandler: PropTypes.func.isRequired,
+    newReport: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
     error: PropTypes.string
   }
 
   onSubmit (form) {
+    const {newReport} = this.props
+    const {content, photo} = form
+
+    newReport(content, photo)
   }
 
   render () {
@@ -22,7 +26,7 @@ export default class ActivityReport extends Component {
 
     return (
       <Card title='Laporan Aktivitas'>
-        <ActivityReportForm onSubmit={this.onSubmit.bind(this)} disabled={disabled} />
+        <ActivityReportForm onSubmit={::this.onSubmit} disabled={disabled} />
         {error ? <Text style={styles.errorText}>{error}</Text> : <View />}
       </Card>
     )
