@@ -13,5 +13,8 @@ export default StyleSheet.create({
   },
   sectionItem: {
   	marginLeft: 10
+  },
+  headerText: {
+    alignItems: 'center'
   }
 })
