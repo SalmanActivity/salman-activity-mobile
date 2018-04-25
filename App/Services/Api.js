@@ -125,7 +125,7 @@ const create = (baseURL = config.baseURL) => {
 
   const updateReport = (userToken, requestId, reportData) => {
     const {requestId: reqId, ...data} = reportData
-    return api.put(`requests/${reqId}/report`,
+    return api.put(`requests/${requestId}/report`,
       data,
       addAuthorizationHeader(userToken))
   }

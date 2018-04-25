@@ -13,11 +13,11 @@ const { Types, Creators } = createActions({
   getReportSuccess: ['report'],
   getReportFailure: ['error'],
 
-  newReport: ['userToken', 'request_id', 'content', 'photo'],
+  newReport: ['userToken', 'requestId', 'content', 'photo'],
   newReportSuccess: null,
   newReportFailure: ['error'],
 
-  updateReport: ['userToken', 'request_id', 'content', 'photo'],
+  updateReport: ['userToken', 'requestId', 'content', 'photo'],
   updateReportSuccess: null,
   updateReportFailure: ['error']
 })

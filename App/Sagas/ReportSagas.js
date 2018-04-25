@@ -38,15 +38,17 @@ export function * getReport (api, action) {
 }
 
 export function * newReport (api, action) {
-  const {userToken, request_id, content, photo} = action
+  const {userToken, requestId, content, photo} = action
   const response = yield call(api.postReport,
                               userToken,
-                              request_id,
+                              requestId,
                               content,
                               photo)
 
   if (response.ok) {
     yield put(ReportActions.postReportSuccess())
+    yield put(ReportActions.getReport(requestId))
+    yield put({type: 'Navigation/BACK'})
   } else {
     let cause
 
@@ -61,10 +63,10 @@ export function * newReport (api, action) {
 }
 
 export function * updateReport (api, action) {
-  const {userToken, request_id, content, photo} = action
+  const {userToken, requestId, content, photo} = action
   const response = yield call(api.updateReport,
                               userToken,
-                              request_id,
+                              requestId,
                               content,
                               photo)
 
