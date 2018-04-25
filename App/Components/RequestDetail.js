@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
-import {View, Text} from 'react-native'
+import {View, Text, Image, TouchableOpacity} from 'react-native'
 import transformDate from '../Transforms/TransformDate'
 import requestStatus from '../Transforms/RequestStatus'
+import Lightbox from 'react-native-lightbox'
 
 import styles from './Styles/RequestDetailStyles'
 
@@ -17,10 +18,36 @@ export default class RequestDetail extends Component {
     )
   }
 
+  renderPicture (title, photo) {
+    if (!photo) return null
+
+    console.tron.debug(photo)
+    return (
+      <View>
+        <Text style={styles.text}>{title}</Text>
+        <Lightbox
+          underlayColor='white'
+          backgroundColor='white'
+          renderHeader={(close) => (
+            <TouchableOpacity onPress={close}>
+              <Text style={styles.closeButton}>×</Text>
+            </TouchableOpacity>)}
+          >
+          <Image
+            style={styles.picture}
+            source={{uri: photo}}
+            resizeMode='contain'
+            resizeMethod='resize'
+          />
+        </Lightbox>
+      </View>
+    )
+  }
+
   render () {
     const {name, description, issuer, issuedTime, division, location,
       startTime, endTime, participantNumber, participantDescription,
-      speaker, status} = this.props
+      speaker, status, reportContent, reportPhoto} = this.props
 
     return (
       <View>
@@ -36,6 +63,8 @@ export default class RequestDetail extends Component {
           ? `${participantNumber} orang, ${participantDescription}` : null)}
         {this.renderUnit('Pembicara', speaker)}
         {this.renderUnit('Status Pengajuan', requestStatus(status))}
+        {this.renderUnit('Laporan', reportContent)}
+        {this.renderPicture('', reportPhoto)}
       </View>
     )
   }

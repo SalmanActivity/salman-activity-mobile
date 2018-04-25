@@ -9,6 +9,7 @@ import NewDivisionScreen from '../Containers/NewDivisionScreen'
 import RequestListScreenAdmin from '../Containers/RequestListScreenAdmin'
 import NewRequestScreen from '../Containers/NewRequestScreen'
 import RequestScreenAdmin from '../Containers/RequestScreenAdmin'
+import LogoutScreen from '../Containers/LogoutScreen'
 
 const AdminNavigation = DrawerNavigator({
   HomeScreen: { screen: HomeScreen, navigationOptions: {drawerLabel: 'Home'} },
@@ -52,6 +53,10 @@ const AdminNavigation = DrawerNavigator({
       initialRouteName: 'DivisionListScreen'
     }),
     navigationOptions: {drawerLabel: 'Manajemen Bidang'}
+  },
+  Logout: {
+    screen: LogoutScreen,
+    navigationOptions: {drawerLabel: 'Logout'}
   }
 })
 

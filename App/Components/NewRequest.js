@@ -39,6 +39,10 @@ export default class NewRequest extends Component {
       .minute(59).second(59)
       .unix() * 1000
 
+    if (startTime > endTime) {
+      return onError('Jam mulai harus lebih awal dari jam selesai.')
+    }
+
     newRequestHandler(name, description, division, location, startTime,
       endTime, participantNumber, participantDescription, speaker,
       personInCharge, phoneNumber)

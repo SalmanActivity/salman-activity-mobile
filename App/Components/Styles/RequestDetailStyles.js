@@ -42,5 +42,23 @@ export default StyleSheet.create({
     padding: Metrics.baseMargin,
     margin: Metrics.baseMargin,
     backgroundColor: 'red'
+  },
+  picture: {
+    width: '100%',
+    height: 250
+  },
+  closeButton: {
+    fontSize: 35,
+    color: 'black',
+    lineHeight: 40,
+    width: 40,
+    textAlign: 'center',
+    shadowOffset: {
+      width: 0,
+      height: 0
+    },
+    shadowRadius: 1.5,
+    shadowColor: 'white',
+    shadowOpacity: 0.8
   }
 })
