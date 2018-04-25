@@ -10,6 +10,7 @@ import { AuthTypes } from '../Redux/AuthRedux'
 import { UserTypes } from '../Redux/UserRedux'
 import { LocationTypes } from '../Redux/LocationRedux'
 import { DivisionTypes } from '../Redux/DivisionRedux'
+import { ReportTypes } from '../Redux/ReportRedux'
 import { RequestTypes } from '../Redux/RequestRedux'
 
 /* ------------- Sagas ------------- */
@@ -21,6 +22,8 @@ import { getLocations, newLocation, updateLocation } from './LocationSagas'
 import { getDivisions, newDivision, updateDivision } from './DivisionSagas'
 import { getRequests, getRequest,
   newRequest, updateRequest } from './RequestSagas'
+import { getReports, getReport,
+  newReport, updateReport } from './ReportSagas'
 
 /* ------------- API ------------- */
 
@@ -46,6 +49,11 @@ export default function * root () {
     takeLatest(LocationTypes.GET_LOCATIONS, getLocations, api),
     takeEvery(LocationTypes.NEW_LOCATION, newLocation, api),
     takeEvery(LocationTypes.UPDATE_LOCATION, updateLocation, api),
+
+    takeLatest(ReportTypes.GET_REPORTS, getReports, api),
+    takeLatest(ReportTypes.GET_REPORT, getReport, api),
+    takeEvery(ReportTypes.NEW_REPORT, newReport, api),
+    takeEvery(ReportTypes.UPDATE_REPORT, updateReport, api),
 
     takeLatest(RequestTypes.GET_REQUESTS, getRequests, api),
     takeLatest(RequestTypes.GET_REQUEST, getRequest, api),

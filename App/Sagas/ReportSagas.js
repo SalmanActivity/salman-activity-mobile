@@ -20,6 +20,23 @@ export function * getReports (api, action) {
   }
 }
 
+export function * getReport (api, action) {
+  const {userToken, requestId} = action
+  const response = yield call(api.getReport, userToken, requestId)
+
+  if (response.ok) {
+    yield put(ReportActions.getReportSuccess(response.data))
+  } else {
+    const cause = response.data
+      ? (response.data.error
+        ? (response.data.error.cause : response.problem)
+        : response.problem)
+      : response.problem
+
+    yield put(ReportActions.getReportFailure(cause))
+  }
+}
+
 export function * newReport (api, action) {
   const {userToken, request_id, content, photo} = action
   const response = yield call(api.postReport,

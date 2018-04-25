@@ -9,6 +9,10 @@ const { Types, Creators } = createActions({
   getReportsSuccess: ['reports'],
   getReportsFailure: ['error'],
 
+  getReport: ['userToken', 'requestId'],
+  getReportSuccess: ['report'],
+  getReportFailure: ['error'],
+
   newReport: ['userToken', 'request_id', 'content', 'photo'],
   newReportSuccess: null,
   newReportFailure: ['error'],
@@ -27,6 +31,10 @@ export const INITIAL_STATE = Immutable({
   reports: [],
   fetchingReports: false,
   fetchingReportsError: null,
+
+  report: null,
+  fetchingReport: false,
+  fetchingReportError: null,
 
   postingReport: false,
   postingReportError: null,
@@ -51,6 +59,22 @@ export const getReportsFailure = (state, action) => {
   const { error } = action
   return state.merge({ fetchingReports: false,
     fetchingReportsError: error })
+}
+
+export const getReport = (state) =>
+state.merge({ fetchingReport: true, fetchingReportError: null })
+
+export const getReportSuccess = (state, action) => {
+  const { report } = action
+  return state.merge({ fetchingReport: false,
+    report,
+    fetchingReportError: null })
+}
+
+export const getReportFailure = (state, action) => {
+  const { error } = action
+  return state.merge({ fetchingReport: false,
+    fetchingReportError: error })
 }
 
 export const newReport = (state) =>
@@ -80,10 +104,13 @@ export const updateReportFailure = (state, action) => {
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
-
   [Types.GET_REPORTS]: getReports,
   [Types.GET_REPORTS_SUCCESS]: getReportsSuccess,
   [Types.GET_REPORTS_FAILURE]: getReportsFailure,
+
+  [Types.GET_REPORT]: getReport,
+  [Types.GET_REPORT_SUCCESS]: getReportSuccess,
+  [Types.GET_REPORT_FAILURE]: getReportFailure,
 
   [Types.NEW_REPORT]: newReport,
   [Types.NEW_REPORT_SUCCESS]: newReportSuccess,

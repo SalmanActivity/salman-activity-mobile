@@ -106,6 +106,10 @@ const create = (baseURL = config.baseURL) => {
   const getReports = (userToken) =>
     api.get('reports', {}, addAuthorizationHeader(userToken))
 
+  const getReport = (userToken, requestId) =>
+    api.get(`request/${requestId}/report`,
+      {}, addAuthorizationHeader(userToken))
+
   const postReport = (userToken, requestId, content, photo) => {
     let data = {
       content,
@@ -143,6 +147,7 @@ const create = (baseURL = config.baseURL) => {
     postRequest,
     updateRequest,
     getReports,
+    getReport,
     postReport,
     updateReport
   }
