@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
-import {FlatList, View, SectionList} from 'react-native'
-import {List, ListItem, Text} from 'react-native-elements'
+import {View} from 'react-native'
+import {ListItem, Text} from 'react-native-elements'
 import PropTypes from 'prop-types'
-import Accordion from 'react-native-collapsible/Accordion';
+import Accordion from 'react-native-collapsible/Accordion'
 import ContentList from '../Components/ContentList'
 
 import styles from './Styles/ScheduleListStyles'
@@ -21,62 +21,60 @@ export default class ScheduleList extends Component {
   }
 
   getDates () {
-    const {data} = this.props;
-    const dates_duplicate = [];
+    const {data} = this.props
+    const datesDuplicate = []
 
     for (let i = 0; i < data.length; i++) {
-      if (data[i].status == "accepted") 
-        dates_duplicate.push(data[i].start_date);
+      if (data[i].status === 'accepted') {
+        datesDuplicate.push(data[i].startDate)
+      }
     }
 
-    const dates = Array.from(new Set(dates_duplicate));
+    const dates = Array.from(new Set(datesDuplicate))
 
-    return dates;
+    return dates
   }
 
   getSect () {
-    const dates = this.getDates().sort();
-    const {data} = this.props;
-    const sect = [];
+    const dates = this.getDates().sort()
+    const {data} = this.props
+    const sect = []
 
     for (let i = 0; i < dates.length; i++) {
-      const sect_data = [];
+      const sectData = []
 
       for (let j = 0; j < data.length; j++) {
-        if (data[j].status === "accepted" && data[j].start_date === dates[i]) {
-          sect_data.push(data[j].title);
+        if (data[j].status === 'accepted' && data[j].startDate === dates[i]) {
+          sectData.push(data[j].title)
         }
       }
-      
 
-      sect.push({title: "Tanggal " + dates[i], data: sect_data, id: i});
+      sect.push({title: 'Tanggal ' + dates[i], data: sectData, id: i})
     }
 
-    return sect;
+    return sect
   }
 
-  _renderSectionTitle(section) {
+  _renderSectionTitle (section) {
     return (
-      <View>
-        
-      </View>
-    );
+      <View />
+    )
   }
 
-  _renderHeader(section) {
+  _renderHeader (section) {
     return (
       <View>
         <Text style={styles.headerText}>{section.title}</Text>
       </View>
-    );
+    )
   }
 
-  _renderContent(section) {
+  _renderContent (section) {
     return (
       <View>
-        <ContentList data={section.data}/>
+        <ContentList data={section.data} />
       </View>
-    );
+    )
   }
 
   render () {
@@ -92,13 +90,12 @@ export default class ScheduleList extends Component {
     }
 
     return (
-        
-        <Accordion
-          sections={this.getSect()}
-          renderSectionTitle={this._renderSectionTitle}
-          renderHeader={this._renderHeader}
-          renderContent={this._renderContent}
-        />
+      <Accordion
+        sections={this.getSect()}
+        renderSectionTitle={this._renderSectionTitle}
+        renderHeader={this._renderHeader}
+        renderContent={this._renderContent}
+      />
     )
   }
 }
