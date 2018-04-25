@@ -29,8 +29,8 @@ class NewRequestScreen extends Component {
   }
 
   onError (error) {
-    const {newUserFailure} = this.props
-    newUserFailure(error)
+    const {newRequestFailure} = this.props
+    newRequestFailure(error)
   }
 
   render () {

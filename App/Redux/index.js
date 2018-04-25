@@ -14,6 +14,7 @@ export const reducers = combineReducers({
   location: require('./LocationRedux').reducer,
   division: require('./DivisionRedux').reducer,
   request: require('./RequestRedux').reducer,
+  report: require('./ReportRedux').reducer,
 
   form: formReducer
 })

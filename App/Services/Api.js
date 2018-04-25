@@ -103,6 +103,33 @@ const create = (baseURL = config.baseURL) => {
     return api.put(`requests/${id}`, data, addAuthorizationHeader(userToken))
   }
 
+  const getReports = (userToken) =>
+    api.get('reports', {}, addAuthorizationHeader(userToken))
+
+  const getReport = (userToken, requestId) =>
+    api.get(`requests/${requestId}/report`,
+      {}, addAuthorizationHeader(userToken))
+
+  const postReport = (userToken, requestId, content, photo) => {
+    let data = {
+      content,
+      photo
+    }
+
+    data = ObjectFilter(data, (key, value) => value != null)
+
+    return api.post(`requests/${requestId}/report`,
+      data,
+      addAuthorizationHeader(userToken))
+  }
+
+  const updateReport = (userToken, requestId, reportData) => {
+    const {requestId: reqId, ...data} = reportData
+    return api.put(`requests/${requestId}/report`,
+      data,
+      addAuthorizationHeader(userToken))
+  }
+
   return {
     login,
     getMe,
@@ -118,7 +145,11 @@ const create = (baseURL = config.baseURL) => {
     getRequests,
     getRequest,
     postRequest,
-    updateRequest
+    updateRequest,
+    getReports,
+    getReport,
+    postReport,
+    updateReport
   }
 }
 

@@ -1,6 +1,7 @@
 const users = require('../Fixtures/users.json')
 const divisions = require('../Fixtures/divisions.json')
 const locations = require('../Fixtures/locations.json')
+const reports = require('../Fixtures/reports.json')
 
 export default {
   login: (username, password) => {
@@ -293,6 +294,25 @@ export default {
             cause: 'location not found'
           }
         }
+      }
+    } else {
+      return {
+        ok: false,
+        data: {
+          error: {
+            msg: 'cannot perform action',
+            cause: 'unauthorized access'
+          }
+        }
+      }
+    }
+  },
+
+  getReports: (userToken) => {
+    if (userToken === 'abcd') {
+      return {
+        ok: true,
+        data: reports
       }
     } else {
       return {
