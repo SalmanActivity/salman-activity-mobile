@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {View, Text} from 'react-native'
+import {View, Text, Img} from 'react-native'
 import transformDate from '../Transforms/TransformDate'
 import requestStatus from '../Transforms/RequestStatus'
 
@@ -17,10 +17,21 @@ export default class RequestDetail extends Component {
     )
   }
 
+  renderPicture (title, photo) {
+    if (!photo) return null
+
+    return (
+      <View>
+        <Text style={styles.text}>{title}</Text>
+        <Img style={styles.innerText} src={{uri: photo}} />
+      </View>
+    )
+  }
+
   render () {
     const {name, description, issuer, issuedTime, division, location,
       startTime, endTime, participantNumber, participantDescription,
-      speaker, status} = this.props
+      speaker, status, reportContent, reportPhoto} = this.props
 
     return (
       <View>
@@ -36,6 +47,8 @@ export default class RequestDetail extends Component {
           ? `${participantNumber} orang, ${participantDescription}` : null)}
         {this.renderUnit('Pembicara', speaker)}
         {this.renderUnit('Status Pengajuan', requestStatus(status))}
+        {this.renderUnit('Laporan', reportContent)}
+        {this.renderPhoto('Laporan', reportPhoto)}
       </View>
     )
   }
