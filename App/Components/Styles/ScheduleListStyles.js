@@ -6,15 +6,26 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  sectionHeader: {
-  	marginTop: 10,
-  	backgroundColor: 'rgba(150, 150, 150, 0.5)',
-  	fontWeight: 'bold'
-  },
   sectionItem: {
   	marginLeft: 10
   },
+  headerView: {
+    alignItems: 'flex-end',
+    height: 25,
+    flex: 1,
+    marginVertical: 5,
+    backgroundColor: 'transparent'
+  },
   headerText: {
-    alignItems: 'center'
+    paddingHorizontal: 15,    
+    fontSize: 16,
+    fontWeight: 'bold',
+    minWidth: 50,
+    textAlign: 'center',
+    borderLeftWidth: 2,
+    color: 'rgba(0, 0, 0, 1)'
+  },
+  contentView: {
+    backgroundColor: 'transparent'
   }
 })

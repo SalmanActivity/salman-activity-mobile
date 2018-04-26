@@ -14,9 +14,10 @@ export default class DataList extends Component {
     const {onPress} = this.props
 
     return (
-      <View>
-        <Text>{item}</Text>
+      <View style={styles.itemView}>
+        <Text style={styles.itemText}>{item}</Text>
       </View>
+
     )
   }
 
@@ -32,12 +33,14 @@ export default class DataList extends Component {
     }
 
     return (
-      <List>
-        <FlatList
-          data={data}
-          renderItem={({item}) => this.renderRow(item)}
-        />
-      </List>
+      <View style={styles.listView}>
+        <List>
+          <FlatList
+            data={data}
+            renderItem={({item}) => this.renderRow(item)}
+          />
+        </List>
+      </View>
     )
   }
 }

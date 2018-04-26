@@ -36,5 +36,9 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignContent: 'center',
     margin: 10
+  },
+
+  logoutButton: {
+    borderRadius: 5
   }
 })
