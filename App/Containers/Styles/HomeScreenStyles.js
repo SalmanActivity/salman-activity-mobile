@@ -14,5 +14,31 @@ export default StyleSheet.create({
   },
   centered: {
     alignItems: 'center'
+  },
+
+  monthPicker: {
+    height: 30
+  },
+
+  refreshButton: {
+    backgroundColor: 'blue',
+    height: 40,
+    borderRadius: 5
+  },
+
+  sectionList: {
+    paddingHorizontal: 10
+  },
+
+  monthPickerContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignContent: 'center',
+    margin: 10
+  },
+
+  logoutButton: {
+    borderRadius: 5
   }
 })

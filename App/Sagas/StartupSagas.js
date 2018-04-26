@@ -17,7 +17,7 @@ export function * startup (api, action) {
 
     yield put(AppStateActions.setRehydrationComplete())
     if (response.ok) {
-      if (response.data.admin) {
+      if (response.data ? response.data.admin : false) {
         yield put(AuthActions.autoLoginAdmin())
       } else {
         yield put(AuthActions.autoLoginRegular())
