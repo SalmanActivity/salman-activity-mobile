@@ -8,8 +8,10 @@ import styles from './Styles/ActivationScreenStyles'
 
 class HomeScreen extends Component {
   render () {
-    const {navigation: {
-      state: {params: {error, id, category, name, active, loading, update}}
+    const {state,
+      navigation: {
+      state: {params: {
+        errorSelector, id, category, name, active, loadingSelector, update}}
     }} = this.props
 
     return (
@@ -26,8 +28,8 @@ class HomeScreen extends Component {
                   title='Aktifkan'
                   buttonStyle={[styles.button, styles.buttonAccept]}
                   onPress={() => update(id, {enabled: true})}
-                  loading={!!loading}
-                  disabled={!!loading}
+                  loading={!!loadingSelector(state)}
+                  disabled={!!loadingSelector(state)}
                 />
               )}
 
@@ -36,12 +38,15 @@ class HomeScreen extends Component {
                   title='Non-Aktifkan'
                   buttonStyle={[styles.button, styles.buttonReject]}
                   onPress={() => update(id, {enabled: false})}
-                  loading={!!loading}
-                  disabled={!!loading}
+                  loading={!!loadingSelector(state)}
+                  disabled={!!loadingSelector(state)}
                 />
               )}
 
-              {error ? <Text style={styles.errorText}>{error}</Text> : <View />}
+              {errorSelector(state)
+                 ? <Text style={styles.errorText}>{errorSelector(state)}</Text>
+                 : <View />
+              }
             </Card>
           </ScrollView>
         </ScrollView>
@@ -50,4 +55,6 @@ class HomeScreen extends Component {
   }
 }
 
-export default connect(null, null)(HomeScreen)
+const mapStateToProps = state => ({state})
+
+export default connect(mapStateToProps, null)(HomeScreen)

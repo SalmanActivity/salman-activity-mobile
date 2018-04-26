@@ -23,7 +23,7 @@ class DivisionListScreen extends Component {
 
   render () {
     const { division, navigation } = this.props
-    const { divisions, updatingDivision, updatingDivisionError,
+    const { divisions,
       fetchingDivisions, fetchingDivisionsError } = division
     const {navigate} = navigation
 
@@ -48,9 +48,10 @@ class DivisionListScreen extends Component {
                   category: 'Bidang',
                   name: item.division.name,
                   active: item.division.enabled,
-                  loading: updatingDivision,
+                  loadingSelector: state => state.division.updatingDivision,
                   update: ::this.updateDivision,
-                  error: updatingDivisionError})} />
+                  errorSelector: state => state.divisionupdatingDivisionError})}
+                />
             )
           }
         </ScrollView>
