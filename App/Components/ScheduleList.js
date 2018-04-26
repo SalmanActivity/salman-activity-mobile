@@ -49,7 +49,7 @@ export default class ScheduleList extends Component {
         }
       }
 
-      sect.push({title: dates[i], data: sect_data, id: i});
+      sect.push({title: dates[i], data: sectData, id: i})
     }
 
     return sect
@@ -57,8 +57,8 @@ export default class ScheduleList extends Component {
 
   _renderSectionTitle (section) {
     return (
-      <View></View>
-    );
+      <View />
+    )
   }
 
   _renderHeader (section) {
@@ -72,8 +72,8 @@ export default class ScheduleList extends Component {
   _renderContent (section) {
     return (
       <View style={styles.contentView}>
-      <Text>Daftar kegiatan :</Text>
-        <ContentList data={section.data}/>
+        <Text>Daftar kegiatan :</Text>
+        <ContentList data={section.data} />
       </View>
     )
   }

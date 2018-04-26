@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {FlatList, View} from 'react-native'
-import {List, ListItem, Text} from 'react-native-elements'
+import {List, Text} from 'react-native-elements'
 import PropTypes from 'prop-types'
 
 import styles from './Styles/ContentListStyles'
@@ -11,8 +11,6 @@ export default class DataList extends Component {
   }
 
   renderRow (item) {
-    const {onPress} = this.props
-
     return (
       <View style={styles.itemView}>
         <Text style={styles.itemText}>{item}</Text>

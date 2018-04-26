@@ -44,7 +44,9 @@ class HomeScreen extends Component {
 
     const transformedRequests = requests.map(request => ({
       id: request.id,
-      title: request.name + " | " + request.location.name + ", " + moment(request.startTime).format("HH.mm") + " - " + moment(request.endTime).format("HH.mm"),
+      title: `${request.name} | ${request.location.name}, ` +
+        `${moment(request.startTime).format('HH.mm')} - ` +
+        `${moment(request.endTime).format('HH.mm')}`,
       status: request.status,
       startDate: moment(request.startTime).format('D')
     }))
@@ -53,37 +55,32 @@ class HomeScreen extends Component {
       <View style={styles.mainContainer}>
         <ScrollView style={styles.container}>
           <View style={styles.scheduleContainer}>
-                <View style={styles.monthPickerContainer}>
-                  <MonthPicker
-                    onChangeMonth={::this.onChangeMonth}
-                    onChangeYear={::this.onChangeYear}
-                    style={styles.monthPicker}
-                  />
+            <View style={styles.monthPickerContainer}>
+              <MonthPicker
+                onChangeMonth={::this.onChangeMonth}
+                onChangeYear={::this.onChangeYear}
+                style={styles.monthPicker}
+              />
 
-                  <Button
-                    title='Refresh'
-                    buttonStyle={styles.refreshButton}
-                    onPress={::this.onRefresh}
-                    loading={fetchingRequests}
-                    disabled={fetchingRequests}
-                  />
-                </View>
+              <Button
+                title='Refresh'
+                buttonStyle={styles.refreshButton}
+                onPress={::this.onRefresh}
+                loading={fetchingRequests}
+                disabled={fetchingRequests}
+              />
+            </View>
 
-                <View style={styles.sectionList}>
-                  {fetchingRequests
-                    ? <ActivityIndicator />
-                    : (
-                      fetchingRequestsError
-                      ? <Text style={styles.error}>{fetchingRequestsError}</Text>
-                      : <ScheduleList data={transformedRequests} />
-                    )
-                  }
-                </View>
-              </View>
-          <View style={styles.section} >
-            <Text style={styles.sectionText}>
-              {isLoggedIn ? '' : 'Not logged in'}
-            </Text>
+            <View style={styles.sectionList}>
+              {fetchingRequests
+                ? <ActivityIndicator />
+                : (
+                  fetchingRequestsError
+                  ? <Text style={styles.error}>{fetchingRequestsError}</Text>
+                  : <ScheduleList data={transformedRequests} />
+                )
+              }
+            </View>
           </View>
         </ScrollView>
       </View>
