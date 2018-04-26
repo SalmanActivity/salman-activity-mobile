@@ -23,7 +23,7 @@ class LocationListScreen extends Component {
 
   render () {
     const { location, navigation } = this.props
-    const { locations, updatingLocation, updatingLocationError,
+    const { locations,
       fetchingLocations, fetchingLocationsError } = location
     const {navigate} = navigation
 
@@ -48,9 +48,11 @@ class LocationListScreen extends Component {
                   category: 'Ruangan / Tempat',
                   name: item.location.name,
                   active: item.location.enabled,
-                  loading: updatingLocation,
+                  loadingSelector: state => state.location.updatingLocation,
                   update: ::this.updateLocation,
-                  error: updatingLocationError})} />
+                  errorSelector:
+                    state => state.location.updatingLocationError})}
+                />
             )
           }
         </ScrollView>
