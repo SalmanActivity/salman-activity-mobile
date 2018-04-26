@@ -45,6 +45,7 @@ export function * updateDivision (api, action) {
 
   if (response.ok) {
     yield put(DivisionActions.updateDivisionSuccess())
+    yield put({type: 'Navigation/BACK'})
     yield put(DivisionActions.getDivisions(userToken))
   } else {
     const cause = response.data
